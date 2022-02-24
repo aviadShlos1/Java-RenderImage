@@ -12,21 +12,30 @@ public class Vector extends Point
         return xyz.d1 * xyz.d1 + xyz.d2* xyz.d2 + xyz.d3* xyz.d3;
     }
 
-    public double length() {
-
+    public double length()
+    {
         return Math.sqrt(lengthSquared());
     }
-
-    public double dotProduct(Vector v3)
+    public Vector add(Vector myVec)
     {
-        return xyz.d1*v3.xyz.d1 +this.xyz.d2*v3.xyz.d2 +this.xyz.d3*v3.xyz.d3;
+        return new Vector(this.xyz.add(myVec.xyz));
     }
 
-    public Vector crossProduct(Vector v2)
+    public Vector scale(double scalar)
     {
-       return new Vector(this.xyz.d2*v2.xyz.d3-this.xyz.d3*v2.xyz.d2,
-                        this.xyz.d3*v2.xyz.d1-this.xyz.d1*v2.xyz.d3,
-                        this.xyz.d1*v2.xyz.d2-this.xyz.d2*v2.xyz.d1);
+        return new Vector(this.xyz.scale(scalar));
+    }
+
+    public double dotProduct(Vector myVec)
+    {
+        return this.xyz.d1*myVec.xyz.d1 +this.xyz.d2*myVec.xyz.d2 +this.xyz.d3*myVec.xyz.d3;
+    }
+
+    public Vector crossProduct(Vector myVec)
+    {
+       return new Vector(this.xyz.d2*myVec.xyz.d3-this.xyz.d3*myVec.xyz.d2,
+                        this.xyz.d3*myVec.xyz.d1-this.xyz.d1*myVec.xyz.d3,
+                        this.xyz.d1*myVec.xyz.d2-this.xyz.d2*myVec.xyz.d1);
 
     }
 

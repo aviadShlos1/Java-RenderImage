@@ -7,6 +7,12 @@ public class Ray
     private Point p0;
     private Vector dir;
 
+    public Ray(Point p0, Vector dir) {
+        this.p0 = p0;
+        this.dir = dir;
+        this.dir.normalize();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
