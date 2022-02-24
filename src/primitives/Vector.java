@@ -6,6 +6,8 @@ public class Vector extends Point
         super(x,y,z);
     }
 
+    public Vector(Double3 dbl) {super(dbl);}
+
     public double lengthSquared() {
         return xyz.d1 * xyz.d1 + xyz.d2* xyz.d2 + xyz.d3* xyz.d3;
     }
