@@ -6,13 +6,13 @@ public class Vector extends Point
         super(x,y,z);
         Point point = new Point(x, y, z);
         if (point.xyz.equals(Double3.ZERO))
-            throw new IllegalArgumentException("cannot get vector of zero");
+            throw new IllegalArgumentException("ERROR: cannot get vector of zero");
     }
 
     public Vector(Double3 dbl) throws IllegalArgumentException{
         super(dbl);
         if (dbl.equals(Double3.ZERO))
-            throw new IllegalArgumentException("cannot get vector of zero");
+            throw new IllegalArgumentException("ERROR: cannot get vector of zero");
     }
 
     public Vector add(Vector myVec) {
@@ -42,8 +42,7 @@ public class Vector extends Point
     }
 
     public Vector normalize() {
-        Double3 p = xyz.scale(length());
-        return new Vector(p.d1,p.d2,p.d3);
+        return new Vector(this.xyz.d1/length(),this.xyz.d2/length(),this.xyz.d3/length());
     }
 
     @Override
