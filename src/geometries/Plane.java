@@ -11,7 +11,7 @@ public class Plane implements Geometry
 //c-tor which gets three points
     public Plane(Point... vertices)
     {
-        normal=null;
+        normal= null;
     }
 
 //c-tor which gets point and vector
