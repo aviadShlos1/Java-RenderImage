@@ -1,15 +1,16 @@
 /**
- * 
+ * @author: Aviad Shloserg 314960881
+ *          Evyatar Levi   318753993
+ * Exercise: PR01
+ * Brief: Defining the Primitives and the Geometries entities
  */
 package primitives;
-
 import static primitives.Util.*;
 
 /**
  * This class will serve all primitive classes based on three numbers
- * 
- * @author Dan Zilberstein
  */
+
 public class Double3 {
 	final double d1;
 	final double d2;
