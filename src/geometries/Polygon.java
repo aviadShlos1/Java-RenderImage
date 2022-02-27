@@ -1,3 +1,9 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR01
+ * Brief: Definding the Primitives and the Gemoteries entities
+ */
 package geometries;
 
 import java.util.List;

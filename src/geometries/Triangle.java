@@ -1,10 +1,22 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR01
+ * Brief: Definding the Primitives and the Gemoteries entities
+ */
 package geometries;
 
 import primitives.Point;
 import primitives.Vector;
 
+/**
+ * Triangle class represents a polygon with three edges and three vertices
+ */
 public class Triangle extends Polygon{
-    //c-tor which gets three points
+    /**
+     * c-tor which gets three points
+     * @param vertices which include a list of three vertices
+     */
     public Triangle(Point... vertices)
     {
         super(vertices);
