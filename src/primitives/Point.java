@@ -6,20 +6,14 @@ public class Point
 {
     Double3 xyz;
 
-    /**
-     * C-tor
-     * @param x coordinate
-     * @param y coordinate
-     * @param z coordinate
-     */
     public Point(double x, double y, double z)
     {
-        xyz = new Double3(x,y,z);
+        xyz= new Double3(x,y,z);
         if (xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("Vector 0");
     }
     public Point(Double3 dbl){
-        xyz = new Double3(dbl.d1,dbl.d2,dbl.d3);
+        xyz= new Double3(dbl.d1,dbl.d2,dbl.d3);
         if (xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("Vector 0");
     }
@@ -39,14 +33,15 @@ public class Point
     public double distanceSquared(Point p1)
     {
         return (this.xyz.d1-p1.xyz.d1)*(this.xyz.d1-p1.xyz.d1) +
-                (this.xyz.d2-p1.xyz.d2)*(this.xyz.d2-p1.xyz.d2) +
-                (this.xyz.d3-p1.xyz.d3)*(this.xyz.d3-p1.xyz.d3) ;
+                         (this.xyz.d2-p1.xyz.d2)*(this.xyz.d2-p1.xyz.d2) +
+                         (this.xyz.d3-p1.xyz.d3)*(this.xyz.d3-p1.xyz.d3) ;
     }
 
     public double distance(Point p1)
     {
-        return Math.sqrt(distanceSquared(p1));
+      return Math.sqrt(distanceSquared(p1));
     }
+
 
 
 
@@ -55,11 +50,9 @@ public class Point
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
-        if (!(obj instanceof Point other)) return false;
-        return Util.isZero(xyz.d1-other.xyz.d1) &&
-                Util.isZero(xyz.d2-other.xyz.d2) &&
-                Util.isZero(xyz.d3-other.xyz.d3);
-//        return Objects.equals(xyz, other.xyz);
+        if (!(obj instanceof Point)) return false;
+        Point other = (Point) obj;
+        return Objects.equals(xyz, other.xyz);
     }
 
     @Override
