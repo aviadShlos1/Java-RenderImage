@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Point
 {
-    Double3 xyz;
+    final Double3 xyz;
 
     public Point(double x, double y, double z)
     {
