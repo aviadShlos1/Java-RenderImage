@@ -6,6 +6,12 @@ public class Point
 {
     Double3 xyz;
 
+    /**
+     * C-tor
+     * @param x coordinate
+     * @param y coordinate
+     * @param z coordinate
+     */
     public Point(double x, double y, double z)
     {
         xyz = new Double3(x,y,z);
@@ -49,8 +55,7 @@ public class Point
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null) return false;
-        if (!(obj instanceof Point)) return false;
-        Point other = (Point) obj;
+        if (!(obj instanceof Point other)) return false;
         return Util.isZero(xyz.d1-other.xyz.d1) &&
                 Util.isZero(xyz.d2-other.xyz.d2) &&
                 Util.isZero(xyz.d3-other.xyz.d3);
