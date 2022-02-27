@@ -2,7 +2,7 @@
  *@author: Aviad Shlosberg 314960881
  *         Evyatar Levi    318753993
  *Exercise: PR01
- * Brief: Definding the Primitives and the Gemoteries entities
+ * Brief: Define the Primitives and the Geometries entities
  */
 package geometries;
 
