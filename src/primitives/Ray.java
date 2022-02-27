@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Ray
 {
-    private Point p0;
-    private Vector dir;
+    final private Point p0;
+    final private Vector dir;
 
     public Ray(Point p0, Vector dir) {
         this.p0 = p0;
@@ -22,10 +22,10 @@ public class Ray
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Ray)) return false;
-        Ray ray = (Ray) o;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Ray)) return false;
+        Ray ray = (Ray) obj;
         return Objects.equals(p0, ray.p0) && Objects.equals(dir, ray.dir);
     }
 

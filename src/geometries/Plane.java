@@ -8,10 +8,16 @@ public class Plane implements Geometry
     private Point q0;
     private Vector normal;
 
-//c-tor which gets three points
-    public Plane(Point... vertices)
-    {
-        normal= null;
+    /**
+     * constructor for plane using three points
+     *
+     * @param vertex
+     * @param vertex1
+     * @param vertex2
+     */
+    public Plane(Point vertex, Point vertex1, Point vertex2) {
+        normal = null;
+        q0 = vertex;
     }
 
 //c-tor which gets point and vector
@@ -19,10 +25,6 @@ public class Plane implements Geometry
         this.q0 = q0;
         this.normal = normal;
         this.normal.normalize();
-    }
-
-    public Point getQ0() {
-        return q0;
     }
 
     public Vector getNormal() {
