@@ -1,3 +1,9 @@
+/**
+ * @author: Aviad Shloserg 314960881
+ *          Evyatar Levi   318753993
+ * Exercise: PR01
+ * Brief: Define the Primitives and the Geometries entities
+ */
 package primitives;
 
 /**
