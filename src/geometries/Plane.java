@@ -8,10 +8,16 @@ public class Plane implements Geometry
     private Point q0;
     private Vector normal;
 
-//c-tor which gets three points
-    public Plane(Point... vertices)
-    {
-
+    /**
+     * constructor for plane using three points
+     *
+     * @param vertex
+     * @param vertex1
+     * @param vertex2
+     */
+    public Plane(Point vertex, Point vertex1, Point vertex2) {
+        normal = null;
+        q0 = vertex;
     }
 
 //c-tor which gets point and vector
