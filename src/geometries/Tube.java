@@ -14,7 +14,5 @@ public class Tube implements Geometry {
     }
 
     @Override
-    public Vector getNormal(Point myPoint) {
-        return null;
-    }
+    public Vector getNormal(Point myPoint) {return null;}
 }
