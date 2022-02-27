@@ -2,11 +2,14 @@ package primitives;
 
 public class Vector extends Point
 {
-    public Vector(double x, double y, double z) {
+    public Vector(double x, double y, double z) throws IllegalArgumentException{
         super(x,y,z);
+        xyz=new Double3(x,y,z);
     }
 
-    public Vector(Double3 dbl) {super(dbl);}
+    public Vector(Double3 dbl) throws IllegalArgumentException {
+        super(dbl);
+    }
 
     public double lengthSquared() {
         return xyz.d1 * xyz.d1 + xyz.d2* xyz.d2 + xyz.d3* xyz.d3;

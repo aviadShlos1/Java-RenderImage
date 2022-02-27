@@ -4,18 +4,14 @@ import java.util.Objects;
 
 public class Point
 {
-    final Double3 xyz;
+    Double3 xyz;
 
     public Point(double x, double y, double z) {
         xyz= new Double3(x,y,z);
-        if (xyz.equals(Double3.ZERO))
-            throw new IllegalArgumentException("Vector 0");
     }
 
     public Point(Double3 dbl) {
         xyz= new Double3(dbl.d1,dbl.d2,dbl.d3);
-        if (xyz.equals(Double3.ZERO))
-            throw new IllegalArgumentException("Vector 0");
     }
 
     public Point add(Vector v) {

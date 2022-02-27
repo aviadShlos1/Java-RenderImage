@@ -10,6 +10,10 @@ public class Cylinder implements Geometry {
         this.height = height;
     }
 
+    public double getHeight() {
+        return height;
+    }
+
     @Override
     public Vector getNormal(Point myPoint) {
         return null;

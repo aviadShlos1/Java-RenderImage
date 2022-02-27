@@ -11,7 +11,15 @@ public class Sphere implements Geometry {
         this.radius = radius;
     }
 
- @Override
+    public Point getPoint() {
+        return point;
+    }
+
+    public double getRadius() {
+        return radius;
+    }
+
+    @Override
  public Vector getNormal(Point myPoint) {
   return null;
  }

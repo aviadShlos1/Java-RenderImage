@@ -11,7 +11,7 @@ public class Plane implements Geometry
 //c-tor which gets three points
     public Plane(Point... vertices)
     {
-
+        normal=null;
     }
 
 //c-tor which gets point and vector
@@ -19,6 +19,10 @@ public class Plane implements Geometry
         this.q0 = q0;
         this.normal = normal;
         this.normal.normalize();
+    }
+
+    public Point getQ0() {
+        return q0;
     }
 
     public Vector getNormal() {
