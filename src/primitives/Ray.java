@@ -21,7 +21,6 @@ public class Ray
         return Objects.equals(p0, ray.p0) && Objects.equals(dir, ray.dir);
     }
 
-
     @Override
     public String toString() {
         return "Ray{" +
