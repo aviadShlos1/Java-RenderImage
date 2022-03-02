@@ -102,4 +102,16 @@ public class Vector extends Point
         return "Vector{}";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Point)) return false;
+        Vector other = (Vector) obj;
+        return Util.isZero(xyz.d1-other.xyz.d1) &&
+                Util.isZero(xyz.d2-other.xyz.d2) &&
+                Util.isZero(xyz.d3-other.xyz.d3);
+//        return super.equals(obj);
+
+    }
 }
