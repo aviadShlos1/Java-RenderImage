@@ -55,7 +55,6 @@ public class Point
      */
     public Point add(Vector v) {
         return  new Point(this.xyz.add(v.xyz));
-//        return new Point(this.xyz.d1+v.xyz.d1,this.xyz.d2+v.xyz.d2,this.xyz.d3+v.xyz.d3) ;
     }
 
     /**
@@ -84,10 +83,7 @@ public class Point
         if (obj == null) return false;
         if (!(obj instanceof Point)) return false;
         Point other = (Point) obj;
-        return Util.isZero(xyz.d1-other.xyz.d1) &&
-                Util.isZero(xyz.d2-other.xyz.d2) &&
-                Util.isZero(xyz.d3-other.xyz.d3);
-//        return Objects.equals(xyz, other.xyz);
+        return xyz.equals(other.xyz);
     }
 
     @Override
