@@ -1,5 +1,5 @@
 /**
- * @author: Aviad Shloserg 314960881
+ * @author: Aviad Shlosberg 314960881
  *          Evyatar Levi   318753993
  * Exercise: PR01
  * Brief: Defining the Primitives and the Geometries entities
