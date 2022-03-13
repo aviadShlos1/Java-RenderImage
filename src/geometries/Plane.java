@@ -21,6 +21,7 @@ public class Plane implements Geometry
     final Vector normal;
 
     /**
+     *
      * * constructor for plane. receives 3 points.
      *
      * @param p1 - first point
@@ -29,7 +30,6 @@ public class Plane implements Geometry
      */
     public Plane(Point p1, Point p2, Point p3) {
         q0 = p1;
-
         Vector U = p2.subtract(p1);
         Vector V = p3.subtract(p1);
         normal = U.crossProduct(V).normalize();
@@ -41,13 +41,12 @@ public class Plane implements Geometry
         this.normal = normal;
         normal = normal.normalize();
     }
+// getter
+    public Vector getNormal() {return normal;}
 
-    public Vector getNormal() {
-        return normal;
-    }
-
+// getNormal
     @Override
     public Vector getNormal(Point myPoint) {
-        return null;
+        return normal;
     }
 }
