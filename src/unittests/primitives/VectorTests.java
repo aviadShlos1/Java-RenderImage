@@ -1,15 +1,14 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR02
+ * Brief: Creating unit tests according to TDD principle
+ */
 package unittests.primitives;
 import org.junit.jupiter.api.Test;
 import primitives.Vector;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static primitives.Util.isZero;
-
-/**
- * Unit tests for primitives.Vector class
- *  @author: Aviad Shloserg 314960881
- *           Evyatar Levi   318753993
- */
 
 class VectorTests {
     Vector v1 = new Vector(1, 2, 3);
