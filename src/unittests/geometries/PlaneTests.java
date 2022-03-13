@@ -8,7 +8,9 @@ import primitives.Vector;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PlaneTests {
-
+    /**
+     * Test method for {@link geometries.Plane#getNormal(primitives.Point)}.
+     */
     @Test
     void testGetNormal() {
 

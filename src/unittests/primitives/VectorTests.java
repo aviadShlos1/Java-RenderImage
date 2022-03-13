@@ -20,7 +20,11 @@ class VectorTests {
      */
     @Test
     void testAdd() {
-        fail("Not yet implemented");
+        // ============ Equivalence Partitions Tests ==============
+        Vector testVec = new Vector(-1, -2, -3);
+
+        // Test that sum of add is proper
+        assertEquals(testVec, v1.add(v2), "ERROR: add() wrong value");
     }
 
     /**
@@ -28,7 +32,11 @@ class VectorTests {
      */
     @Test
     void testScale() {
-        fail("Not yet implemented");
+        // ============ Equivalence Partitions Tests ==============
+        Vector testVec = new Vector(3, 6, 9);
+
+        // Test that result of scale is proper
+        assertEquals(testVec, v1.scale(3), "ERROR: scale() wrong value");
     }
 
     /**
@@ -36,7 +44,12 @@ class VectorTests {
      */
     @Test
     void testDotProduct() {
-        fail("Not yet implemented");
+        // ============ Equivalence Partitions Tests ==============
+        int dotProd = -28; //-2-8-18;
+
+        // Test that result of dotProduct is proper
+        assertEquals(dotProd, v1.dotProduct(v2), "ERROR: dotProduct() wrong value");
+        assertEquals(0, v1.dotProduct(v3), "ERROR: dotProduct() wrong value");
     }
 
     /**
@@ -69,7 +82,14 @@ class VectorTests {
      */
     @Test
     void testLengthSquared() {
-        fail("Not yet implemented");
+        // ============ Equivalence Partitions Tests ==============
+        int length1 = 14;
+        int length2 = 56;
+
+        // Test that length squared is proper
+        assertEquals(length1, v1.lengthSquared(), "ERROR: lengthSquared() wrong value");
+        assertEquals(length2, v2.lengthSquared(), "ERROR: lengthSquared() wrong value");
+
     }
 
     /**
@@ -77,7 +97,12 @@ class VectorTests {
      */
     @Test
     void testLength() {
-        fail("Not yet implemented");
+        // ============ Equivalence Partitions Tests ==============
+        int length2 = 5;
+
+        // Test that length is proper
+        assertEquals(length2, new Vector(0, 3, 4).length(), "ERROR: length() wrong value");
+
     }
 
     /**
