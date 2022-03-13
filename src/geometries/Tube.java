@@ -15,16 +15,16 @@ import primitives.Vector;
  */
 public class Tube implements Geometry {
     double radius;
-    Ray ray;
+    Ray axisRay;
 
     /**
      * Constructor to initialize Tube
      * @param radius
-     * @param ray
+     * @param axisRay
      */
-    public Tube(double radius, Ray ray) {
+    public Tube(double radius, Ray axisRay) {
         this.radius = radius;
-        this.ray = ray;
+        this.axisRay = axisRay;
     }
 
     /**
@@ -39,10 +39,24 @@ public class Tube implements Geometry {
      * Getter
      * @return ray
      */
-    public Ray getRay() {
-        return ray;
+    public Ray getAxisRay() {
+        return axisRay;
     }
 
+    /**
+     * function that receive a point in a body and return a normal in this point to the body
+     *
+     * @param myPoint pointing in the direction of the normal
+     * @return normal vector to the Geometry
+     */
     @Override
-    public Vector getNormal(Point myPoint) {return null;}
+    public Vector getNormal(Point myPoint) {
+        Vector v = axisRay.getDir();
+        Point p0 = axisRay.getP0();
+        double t= myPoint.subtract(p0).dotProduct(v);
+        // getting the center point
+        Point center = p0.add(v.scale(t));
+        return (myPoint.subtract(center)).normalize();
+    }
+
 }

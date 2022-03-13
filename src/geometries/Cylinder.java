@@ -33,6 +33,7 @@ public class Cylinder implements Geometry {
 
     @Override
     public Vector getNormal(Point myPoint) {
+
         return null;
     }
 }
