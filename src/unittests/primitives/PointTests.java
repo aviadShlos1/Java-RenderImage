@@ -15,16 +15,14 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 class PointTests {
     Point a = new Point(1,2,3);
-    Point b = new Point(1,2,3);
-
-    Vector vec=b.subtract(a);
+    Point b = new Point(3,5,5);
     /**
      * Test method for {@link primitives.Point# testSubtract(primitives.Point)}.
      */
     @Test
     void testSubtract() {
-        Point testPoint = new Point(0,0,0);
-        assertEquals(testPoint,a.subtract(b),"ERROR: subtract() wrong value");
+        Vector testVector = new Vector(2,3,2);
+        assertEquals(testVector, b.subtract(a), "ERROR: subtract() wrong value");
     }
 
     /**
@@ -33,7 +31,8 @@ class PointTests {
     @Test
     void testAdd(){
         Point testPoint = new Point(1,2,3);
-        assertEquals(testPoint,a.add(vec),"ERROR: add() wrong value");
+        Vector myVector = new Vector(-2,-3,-2);
+        assertEquals(testPoint,b.add(myVector),"ERROR: add() wrong value");
     }
 
     /**
@@ -41,7 +40,10 @@ class PointTests {
      */
     @Test
     void testDistanceSquared() {
-        fail("Not yet implemented");
+
+        int sqrtDistance = 17;
+        Point testPoint = new Point(1,2,3);
+        assertEquals(sqrtDistance,b.distanceSquared(a),"ERROR: DistanceSquared() wrong value");
     }
 
 
@@ -50,6 +52,7 @@ class PointTests {
      */
     @Test
     void testDistance() {
-        fail("Not yet implemented");
+       Double distance = Math.sqrt(17);
+        assertEquals(distance,b.distance(a),"ERROR: DistanceSquared() wrong value");
     }
 }
