@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Vector;
 import geometries.Sphere;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class SphereTests {
