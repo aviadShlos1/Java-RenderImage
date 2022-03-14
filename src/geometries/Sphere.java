@@ -8,6 +8,8 @@ package geometries;
 
 import primitives.*;
 
+import java.util.List;
+
 /**
  * Sphere class represents a geometrical object that is a three-dimensional analogue to a two-dimensional circle based on main point anda radius
  */
@@ -52,5 +54,10 @@ public class Sphere implements Geometry {
     public Vector getNormal(Point myPoint) {
        return (myPoint.subtract(centerPoint)).normalize();
 
+    }
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }

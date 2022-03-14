@@ -10,12 +10,14 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.List;
+
 /**
  * Tube class represents any of various usually cylindrical structures or devices based on radius and a ray
  */
 public class Tube implements Geometry {
-    double radius;
-    Ray axisRay;
+    final double radius;
+    final Ray axisRay;
 
     /**
      * Constructor to initialize Tube
@@ -59,4 +61,8 @@ public class Tube implements Geometry {
         return (myPoint.subtract(center)).normalize();
     }
 
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
+    }
 }

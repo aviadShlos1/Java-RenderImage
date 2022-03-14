@@ -9,7 +9,10 @@ package unittests.geometries;
 import geometries.Plane;
 import org.junit.jupiter.api.Test;
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,9 +26,9 @@ class PlaneTests {
         // ============ Equivalence Partitions Tests ==============
         // TC01: There is a simple single test here
         Plane testPlane = new Plane(
-                new Point(1,0,0),
-                new Point(0,1,0),
-                new Point(0,0,1)
+                new Point(1, 0, 0),
+                new Point(0, 1, 0),
+                new Point(0, 0, 1)
         );
         double sqrt3 = Math.sqrt(1 / 3d);
 
@@ -33,3 +36,20 @@ class PlaneTests {
         assertEquals(new Vector(sqrt3, sqrt3, sqrt3), testPlane.getNormal(new Point(0, 0, 1)), "Bad normal to plane");
     }
 }
+
+//    @Test
+//    void testFindIntersections() {
+//        Ray ray = new Ray(1,);
+//        Plane plane = new Plane(
+//                new Point(1,0,0),
+//                new Point(0, 1, 0),
+//                new Point(0, 0, 1));
+//        assertNull(plane.findIntersections(ray),"");
+//
+////        assertEquals(List.of (new Point(1,1,1), plane.findIntersections(ray)) );
+
+
+
+
+//    }
+

@@ -12,7 +12,7 @@ import primitives.Vector;
 /**
  * This interface will serve all geometries classes which will implement the getNormal method
  */
-public interface Geometry
-{
-    Vector getNormal(Point myPoint);
+public interface Geometry extends Intersectable{
+     Vector getNormal(Point myPoint);
 }
+

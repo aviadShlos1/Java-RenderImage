@@ -7,7 +7,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 
 /**
@@ -48,5 +51,10 @@ public class Plane implements Geometry
     @Override
     public Vector getNormal(Point myPoint) {
         return normal;
+    }
+
+    @Override
+    public List<Point> findIntersections(Ray ray) {
+        return null;
     }
 }
