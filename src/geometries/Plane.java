@@ -14,6 +14,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
 
 
 /**
@@ -33,7 +34,7 @@ public class Plane implements Geometry {
      * @param p3 - third point
      */
     public Plane(Point p1, Point p2, Point p3) {
-        q0 = p1;
+        q0 = p1;//reference point
         Vector U = p2.subtract(p1);
         Vector V = p3.subtract(p1);
         normal = U.crossProduct(V).normalize();
@@ -67,6 +68,8 @@ public class Plane implements Geometry {
 
         double enumerator=N.dotProduct(Q0.subtract(P0));
         double denominator=N.dotProduct(v);
+        if(isZero(denominator))
+            throw new IllegalArgumentException("Error: denominator cannot be zero");
         double t = alignZero(enumerator/denominator);
         List<Point> intersectPoints=new LinkedList<>();
         if (t > 0){

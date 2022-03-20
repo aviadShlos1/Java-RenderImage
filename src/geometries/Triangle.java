@@ -7,7 +7,10 @@
 package geometries;
 
 import primitives.Point;
+import primitives.Ray;
 import primitives.Vector;
+
+import java.util.List;
 
 /**
  * Triangle class represents a polygon with three edges and three vertices
@@ -21,4 +24,6 @@ public class Triangle extends Polygon{
     {
         super(vertices);
     }
+
+
 }
