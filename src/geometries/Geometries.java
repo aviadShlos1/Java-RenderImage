@@ -1,3 +1,9 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR03
+ * Brief: Creates the finding intersection method and implement the tests
+ */
 package geometries;
 
 import primitives.Point;
@@ -50,19 +56,19 @@ public class Geometries implements Intersectable {
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        List<Point> intersections = new LinkedList<>();
-        for (Intersectable geometry : geometriesList) {
+        List<Point> intersections = null;
+        for (var geometry : geometriesList) {
             // declare list as null
-            List<Point> geoIntersections = null;
+            List<Point> geoIntersections = geometry.findIntersections(ray);
 
-            if (geometriesList != null && geometriesList.size() > 0) {
+            if (geoIntersections != null) {
+                if (intersections == null)
+                    intersections = new LinkedList<>();
+
                 intersections.addAll(geoIntersections);
             }
         }
-        if (geometriesList.size() > 0) {
-            return intersections;
-        }
-        return null;
+        return intersections;
     }
 }
 
