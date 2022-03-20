@@ -85,7 +85,11 @@ public class Sphere implements Geometry {
 
         // t must be positive
         if (t1 > 0) {
-            intersectPoints.add(new Point(this, ray.getP0(t1) ));
+            intersectPoints.add((p0.add(v.scale(t1))));
         }
+        if (t2 > 0) {
+            intersectPoints.add((p0.add(v.scale(t2))));
+        }
+        return intersectPoints;
     }
 }

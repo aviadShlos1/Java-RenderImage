@@ -10,7 +10,10 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.LinkedList;
 import java.util.List;
+
+import static primitives.Util.alignZero;
 
 
 /**
@@ -18,13 +21,11 @@ import java.util.List;
  *  have different directions (together reflecting the basic 2D object.)
  *  contains a point in the plane and normal to the plane.
  */
-public class Plane implements Geometry
-{
+public class Plane implements Geometry {
     final Point q0;
     final Vector normal;
 
     /**
-     *
      * * constructor for plane. receives 3 points.
      *
      * @param p1 - first point
@@ -38,16 +39,19 @@ public class Plane implements Geometry
         normal = U.crossProduct(V).normalize();
     }
 
-//c-tor which gets point and vector
+    //c-tor which gets point and vector
     public Plane(Point q0, Vector normal) {
         this.q0 = q0;
         this.normal = normal;
         normal = normal.normalize();
     }
-// getter
-    public Vector getNormal() {return normal;}
 
-// getNormal
+    // getter
+    public Vector getNormal() {
+        return normal;
+    }
+
+    // getNormal
     @Override
     public Vector getNormal(Point myPoint) {
         return normal;
@@ -56,6 +60,18 @@ public class Plane implements Geometry
 
     @Override
     public List<Point> findIntersections(Ray ray) {
-        return null;
+        Point P0 = ray.getP0();
+        Vector v = ray.getDir();
+        Point Q0 = q0;
+        Vector N = normal;
+
+        double enumerator=N.dotProduct(Q0.subtract(P0));
+        double denominator=N.dotProduct(v);
+        double t = alignZero(enumerator/denominator);
+        List<Point> intersectPoints=new LinkedList<>();
+        if (t > 0){
+            intersectPoints.add(P0.add(v.scale(t)));
+        }
+        return intersectPoints;
     }
 }

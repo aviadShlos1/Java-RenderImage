@@ -35,21 +35,42 @@ class PlaneTests {
         // Test that result of getNormal is proper
         assertEquals(new Vector(sqrt3, sqrt3, sqrt3), testPlane.getNormal(new Point(0, 0, 1)), "Bad normal to plane");
     }
+
+
+    /**
+     * Test method for {@link geometries.Plane#findIntersections(primitives.Ray)}.'
+     */
+    @Test
+    public void testFindIntersections() {
+        Plane plane = new Plane(
+                new Point(1, 0, 0),
+                new Point(0, 1, 0),
+                new Point(0, 0, 1));
+
+
+// ============ Equivalence Partitions Tests ==============
+        Point intersectionPoint;
+
+        // TC01: Ray intersects the plane (1 points)
+        Ray ray1 = new Ray(new Point(0, -1, 0), new Vector(1, 3, 1));
+        List<Point> TC01result = pl.findIntersections(ray1);
+
+        assertEquals(1, TC01result.size(), "Wrong number of intersection points");
+
+        intersectionPoint = new Point(0.4, 0.2, 0.4);
+        assertEquals(intersectionPoint, TC01result.get(0), "not the correct intersection point");
+
+        // TC02: Ray  doesn't intersects the plane(0 points)
+        Ray ray2 = new Ray(new Point(3, 4, 2), new Vector(1, 2, 1));
+        List<Point> TC02result = pl.findIntersections(ray2);
+
+        assertNull(TC02result, "Wrong number of intersection points");
+
+
+        assertNull(plane.findIntersections(ray), "");
+
+//        assertEquals(List.of (new Point(1,1,1), plane.findIntersections(ray)) );
+
+
+    }
 }
-
-//    @Test
-//    void testFindIntersections() {
-//        Ray ray = new Ray(1,);
-//        Plane plane = new Plane(
-//                new Point(1,0,0),
-//                new Point(0, 1, 0),
-//                new Point(0, 0, 1));
-//        assertNull(plane.findIntersections(ray),"");
-//
-////        assertEquals(List.of (new Point(1,1,1), plane.findIntersections(ray)) );
-
-
-
-
-//    }
-
