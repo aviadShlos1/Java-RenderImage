@@ -1,9 +1,3 @@
-/**
- *@author: Aviad Shlosberg 314960881
- *         Evyatar Levi    318753993
- *Exercise: PR02
- * Brief: Creating unit tests according to TDD principle
- */
 package unittests.geometries;
 
 import geometries.Triangle;
@@ -18,8 +12,8 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Unit tests for geometries.Triangle class
  */
-class TriangleTest {
 
+public class TriangleTests {
     /**
      * Test method for {@link geometries.Triangle#getNormal(primitives.Point)}.
      */
@@ -95,3 +89,4 @@ class TriangleTest {
         assertNull(TC06result, "Wrong number of intersection points");
     }
 }
+
