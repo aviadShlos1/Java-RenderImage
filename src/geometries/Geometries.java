@@ -1,4 +1,4 @@
-package unittests.geometries;
+package geometries;
 
 import geometries.Intersectable;
 import primitives.Point;
