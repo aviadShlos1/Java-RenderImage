@@ -13,10 +13,34 @@ import primitives.Ray;
 import primitives.Vector;
 
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-class TriangleTests {
+/**
+ * Unit tests for geometries.Triangle class
+ */
+class TriangleTest {
+
+    /**
+     * Test method for {@link geometries.Triangle#getNormal(primitives.Point)}.
+     */
+    @Test
+    void getNormal() {
+
+        // ============ Equivalence Partitions Tests ==============
+        Triangle testT = new Triangle(
+                new Point(1, 0, 0),
+                new Point(0, 1, 0),
+                new Point(0, 0, 1)
+        );
+        double sq = Math.sqrt(1 / 3d);
+
+        // Test that result of getNormal is proper
+        assertEquals(testT.getNormal(new Point(1, 0, 0)), new Vector(sq, sq, sq));
+
+    }
+    /**
+     * Test method for {@link geometries.Triangle#findIntersections(primitives.Ray)}.'
+     * */
     @Test
     void findIntersections() {
 
@@ -69,6 +93,5 @@ class TriangleTests {
         List<Point> TC06result = t.findIntersections(ray6);
 
         assertNull(TC06result, "Wrong number of intersection points");
-
     }
 }
