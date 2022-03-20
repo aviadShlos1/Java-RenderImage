@@ -18,10 +18,10 @@ public class Sphere implements Geometry {
     double radius;
 
     /**
-     *  Main Constructor for sphere, by entrance of center point and radius
+     * Main Constructor for sphere, by entrance of center point and radius
      *
      * @param centerPoint - center of sphere
-     * @param radius - radius of sphere
+     * @param radius      - radius of sphere
      */
     public Sphere(Point centerPoint, double radius) {
         this.centerPoint = centerPoint;
@@ -30,6 +30,7 @@ public class Sphere implements Geometry {
 
     /**
      * Getter
+     *
      * @return the point
      */
     public Point getCenterPoint() {
@@ -38,6 +39,7 @@ public class Sphere implements Geometry {
 
     /**
      * Getter
+     *
      * @return the radius
      */
     public double getRadius() {
@@ -52,11 +54,12 @@ public class Sphere implements Geometry {
      */
     @Override
     public Vector getNormal(Point myPoint) {
-       return (myPoint.subtract(centerPoint)).normalize();
+        return (myPoint.subtract(centerPoint)).normalize();
 
     }
+
     /**
-     * @param ray         ray that cross the geometry
+     * @param ray ray that cross the geometry
      * @return list of intersection points that were found
      */
     @Override
@@ -68,8 +71,8 @@ public class Sphere implements Geometry {
         Vector u = O.subtract(p0);
 
         double t_m = alignZero(v.dotProduct(u));
-        double d = alignZero(Math.sqrt(u.lengthSquared() - (t_m*t_m)) );
-        double t_h = alignZero(Math.sqrt( (radius*radius) - (d*d) ));
+        double d = alignZero(Math.sqrt(u.lengthSquared() - (t_m * t_m)));
+        double t_h = alignZero(Math.sqrt((radius * radius) - (d * d)));
 
         // if d is equal to or bigger than r, there will be no intersections at all
         if (d >= r) {
@@ -78,7 +81,7 @@ public class Sphere implements Geometry {
         double t1 = alignZero(t_m + t_h);
         double t2 = alignZero(t_m - t_h);
 
-        List <Point> intersectPoints = new LinkedList<>();
+        List<Point> intersectPoints = new LinkedList<>();
 
         // t must be positive
         if (t1 > 0) {
