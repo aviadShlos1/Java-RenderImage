@@ -1,7 +1,7 @@
 /**
- *@author: Aviad Shlosberg 314960881
- *         Evyatar Levi    318753993
- *Exercise: PR01
+ * @author: Aviad Shloserg 314960881
+ *          Evyatar Levi   318753993
+ * Exercise: PR01
  * Brief: Define the Primitives and the Geometries entities
  */
 package geometries;
@@ -93,5 +93,10 @@ public class Polygon implements Geometry {
 	@Override
 	public Vector getNormal(Point point) {
 		return plane.getNormal();
+	}
+
+	@Override
+	public List<Point> findIntersections(Ray ray) {
+		return null;
 	}
 }

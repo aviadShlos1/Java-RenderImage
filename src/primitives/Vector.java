@@ -1,10 +1,9 @@
 /**
- *@author: Aviad Shlosberg 314960881
- *         Evyatar Levi    318753993
- *Exercise: PR01
+ * @author: Aviad Shlosberg 314960881
+ *          Evyatar Levi   318753993
+ * Exercise: PR01
  * Brief: Define the Primitives and the Geometries entities
  */
-
 package primitives;
 
 /**
@@ -20,8 +19,7 @@ public class Vector extends Point
      */
     public Vector(double x, double y, double z) throws IllegalArgumentException {
         super(x,y,z);
-        Point point = new Point(x, y, z);
-        if (point.xyz.equals(Double3.ZERO))
+        if (xyz.equals(Double3.ZERO))
             throw new IllegalArgumentException("ERROR: cannot get vector of zero");
     }
 
@@ -104,4 +102,11 @@ public class Vector extends Point
         return "Vector{}";
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof Point)) return false;
+        return super.equals(obj);
+    }
 }
