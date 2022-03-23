@@ -55,41 +55,34 @@ public class Sphere implements Geometry {
     @Override
     public Vector getNormal(Point myPoint) {
         return (myPoint.subtract(centerPoint)).normalize();
-
     }
-
     /**
      * @param ray ray that cross the geometry
      * @return list of intersection points that were found
      */
     @Override
     public List<Point> findIntersections(Ray ray) {
-        Point O = centerPoint;
         Point p0 = ray.getP0();
-        double r = radius;
         Vector v = ray.getDir();
-        Vector u = O.subtract(p0);
 
-        double t_m = alignZero(v.dotProduct(u));
-        double d = alignZero(Math.sqrt(u.lengthSquared() - (t_m * t_m)));
-        double t_h = alignZero(Math.sqrt((radius * radius) - (d * d)));
+        if (p0.equals(this.centerPoint))         // p0 = centerPoint only one intersect
+            return List.of(ray.getPoint(radius));
+        Vector u = this.centerPoint.subtract(p0);
+        double tm = v.dotProduct(u);
+        double d = Math.sqrt(u.lengthSquared() - tm * tm);
 
-        // if d is equal to or bigger than r, there will be no intersections at all
-        if (d >= r) {
+        if (d >= this.radius)
             return null;
-        }
-        double t1 = alignZero(t_m + t_h);
-        double t2 = alignZero(t_m - t_h);
+        double th = Math.sqrt(this.radius * this.radius - d * d);
+        double t1 = tm + th;
+        double t2 = tm - th;
 
-        List<Point> intersectPoints = new LinkedList<>();
-
-        // t must be positive
-        if (t1 > 0) {
-            intersectPoints.add((p0.add(v.scale(t1))));
-        }
-        if (t2 > 0) {
-            intersectPoints.add((p0.add(v.scale(t2))));
-        }
-        return intersectPoints;
+        if (t1 > 0 && t2 > 0)
+            return List.of(ray.getPoint(t1), ray.getPoint(t2));
+        if (t1 > 0)
+            return List.of(ray.getPoint(t1));
+        if (t2 > 0)
+            return List.of(ray.getPoint(t2));
+        return null;
     }
 }
