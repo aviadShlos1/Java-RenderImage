@@ -8,26 +8,39 @@ public class Camera {
     private Vector Vto;
     private Vector Vup;
     private Vector Vright;
-    private Point location;
+    private Point zeroPoint;
     private double distance;
     private double width;
     private double height;
 
+    /**
+     * C-tor
+     * @param zeroPoint
+     * @param Vto
+     * @param Vup
+     */
     public Camera(Point zeroPoint, Vector Vto, Vector Vup) {
+        this.zeroPoint =zeroPoint;
         this.Vto = Vto.normalize();
-        //TODO: implement
-    }
-
-    public Camera setVPDistance(double distance) {
-        this.distance = distance;
-        return this;
-
+        this.Vup = Vup.normalize();
+        if(Vto.dotProduct(Vup)!=0)
+            throw new IllegalArgumentException("The vectors are not orthogonal");
+        this.Vright = Vto.crossProduct(Vup);
     }
 
     public Camera setVPSize(double width, double height) {
         this.width = width;
         this.height = height;
         return this;
+    }
+
+    public Camera setVPDistance(double distance) {
+        this.distance = distance;
+        return this;
+    }
+
+    public Ray constructRay(int nX, int nY, int j, int i) {
+        return  null;
     }
 
     public Vector getVto() {
@@ -42,8 +55,8 @@ public class Camera {
         return Vright;
     }
 
-    public Point getLocation() {
-        return location;
+    public Point getZeroPoint() {
+        return zeroPoint;
     }
 
     public double getDistance() {
@@ -58,7 +71,5 @@ public class Camera {
         return height;
     }
 
-    public Ray constructRay(int nx, int i1, int i2, int i3) {
-        return  null;
-    }
+
 }
