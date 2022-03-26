@@ -3,10 +3,8 @@ package unittests.renderer;
 import geometries.*;
 import org.junit.jupiter.api.Test;
 import primitives.*;
-import geometries.Intersectable.*;
 import renderer.Camera;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -17,20 +15,20 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class CameraIntegrationsTest {
 
-    private void testPoint3DS(Geometry geo, Camera cam, int points) {
+    private void testPointS(Geometry geo, Camera cam, int points) {
 
-        List<GeoPoint> allPoints = null;
+        List<Point> allPoints = null;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 Ray ray = cam.constructRayThroughPixel(3, 3, j, i);
-                List<GeoPoint> lst = geo.findGeoIntersections(ray);
+                List<Point> intersectionsList = geo.findIntersections(ray);
 
-                if (lst != null) {
+                if (intersectionsList != null) {
                     if (allPoints == null) {
                         allPoints = new LinkedList<>();
                     }
-                    allPoints.addAll(lst);
+                    allPoints.addAll(intersectionsList);
                 }
             }
         }
@@ -43,25 +41,26 @@ public class CameraIntegrationsTest {
         }
     }
 
+    static final Point ZERO_POINT = new Point(0, 0, 0);
     Camera cam1 = new Camera(
             Point.ZERO,                   // camera center
             new Vector(0, 0, -1),   // Vup
             new Vector(0, 1, 0))    // Vto
-            .setDistance(1)
+            .setViewPlaneDistance(1)
             .setViewPlaneSize(3, 3);
 
     Camera cam2 = new Camera(
-            new Point3D(0, 0, 0.5), // camera center
+            new Point(0, 0, 0.5), // camera center
             new Vector(0, 0, -1),   // Vup
             new Vector(0, 1, 0))    // Vto
-            .setDistance(1)
+            .setViewPlaneDistance(1)
             .setViewPlaneSize(3, 3);
 
     Camera cam3 = new Camera(
-            Point3D.ZERO,                   // camera center
+            Point.ZERO,                   // camera center
             new Vector(0, 0, -1),   // Vup
             new Vector(0, -1, 0))   // Vto
-            .setDistance(1)
+            .setViewPlaneDistance(1)
             .setViewPlaneSize(3, 3);
 
     /**
@@ -72,33 +71,33 @@ public class CameraIntegrationsTest {
 
         // =================================================================================
         // Sphere 1 test (slide 14)
-        Sphere sphere1 = new Sphere(new Point3D(0, 0, -3), 1);
-        testPoint3DS(sphere1, cam1, 2);
+        Sphere sphere1 = new Sphere(new Point(0, 0, -3), 1);
+        testPointS(sphere1, cam1, 2);
         // =================================================================================
 
 
         // =================================================================================
         // Sphere 2 test (slide 15)
-        Sphere sphere2 = new Sphere(new Point3D(0, 0, -2.5), 2.5);
-        testPoint3DS(sphere2, cam2, 18);
+        Sphere sphere2 = new Sphere(new Point(0, 0, -2.5), 2.5);
+        testPointS(sphere2, cam2, 18);
         // =================================================================================
 
         // =================================================================================
         // Sphere 3 test (slide 16)
-        Sphere sphere3 = new Sphere(new Point3D(0, 0, -2), 2);
-        testPoint3DS(sphere3, cam2, 10);
+        Sphere sphere3 = new Sphere(new Point(0, 0, -2), 2);
+        testPointS(sphere3, cam2, 10);
         // =================================================================================
 
         // =================================================================================
         // Sphere 4 test (slide 17)
-        Sphere sphere4 = new Sphere(new Point3D(0, 0, -1), 4);
-        testPoint3DS(sphere4, cam1, 9);
+        Sphere sphere4 = new Sphere(new Point(0, 0, -1), 4);
+        testPointS(sphere4, cam1, 9);
         // =================================================================================
 
         // =================================================================================
         // Sphere 5 test (slide 18)
-        Sphere sphere5 = new Sphere(new Point3D(0, 0, 1), 0.5);
-        testPoint3DS(sphere5, cam1, 0);
+        Sphere sphere5 = new Sphere(new Point(0, 0, 1), 0.5);
+        testPointS(sphere5, cam1, 0);
         // =================================================================================
     }
 
@@ -110,20 +109,20 @@ public class CameraIntegrationsTest {
 
         // =================================================================================
         // Plane 1 test (slide 19)
-        Plane plane1 = new Plane(new Point3D(0, 0, -5), new Vector(0, 0, 1));
-        testPoint3DS(plane1, cam3, 9);
+        Plane plane1 = new Plane(new Point(0, 0, -5), new Vector(0, 0, 1));
+        testPointS(plane1, cam3, 9);
         // =================================================================================
 
         // =================================================================================
         // Plane 2 test (slide 20)
-        Plane plane2 = new Plane(new Point3D(0, 0, -5), new Vector(0, 1, 2));
-        testPoint3DS(plane2, cam3, 9);
+        Plane plane2 = new Plane(new Point(0, 0, -5), new Vector(0, 1, 2));
+        testPointS(plane2, cam3, 9);
         // =================================================================================
 
         // =================================================================================
         // Plane 3 test (slide 21)
-        Plane plane3 = new Plane(new Point3D(0, 0, -5), new Vector(0, 1, 1));
-        testPoint3DS(plane3, cam3, 6);
+        Plane plane3 = new Plane(new Point(0, 0, -5), new Vector(0, 1, 1));
+        testPointS(plane3, cam3, 6);
         // =================================================================================
     }
 
@@ -136,19 +135,19 @@ public class CameraIntegrationsTest {
         // =================================================================================
         // Triangle 1 test (slide 22)
         Triangle triangle1 = new Triangle(
-                new Point3D(0, 1, -2),
-                new Point3D(-1, -1, -2),
-                new Point3D(1, -1, -2));
-        testPoint3DS(triangle1, cam1, 1);
+                new Point(0, 1, -2),
+                new Point(-1, -1, -2),
+                new Point(1, -1, -2));
+        testPointS(triangle1, cam1, 1);
         // =================================================================================
 
         // =================================================================================
         // Triangle 2 test (slide 23)
         Triangle triangle2 = new Triangle(
-                new Point3D(0, 20, -2),
-                new Point3D(-1, -1, -2),
-                new Point3D(1, -1, -2));
-        testPoint3DS(triangle2, cam1, 2);
+                new Point(0, 20, -2),
+                new Point(-1, -1, -2),
+                new Point(1, -1, -2));
+        testPointS(triangle2, cam1, 2);
         // =================================================================================
 
     }

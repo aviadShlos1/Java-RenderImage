@@ -18,17 +18,9 @@ public class Point {
      */
     final Double3 xyz;
 
-    public double getX() {
-        return xyz.d1;
-    }
+    public final static Point ZERO = new Point(0d, 0d, 0d);
 
-    public double getY() {
-        return xyz.d2;
-    }
 
-    public double getZ() {
-        return xyz.d3;
-    }
     /**
      * Constructor to initialize Double3 based object with its three number values
      *
@@ -108,5 +100,33 @@ public class Point {
         return "Point{" +
                 "xyz=" + xyz +
                 '}';
+    }
+
+    //// getters
+    /**
+     * getters for x coordinate double value
+     *
+     * @return xyz.d1(x)
+     */
+    public double getX() {
+        return xyz.d1;
+    }
+
+    /**
+     * getters for y coordinate double value
+     *
+     * @return xyz.d2(y)
+     */
+    public double getY() {
+        return xyz.d2;
+    }
+
+    /**
+     * getters for z coordinate double value
+     *
+     * @return xyz.d3 (z)
+     */
+    public double getZ() {
+        return xyz.d3;
     }
 }
