@@ -5,22 +5,40 @@ import primitives.Ray;
 import primitives.Vector;
 
 public class Camera {
+    /**
+     * zeroPoint - the camera location
+     */
+    private Point p0;
+
+    /**
+     * X axis vector
+     */
     private Vector Vto;
+    /**
+     * _Vup - Y axis vector
+     */
     private Vector Vup;
+
+    /**
+     * Z axis vector
+     */
     private Vector Vright;
-    private Point zeroPoint;
+
+    /**
+     * object's actual distance from the camera center
+     */
     private double distance;
     private double width;
     private double height;
 
     /**
      * C-tor
-     * @param zeroPoint
+     * @param p0
      * @param Vto
      * @param Vup
      */
-    public Camera(Point zeroPoint, Vector Vto, Vector Vup) {
-        this.zeroPoint =zeroPoint;
+    public Camera(Point p0, Vector Vto, Vector Vup) {
+        this.p0 = p0;
         this.Vto = Vto.normalize();
         this.Vup = Vup.normalize();
         if(Vto.dotProduct(Vup)!=0)
@@ -39,7 +57,7 @@ public class Camera {
         return this;
     }
 
-    public Ray constructRay(int nX, int nY, int j, int i) {
+    public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
         return  null;
     }
 
@@ -55,8 +73,8 @@ public class Camera {
         return Vright;
     }
 
-    public Point getZeroPoint() {
-        return zeroPoint;
+    public Point getP0() {
+        return p0;
     }
 
     public double getDistance() {
