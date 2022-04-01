@@ -68,8 +68,6 @@ public class Plane implements Geometry {
 
         double enumerator=N.dotProduct(Q0.subtract(P0));
         double denominator=N.dotProduct(v);
-        if(isZero(denominator))
-            throw new IllegalArgumentException("Error: denominator cannot be zero");
         double t = alignZero(enumerator/denominator);
         List<Point> intersectPoints=new LinkedList<>();
         if (t > 0){
