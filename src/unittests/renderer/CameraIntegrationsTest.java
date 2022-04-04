@@ -1,3 +1,9 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR04
+ * Brief: Creating the camera and the camera integration between some geometries, and testing the cases.
+ */
 package unittests.renderer;
 
 import geometries.*;
