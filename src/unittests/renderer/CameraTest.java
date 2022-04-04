@@ -1,3 +1,9 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR04
+ * Brief: Create the camera and camera test and tests camera integration between some geometries
+ */
 package unittests.renderer;
 
 import static org.junit.jupiter.api.Assertions.*;
