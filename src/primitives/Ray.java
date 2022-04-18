@@ -6,6 +6,7 @@
  */
 package primitives;
 
+import java.util.List;
 import java.util.Objects;
 /**
  * This class presents the primitive "Ray" -
@@ -49,6 +50,30 @@ public class Ray
         Ray ray = (Ray) obj;
         return Objects.equals(p0, ray.p0) && Objects.equals(dir, ray.dir);
     }
+    /**
+     * find the closest Point to Ray
+     *
+     * @param points3DList List of intersections point
+     * @return the closest point
+     */
+    public Point findClosestPoint(List<Point> points3DList) {
+        double distance = Double.POSITIVE_INFINITY;
+        Point nearPoint = null;
+
+        if (points3DList == null) {
+            return null;
+        }
+
+        for (Point p : points3DList) {
+            double dis = p.distance(p0); // distance from the starting point of the ray
+            if (dis < distance) {
+                distance = dis;
+                nearPoint = p;
+            }
+        }
+
+        return nearPoint;
+    }
 
     @Override
     public String toString() {
@@ -57,6 +82,7 @@ public class Ray
                 ", dir=" + dir +
                 '}';
     }
+
 
 
 }

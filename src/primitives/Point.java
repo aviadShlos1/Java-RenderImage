@@ -16,10 +16,8 @@ public class Point {
     /**
      * Immutable field which holds three-dimensional point
      */
+    public static final Point ZERO=new Point(Double3.ZERO);
     final Double3 xyz;
-
-    public final static Point ZERO = new Point(0d, 0d, 0d);
-
 
     /**
      * Constructor to initialize Double3 based object with its three number values

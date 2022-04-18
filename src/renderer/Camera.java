@@ -6,9 +6,12 @@
  */
 package renderer;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
+
+import java.util.MissingResourceException;
 
 import static primitives.Util.isZero;
 
@@ -47,6 +50,8 @@ public class Camera {
     private double distance;
     private double width;
     private double height;
+    private ImageWriter imageWriter;
+    private RayTracerBase rayTracerBasic;
 
     /**
      * simple Camera constructor which get as input location point and two orthogonal vectors represent the direction
@@ -186,6 +191,45 @@ public class Camera {
         return this;
     }
 
+    public Camera setImageWriter(ImageWriter imageWriter) {
+        this.imageWriter=imageWriter;
+        return this;
+    }
 
+    public Camera setRayTracer(RayTracerBasic rayTracerBasic) {
+        this.rayTracerBasic=rayTracerBasic;
+        return this;
+    }
+
+    public void renderImage() {
+            if (imageWriter == null)
+                throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
+            if (rayTracerBasic == null)
+                throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
+            throw new UnsupportedOperationException();
+
+    }
+
+    public void printGrid(int interval, Color color) {
+        if (imageWriter == null)
+            throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
+
+        for (int i=0; i< imageWriter.getNx();i+=50){
+            for (int j=0; j< imageWriter.getNy();j++){
+                imageWriter.writePixel(i,j,color);
+            }
+        }
+        for (int i=0; i< imageWriter.getNx();i++){
+            for (int j=0; j< imageWriter.getNy();j+=50){
+                imageWriter.writePixel(i,j,color);
+            }
+        }
+    }
+
+    public void writeToImage() {
+        if (imageWriter == null)
+            throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
+        imageWriter.writeToImage();
+    }
 
 }

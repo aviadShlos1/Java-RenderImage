@@ -45,7 +45,7 @@ public class Geometries implements Intersectable {
      * a method that receives one or more shape and adds to this list.
      * @param geometries - shapes to be added to this instance
      */
-    private void add(Intersectable... geometries) {
+    public void add(Intersectable... geometries) {
         this.geometriesList.addAll(Arrays.asList(geometries));
     }
 
