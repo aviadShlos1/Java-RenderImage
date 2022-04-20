@@ -28,7 +28,7 @@ public class Color {
 	}
 
 	/**
-	 * Constructor to generate a color according to RGB components Each component in
+	 * Constructor to generate a color according to RGB components. Each component in
 	 * range 0..255 (for printed white color) or more [for lights]
 	 *
 	 * @param r Red component
