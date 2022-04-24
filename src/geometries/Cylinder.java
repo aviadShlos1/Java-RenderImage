@@ -69,4 +69,9 @@ public class Cylinder extends Tube {
     public List<Point> findIntersections(Ray ray) {
         return super.findIntersections(ray);
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        return null;
+    }
 }

@@ -17,7 +17,7 @@ import java.util.List;
  * this class represents a group of shapes in the space that represent a picture.
  * Composite class which includes components and composite geometries
  */
-public class Geometries implements Intersectable {
+public class Geometries extends Intersectable {
     /**
      * geometries - list of all components in the scene
      */
@@ -69,6 +69,18 @@ public class Geometries implements Intersectable {
             }
         }
         return intersections;
+    }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+       List<GeoPoint> lst1 = null;
+       for (Intersectable geometry : geometriesList){
+           List<GeoPoint> temp = geometry.findGeoIntersections(ray);
+           if (lst1 == null)
+               lst1 = new LinkedList<>();
+           lst1.addAll(temp);
+       }
+       return  lst1;
     }
 }
 
