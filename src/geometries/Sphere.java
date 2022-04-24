@@ -85,4 +85,9 @@ public class Sphere extends Geometry {
             return List.of(ray.getPoint(t2));
         return null;
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        return null;
+    }
 }

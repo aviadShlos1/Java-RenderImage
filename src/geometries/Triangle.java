@@ -58,4 +58,9 @@ public class Triangle extends Polygon{
         } else
             return null;	//If the scalars are in a different sign
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        return super.findGeoIntersectionsHelper(ray);
+    }
 }

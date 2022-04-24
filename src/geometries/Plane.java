@@ -75,4 +75,9 @@ public class Plane extends Geometry {
         }
         return intersectPoints;
     }
+
+    @Override
+    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        return null;
+    }
 }

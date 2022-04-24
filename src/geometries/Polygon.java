@@ -99,4 +99,9 @@ public class Polygon extends Geometry {
 	public List<Point> findIntersections(Ray ray) {
 		return null;
 	}
+
+	@Override
+	protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+		return null;
+	}
 }

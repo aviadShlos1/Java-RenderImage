@@ -8,6 +8,7 @@ package primitives;
 
 import java.util.List;
 import java.util.Objects;
+import geometries.Intersectable.GeoPoint;
 /**
  * This class presents the primitive "Ray" -
  * part of a line that has a fixed starting point but no end point. It can extend infinitely in one direction.
@@ -72,6 +73,35 @@ public class Ray
             }
         }
 
+        return nearPoint;
+    }
+
+    /**
+     * find the closest GeoPoint to Ray
+     *
+     * @param GeoPointList List of intersections point
+     * @return the closest point
+     */
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> GeoPointList) {
+
+        double distance = Double.POSITIVE_INFINITY;
+
+        GeoPoint nearPoint = null;
+
+        if (GeoPointList == null) {
+            return null;
+        }
+
+        // distance => distanceSquared
+        // no need to activate the Math.sqrt function
+        // distance is always a positive value,
+        for (GeoPoint p : GeoPointList) {
+            double dis = p.point.distanceSquared(p0); // distance from the starting point of the ray
+            if (dis < distance) {
+                distance = dis;
+                nearPoint = p;
+            }
+        }
         return nearPoint;
     }
 
