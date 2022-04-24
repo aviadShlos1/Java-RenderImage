@@ -53,7 +53,7 @@ public class Ray
     /**
      * find the closest Point to Ray
      *
-     * @param points3DList List of intersections point
+     * @param points3DList List of intersections points
      * @return the closest point to the ray head
      */
     public Point findClosestPoint(List<Point> points3DList) {
