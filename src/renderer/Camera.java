@@ -1,8 +1,8 @@
 /**
  *@author: Aviad Shlosberg 314960881
  *         Evyatar Levi    318753993
- *Exercise: PR04
- * Brief: Creating the camera and the camera integration between some geometries, and testing the cases.
+ *Exercise: PR05
+ * Brief: Supports color, .
  */
 package renderer;
 
@@ -218,15 +218,10 @@ public class Camera {
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
 
-        for (int i=0; i< imageWriter.getNx();i+=interval){
-            for (int j=0; j< imageWriter.getNy();j++){
-
-                    imageWriter.writePixel(i,j,color);
-            }
-        }
         for (int i=0; i< imageWriter.getNx();i++){
-            for (int j=0; j< imageWriter.getNy();j+=interval){
-                imageWriter.writePixel(i,j,color);
+            for (int j=0; j< imageWriter.getNy();j++){
+                if(i%interval==0||j%interval==0)
+                    imageWriter.writePixel(i,j,color);
             }
         }
     }
