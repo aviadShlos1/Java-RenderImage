@@ -114,7 +114,13 @@ public class Camera {
             }
         }
     }
-
+    /**
+     * Create a grid [over the picture] in the pixel color map. given the grid's
+     * interval and color. Colors only the grid lines
+     *
+     * @param interval  grid's step
+     * @param color grid's color
+     */
     public void printGrid(int interval, Color color) {
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
@@ -126,19 +132,25 @@ public class Camera {
             }
         }
     }
-
+    /**
+     * Function writeToImage produces unoptimized png file of the image according to
+     * pixel color matrix in the directory of the project
+     */
     public void writeToImage() {
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
         imageWriter.writeToImage();
     }
-
-    private Color castRay(int j,int i)
+    /**
+     * Cast ray from camera in order to color a pixel
+     * @param col - pixel's column number (pixel index in row)
+     * @param row - pixel's row number (pixel index in column)
+     */
+    private Color castRay(int col,int row)
     {
-        Ray rayForCast=constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(), j,i);
+        Ray rayForCast=constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(), col,row);
         return rayTracerBasic.traceRay(rayForCast);
     }
-
 
 
 
