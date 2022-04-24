@@ -1,3 +1,4 @@
+
 /**
  *@author: Aviad Shlosberg 314960881
  *         Evyatar Levi    318753993
@@ -5,8 +6,8 @@
  * Brief: Support color, add scheme and building image with ambient light
  */
 package lighting;
-
 import primitives.Color;
+
 import primitives.Double3;
 /**
  * Ambient Light Color
@@ -18,19 +19,30 @@ import primitives.Double3;
  * Mainly used to provide the scene with a basic view of the different objects in it.
  * The simplest type of lighting to implement and models how light can be
  */
-public class AmbientLight {
-    private Color intensity;
+public class AmbientLight extends Light {
     /**
      * empty constructor - return neutral color
      */
     public AmbientLight() {
-        this.intensity=Color.BLACK;
+        super(Color.BLACK);
+    }
+    /**
+     * Ambient Light constructor accepting the intensity's value and the color light source's value
+     * creates the fixed ambient light's intensity
+     *
+     * @param Ia intensity color
+     * @param Ka constant for intensity
+     */
+    public AmbientLight(Color Ia, Double3 Ka) {
+        super(Ia.scale(Ka));
     }
 
-    public AmbientLight(Color Ia, Double3 Ka) {
-        this.intensity= Ia.scale(Ka);
+
+    @Override
+    public String toString() {
+        return "AmbientLight{" +
+                "_intensity=" + getIntensity() +
+                '}';
     }
-    public Color getIntensity() {
-        return intensity;
-    }
+
 }
