@@ -7,7 +7,7 @@
 package scene;
 
 import geometries.Geometries;
-import lightning.AmbientLight;
+import lighting.AmbientLight;
 import primitives.Color;
 import primitives.Double3;
 /**

@@ -4,7 +4,7 @@
  *Exercise: PR05
  * Brief: Support color, add scheme and building image with ambient light
  */
-package lightning;
+package lighting;
 
 import primitives.Color;
 import primitives.Double3;

@@ -15,14 +15,28 @@ import primitives.Vector;
  */
 public abstract class Geometry implements Intersectable{
      public abstract Vector getNormal(Point myPoint);
-     protected Color emission=Color.BLACK;
-
      /**
-      * Getter
-      * @return
+      * emission light
+      */
+     protected Color emission = Color.BLACK;
+     /**
+      * get self color of the shape
+      *
+      * @return emission of geometry
       */
      public Color getEmission() {
           return emission;
+     }
+
+     /**
+      * setter of emission light, chaining method design pattern
+      *
+      * @param emission color of shape
+      * @return this instance
+      */
+     public Geometry setEmission(Color emission) {
+          this.emission = emission;
+          return this;
      }
 }
 

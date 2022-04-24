@@ -15,7 +15,7 @@ import java.util.List;
 /**
  * Tube class represents any of various usually cylindrical structures or devices based on radius and a ray
  */
-public class Tube implements Geometry {
+public class Tube extends Geometry {
     final double radius;
     final Ray axisRay;
 
