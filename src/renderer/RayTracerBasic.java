@@ -18,6 +18,12 @@ public class RayTracerBasic extends RayTracerBase {
         super(scene);
     }
 
+    /**
+     * abstract function to determine the color of a pixel
+     *
+     * @param ray - the ray sent from the light source to the scene
+     * @return the color of the pixel intersects the given ray
+     */
     @Override
     public Color traceRay(Ray ray) {
        List<Point> intersections= scene.geometries.findIntersections(ray);
@@ -27,6 +33,13 @@ public class RayTracerBasic extends RayTracerBase {
         return calcColor(closetPoint);
     }
 
+    /**
+     * function which returns the color of the object the ray is intersecting
+     * if no intersection was found, returns the ambient light's color
+     *
+     * @param closetPoint - the point on the 3D model
+     * @return the color in the point
+     */
     private Color calcColor(Point closetPoint)
     {
         return scene.ambientLight.getIntensity();
