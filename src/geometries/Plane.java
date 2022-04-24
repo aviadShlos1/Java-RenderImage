@@ -22,7 +22,7 @@ import static primitives.Util.isZero;
  *  have different directions (together reflecting the basic 2D object.)
  *  contains a point in the plane and normal to the plane.
  */
-public class Plane implements Geometry {
+public class Plane extends Geometry {
     final Point q0;
     final Vector normal;
 

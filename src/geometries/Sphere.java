@@ -13,7 +13,7 @@ import static primitives.Util.alignZero;
 /**
  * Sphere class represents a geometrical object that is a three-dimensional analogue to a two-dimensional circle based on main point anda radius
  */
-public class Sphere implements Geometry {
+public class Sphere extends Geometry {
     Point centerPoint;
     double radius;
 

@@ -1,9 +1,3 @@
-/**
- *@author: Aviad Shlosberg 314960881
- *         Evyatar Levi    318753993
- *Exercise: PR05
- * Brief: Support color, add scheme and building image with ambient light
- */
 package primitives;
 
 /**
@@ -34,7 +28,7 @@ public class Color {
 	}
 
 	/**
-	 * Constructor to generate a color according to RGB components. Each component in
+	 * Constructor to generate a color according to RGB components Each component in
 	 * range 0..255 (for printed white color) or more [for lights]
 	 *
 	 * @param r Red component
