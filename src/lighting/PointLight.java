@@ -2,6 +2,7 @@ package lighting;
 
 import primitives.Color;
 import primitives.Point;
+import primitives.Vector;
 
 /**
  * class represents a light source with a known position, emits light to all directions (e.g. light bulb)
@@ -32,6 +33,31 @@ public class PointLight extends Light implements LightSource{
     public PointLight(Color color, Point position) {
         super(color);
         this.position = position;
+    }
+
+    /**
+     * Calculates the color of the light in a given point in the 3D space ,
+     * taking into consideration the attenuation factors
+     *
+     * @param p - the point which we want to know what the color is in
+     * @return the light color in p
+     */
+    @Override
+    public Color getIntensity(Point p) {
+        double dist = p.distance(position);
+        double distSquared = p.distanceSquared(position);
+        return getIntensity().scale(1 / (kC + kL * dist + kQ * distSquared));
+    }
+
+    /**
+     * Get the ray from the light source to the given point
+     *
+     * @param p - the ray's destination point
+     * @return the ray - the normalized(p - pL)
+     */
+    @Override
+    public Vector getL(Point p) {
+        return p.subtract(position).normalize();
     }
 
 

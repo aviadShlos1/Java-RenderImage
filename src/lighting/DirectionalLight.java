@@ -1,7 +1,7 @@
 package lighting;
 
-import primitives.Color;
-import primitives.Vector;
+import primitives.*;
+
 
 /**
  *
@@ -29,4 +29,27 @@ public class DirectionalLight extends Light implements LightSource {
         super(color);
         this.direction = direction;
     }
+
+    /**
+     * function calculates the color of the light in a given point in the 3D space
+     *
+     * @param p - the point which we want to know what the color is in
+     * @return the light color in p
+     */
+    @Override
+    public Color getIntensity(Point p) {
+        return getIntensity(); // No attenuation with distance
+    }
+
+    /**
+     * function to get the ray from the light source to the given point
+     *
+     * @param p - the ray's destination point
+     * @return the ray - the normalized(p - pL)
+     */
+    @Override
+    public Vector getL(Point p) {
+        return direction.normalize();
+    }
+
 }
