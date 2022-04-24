@@ -1,3 +1,9 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR05
+ * Brief: Support color, add scheme and building image with ambient light
+ */
 package lightning;
 
 import primitives.Color;

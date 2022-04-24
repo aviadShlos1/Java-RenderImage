@@ -1,8 +1,8 @@
 /**
  *@author: Aviad Shlosberg 314960881
  *         Evyatar Levi    318753993
- *Exercise: PR04
- * Brief: Creating the camera and the camera integration between some geometries, and testing the cases.
+ *Exercise: PR05
+ * Brief: Support color, add scheme and building image with ambient light
  */
 package renderer;
 
@@ -121,7 +121,7 @@ public class Camera {
 
         for (int i=0; i< imageWriter.getNx();i++){
             for (int j=0; j< imageWriter.getNy();j++){
-                if(i%interval==0 && i!=0 || j%interval==0 && j!=0)
+                if(i%interval==0  || j%interval==0 )
                     imageWriter.writePixel(i,j,color);
             }
         }

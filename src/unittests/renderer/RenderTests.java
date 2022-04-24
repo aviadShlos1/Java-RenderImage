@@ -1,3 +1,9 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR05
+ * Brief: Support color, add scheme and building image with ambient light
+ */
 package unittests.renderer;
 
 import org.junit.jupiter.api.Test;
@@ -44,22 +50,22 @@ public class RenderTests {
 		camera.writeToImage();
 	}
 
-	/**
-	 * Test for XML based scene - for bonus
-	 */
-	@Test
-	public void basicRenderXml() {
-		Scene scene = new Scene("XML Test scene");
-		// enter XML file name and parse from XML file into scene object
-		// ...
-
-		Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-				.setViewPlaneDistance(100) //
-				.setViewPlaneSize(500, 500)
-				.setImageWriter(new ImageWriter("xml render test", 1000, 1000))
-				.setRayTracer(new RayTracerBasic(scene));
-		camera.renderImage();
-		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
-		camera.writeToImage();
-	}
+//	/**
+//	 * Test for XML based scene - for bonus
+//	 */
+//	@Test
+//	public void basicRenderXml() {
+//		Scene scene = new Scene("XML Test scene");
+//		// enter XML file name and parse from XML file into scene object
+//		// ...
+//
+//		Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
+//				.setViewPlaneDistance(100) //
+//				.setViewPlaneSize(500, 500)
+//				.setImageWriter(new ImageWriter("xml render test", 1000, 1000))
+//				.setRayTracer(new RayTracerBasic(scene));
+//		camera.renderImage();
+//		camera.printGrid(100, new Color(java.awt.Color.YELLOW));
+//		camera.writeToImage();
+//	}
 }
