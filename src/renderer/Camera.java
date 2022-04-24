@@ -208,22 +208,29 @@ public class Camera {
                 throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
             throw new UnsupportedOperationException();
 
+        for (int i=0; i< imageWriter.getNx();i++){
+            for (int j=0; j< imageWriter.getNy();j++){
+                imageWriter.writePixel(i,j,castRay(j,i));
+            }
+        }
+
     }
 
     public void printGrid(int interval, Color color) {
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
 
-        for (int i=0; i< imageWriter.getNx();i+=50){
-            for (int j=0; j< imageWriter.getNy();j++){
-                imageWriter.writePixel(i,j,color);
-            }
-        }
         for (int i=0; i< imageWriter.getNx();i++){
-            for (int j=0; j< imageWriter.getNy();j+=50){
-                imageWriter.writePixel(i,j,color);
+            for (int j=0; j< imageWriter.getNy();j++){
+                if(i%interval==0||j%interval==0)
+                    imageWriter.writePixel(i,j,color);
             }
         }
+//        for (int i=0; i< imageWriter.getNx();i++){
+//            for (int j=0; j< imageWriter.getNy();j+=interval){
+//                imageWriter.writePixel(i,j,color);
+//            }
+//        }
     }
 
     public void writeToImage() {
@@ -232,4 +239,9 @@ public class Camera {
         imageWriter.writeToImage();
     }
 
+    private Color castRay(int j,int i)
+    {
+        Ray rayForCast=constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(), j,i);
+        return rayTracerBasic.traceRay(rayForCast);
+    }
 }
