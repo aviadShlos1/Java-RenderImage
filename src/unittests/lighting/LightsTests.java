@@ -19,11 +19,11 @@ public class LightsTests {
 	private Scene scene2 = new Scene("Test scene") //
 			.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
 	private Camera camera1 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-			.setVPSize(150, 150) //
-			.setVPDistance(1000);
+			.setViewPlaneSize(150, 150) //
+			.setViewPlaneDistance(1000);
 	private Camera camera2 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
-			.setVPSize(200, 200) //
-			.setVPDistance(1000);
+			.setViewPlaneSize(200, 200) //
+			.setViewPlaneDistance(1000);
 
 	private Point[] p = { // The Triangles' vertices:
 			new Point(-110, -110, -150), // the shared left-bottom
