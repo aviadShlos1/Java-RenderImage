@@ -6,13 +6,23 @@
  */
 package geometries;
 
+import primitives.Color;
 import primitives.Point;
 import primitives.Vector;
 
 /**
  * This interface will serve all geometries classes which will implement the getNormal method
  */
-public interface Geometry extends Intersectable{
-     Vector getNormal(Point myPoint);
+public abstract class Geometry implements Intersectable{
+     public abstract Vector getNormal(Point myPoint);
+     protected Color emission=Color.BLACK;
+
+     /**
+      * Getter
+      * @return
+      */
+     public Color getEmission() {
+          return emission;
+     }
 }
 
