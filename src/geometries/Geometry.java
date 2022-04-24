@@ -13,7 +13,7 @@ import primitives.Vector;
 /**
  * This interface will serve all geometries classes which will implement the getNormal method
  */
-public abstract class Geometry implements Intersectable{
+public abstract class Geometry extends Intersectable{
      public abstract Vector getNormal(Point myPoint);
      /**
       * emission light
