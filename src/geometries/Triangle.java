@@ -60,7 +60,7 @@ public class Triangle extends Polygon{
     }
 
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         return super.findGeoIntersectionsHelper(ray);
     }
 }
