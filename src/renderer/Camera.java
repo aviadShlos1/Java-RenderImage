@@ -184,7 +184,7 @@ public class Camera {
     }
 
     /**
-     * get the right vector of the camera (represent the x axis of camera, position of the view)
+     * get the right vector of the camera (represent the x axis of camera, position of the view).
      *
      * @return Vright
      */
