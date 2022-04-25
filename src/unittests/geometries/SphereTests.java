@@ -5,12 +5,13 @@
  * Brief: Creates the finding intersection method and implement the tests
  */
 package unittests.geometries;
+import geometries.Intersectable;
 import org.junit.jupiter.api.Test;
 import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 import geometries.Sphere;
-
+import geometries.Intersectable.GeoPoint;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,7 +50,7 @@ class SphereTests {
         // TC02: Ray starts before and crosses the sphere (2 points)
         Point p1 = new Point( 0.0651530771650466, 0.355051025721682, 0);
         Point p2 = new Point(1.53484692283495, 0.844948974278318, 0);
-        List<Point> result = sphere.findGeoIntersectionsHelper(new Ray(new Point(-1, 0, 0),
+        List<Point> result = sphere.findIntersections(new Ray(new Point(-1, 0, 0),
                 new Vector(3, 1, 0)));
         assertEquals(2, result.size(), "Wrong number of points");
         if (result.get(0).getX() > result.get(1).getX())
@@ -58,7 +59,7 @@ class SphereTests {
 
         // TC03: Ray starts inside the sphere (1 point)
         Point p_inside = new Point(1.5, 0, 0);
-        List<Point> TC03results = sphere.findGeoIntersectionsHelper(new Ray(p_inside, new Vector(1, 1, 1)));
+        List<GeoPoint> TC03results = sphere.findGeoIntersectionsHelper(new Ray(p_inside, new Vector(1, 1, 1)));
         assertEquals(1, TC03results.size(), "Wrong number of points");
 
         Point TC03intersection = new Point(1.8603796100280632, 0.36037961002806324, 0.36037961002806324);
@@ -73,19 +74,19 @@ class SphereTests {
         // **** Group: Ray's line crosses the sphere (but not the center)
         // TC11: Ray starts at sphere and goes inside (1 points)
         Point p_onSphere = new Point(2, 0, 0);
-        List<Point> TC11results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(-2, 0, 1)));
+        List<GeoPoint> TC11results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(-2, 0, 1)));
         assertEquals(1, TC11results.size(), "Wrong number of points");
 
         Point TC11intersection = new Point(0.4, 0, 0.8);
         assertEquals(TC11results, List.of(TC11intersection), "Wrong intersection point");
 
         // TC12: Ray starts at sphere and goes outside (0 points)
-        List<Point> TC12results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(2, 0, 2)));
+        List<GeoPoint> TC12results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(2, 0, 2)));
         assertNull(TC12results, "Wrong number of points");
 
         // **** Group: Ray's line goes through the center
         // TC13: Ray starts before the sphere (2 points)
-        List<Point> TC13results = sphere.findGeoIntersectionsHelper(new Ray(new Point(1, -2, 0), new Vector(0, 1, 0)));
+        List<GeoPoint> TC13results = sphere.findGeoIntersectionsHelper(new Ray(new Point(1, -2, 0), new Vector(0, 1, 0)));
         assertEquals(2, TC13results.size(), "Wrong number of points");
 
         if (TC13results.get(0).getX() > TC13results.get(1).getX()) {
@@ -96,7 +97,7 @@ class SphereTests {
 
         // TC14: Ray starts at sphere and goes inside (1 points)
         p_onSphere = new Point(1, -1, 0);
-        List<Point> TC14results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
+        List<GeoPoint> TC14results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
         assertEquals(1, TC14results.size(), "Wrong number of points");
 
         Point TC14intersection = new Point(1, 1, 0);
@@ -104,7 +105,7 @@ class SphereTests {
 
         // TC15: Ray starts inside (1 points)
         p_onSphere = new Point(1, 0.5, 0);
-        List<Point> TC15results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
+        List<GeoPoint> TC15results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
         assertEquals(1, TC15results.size(), "Wrong number of points");
 
         Point TC15intersection = new Point(1, 1, 0);
@@ -112,7 +113,7 @@ class SphereTests {
 
         // TC16: Ray starts at the center (1 points)
         p_onSphere = new Point(1, 0.5, 0);
-        List<Point> TC16results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
+        List<GeoPoint> TC16results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
         assertEquals(1, TC16results.size(), "Wrong number of points");
 
         Point TC16intersection = new Point(1, 1, 0);
@@ -120,13 +121,13 @@ class SphereTests {
 
         // TC17: Ray starts at sphere and goes outside (0 points)
         p_onSphere = new Point(1, 1, 0);
-        List<Point> TC17results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
+        List<GeoPoint> TC17results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
 
         assertNull(TC17results, "Wrong number of points");
 
         // TC18: Ray starts after sphere (0 points)
         p_onSphere = new Point(1, 2, 0);
-        List<Point> TC18results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
+        List<GeoPoint> TC18results = sphere.findGeoIntersectionsHelper(new Ray(p_onSphere, new Vector(0, 1, 0)));
 
         assertNull(TC18results, "Wrong number of points");
 
@@ -135,26 +136,26 @@ class SphereTests {
 
         // TC19: Ray starts before the tangent point
         Point p_tan = new Point(0, 1, 0);
-        List<Point> TC19results = sphere.findGeoIntersectionsHelper(new Ray(p_tan, new Vector(1, 0, 0)));
+        List<GeoPoint> TC19results = sphere.findGeoIntersectionsHelper(new Ray(p_tan, new Vector(1, 0, 0)));
 
         assertNull(TC19results, "Wrong number of points");
 
         // TC20: Ray starts at the tangent point
         p_tan = new Point(1, 1, 0);
-        List<Point> TC20results = sphere.findGeoIntersectionsHelper(new Ray(p_tan, new Vector(1, 0, 0)));
+        List<GeoPoint> TC20results = sphere.findGeoIntersectionsHelper(new Ray(p_tan, new Vector(1, 0, 0)));
 
         assertNull(TC20results, "Wrong number of points");
 
         // TC21: Ray starts after the tangent point
         p_tan = new Point(2, 1, 0);
-        List<Point> TC21results = sphere.findGeoIntersectionsHelper(new Ray(p_tan, new Vector(1, 0, 0)));
+        List<GeoPoint> TC21results = sphere.findGeoIntersectionsHelper(new Ray(p_tan, new Vector(1, 0, 0)));
 
         assertNull(TC21results, "Wrong number of points");
 
         // **** Group: Special cases
         // TC19B: Ray's line is outside, ray is orthogonal to ray start to sphere's center line
         Point p = new Point(-1, 0, 0);
-        List<Point> TC19B_results = sphere.findGeoIntersectionsHelper(new Ray(p, new Vector(0, 0, 1)));
+        List<GeoPoint> TC19B_results = sphere.findGeoIntersectionsHelper(new Ray(p, new Vector(0, 0, 1)));
 
         assertNull(TC19B_results, "Wrong number of points");
 

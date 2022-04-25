@@ -10,7 +10,7 @@ import geometries.*;
 import org.junit.jupiter.api.Test;
 import primitives.*;
 import renderer.Camera;
-
+import geometries.Intersectable.GeoPoint;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -23,12 +23,12 @@ public class CameraIntegrationsTest {
 
     private void testPointS(Geometry geo, Camera cam, int points) {
 
-        List<Point> allPoints = null;
+        List<GeoPoint> allPoints = null;
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 Ray ray = cam.constructRayThroughPixel(3, 3, j, i);
-                List<Point> intersectionsList = geo.findGeoIntersectionsHelper(ray);
+                List<GeoPoint> intersectionsList = geo.findGeoIntersections(ray);
 
                 if (intersectionsList != null) {
                     if (allPoints == null) {
