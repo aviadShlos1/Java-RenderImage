@@ -38,7 +38,7 @@ class PlaneTests {
 
 
     /**
-     * Test method for {@link geometries.Plane#findIntersections(primitives.Ray)}.'
+     * Test method for {@link geometries.Plane#findGeoIntersectionsHelper(primitives.Ray)}.'
      */
     @Test
     public void testFindIntersections() {
@@ -53,7 +53,7 @@ class PlaneTests {
 
         // TC01: Ray intersects the plane (1 points)
         Ray ray1 = new Ray(new Point(0, -1, 0), new Vector(1, 3, 1));
-        List<Point> TC01result = plane.findIntersections(ray1);
+        List<Point> TC01result = plane.findGeoIntersectionsHelper(ray1);
 
         assertEquals(1, TC01result.size(), "Wrong number of intersection points");
 
@@ -62,7 +62,7 @@ class PlaneTests {
 
         // TC02: Ray doesn't intersect the plane(0 points)
         Ray ray2 = new Ray(new Point(3, 4, 2), new Vector(1, 2, 1));
-        List<Point> TC02result = plane.findIntersections(ray2);
+        List<Point> TC02result = plane.findGeoIntersectionsHelper(ray2);
 
         assertEquals(0,TC02result.size(), "Wrong number of intersection points");
 
@@ -72,19 +72,19 @@ class PlaneTests {
         // TC03 :Ray is parallel to the plane and is included in the plane (0 points)
 
         Ray ray3 = new Ray(new Point(0.5, 0.5, 0), new Vector(1, -2, 0));
-        List<Point> TC03result = plane.findIntersections(ray3);
+        List<Point> TC03result = plane.findGeoIntersectionsHelper(ray3);
 
         assertEquals(0, TC03result.size(), "Wrong number of intersection points");
 
         // TC04 :Ray is parallel to the plane and is not included in the plane (0 points)
         Ray ray4 = new Ray(new Point(0.5, 0, 0), new Vector(1, -2, 0));
-        List<Point> TC04result = plane.findIntersections(ray4);
+        List<Point> TC04result = plane.findGeoIntersectionsHelper(ray4);
 
         assertEquals(0, TC04result.size(), "Wrong number of intersection points");
 
         // TC05 :Ray is orthogonal to the plane and the point is located before the plane (1 points)
         Ray ray5 = new Ray(new Point(1, 1, 1), new Vector(-1, -1, -1));
-        List<Point> TC05result = plane.findIntersections(ray5);
+        List<Point> TC05result = plane.findGeoIntersectionsHelper(ray5);
 
         assertEquals(1, TC05result.size(), "Wrong number of intersection points");
 
@@ -93,26 +93,26 @@ class PlaneTests {
 
         // TC06 :Ray is orthogonal to the plane and its starting point is in the plane (0 points)
         Ray ray6 = new Ray(new Point(0.5, 0.25, 0.25), new Vector(-1, -1, -1));
-        List<Point> TC06result = plane.findIntersections(ray6);
+        List<Point> TC06result = plane.findGeoIntersectionsHelper(ray6);
 
         assertEquals(0, TC06result.size(), "Wrong number of intersection points");
 
         // TC07 :Ray is orthogonal to the plane and the point is located after the plane (0 points)
         Ray ray7 = new Ray(new Point(-1, -1, -1), new Vector(-1, -1, -1));
-        List<Point> TC07result = plane.findIntersections(ray7);
+        List<Point> TC07result = plane.findGeoIntersectionsHelper(ray7);
 
         assertEquals(0, TC07result.size(), "Wrong number of intersection points");
 
         // TC08 :Ray is neither orthogonal nor parallel  and begins at the plane(the point is in the plane) (0 points)
         Ray ray8 = new Ray(new Point(0.5, 0.25, 0.25), new Vector(-4, 1, 0));
-        List<Point> TC08result = plane.findIntersections(ray8);
+        List<Point> TC08result = plane.findGeoIntersectionsHelper(ray8);
 
         assertEquals(0, TC08result.size(), "Wrong number of intersection points");
 
         // TC09 :Ray is neither orthogonal nor parallel  and  begins in
         //the same point which appears as reference point in the plane (0 points)
         Ray ray9 = new Ray(new Point(-2, -2, 5), new Vector(2, 10, -5));
-        List<Point> TC09result = plane.findIntersections(ray9);
+        List<Point> TC09result = plane.findGeoIntersectionsHelper(ray9);
 
         assertEquals(0, TC09result.size(), "Wrong number of intersection points"+
                 "the same point which appears as reference point in the plane");

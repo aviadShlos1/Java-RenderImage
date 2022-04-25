@@ -54,12 +54,11 @@ public class Geometries extends Intersectable {
      *
      * @param ray         - the ray to be checked with the shapes
      */
-    @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> intersections = null;
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        List<GeoPoint> intersections = null;
         for (var geometry : geometriesList) {
             // declare list as null
-            List<Point> geoIntersections = geometry.findIntersections(ray);
+            List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray);
 
             if (geoIntersections != null) {
                 if (intersections == null)
@@ -71,16 +70,5 @@ public class Geometries extends Intersectable {
         return intersections;
     }
 
-    @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-       List<GeoPoint> lst1 = null;
-       for (Intersectable geometry : geometriesList){
-           List<GeoPoint> temp = geometry.findGeoIntersections(ray);
-           if (lst1 == null)
-               lst1 = new LinkedList<>();
-           lst1.addAll(temp);
-       }
-       return  lst1;
-    }
 }
 

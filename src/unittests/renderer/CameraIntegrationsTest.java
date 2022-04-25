@@ -28,7 +28,7 @@ public class CameraIntegrationsTest {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 Ray ray = cam.constructRayThroughPixel(3, 3, j, i);
-                List<Point> intersectionsList = geo.findIntersections(ray);
+                List<Point> intersectionsList = geo.findGeoIntersectionsHelper(ray);
 
                 if (intersectionsList != null) {
                     if (allPoints == null) {

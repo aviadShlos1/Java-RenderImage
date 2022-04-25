@@ -10,7 +10,6 @@ import primitives.*;
 public class SpotLight extends PointLight {
     /**
      *  direction - the direction of the light
-     *  focus - the narrowing factor, the beam gets narrower and weaker as it gets bigger.
      */
     private Vector direction;
 
