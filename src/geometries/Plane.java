@@ -58,8 +58,12 @@ public class Plane extends Geometry {
         return normal;
     }
 
-
-    public List<Point> findGeoIntersectionsHelper(Ray ray) {
+    /**
+     * @param ray - ray that cross the geometry
+     * @return list of intersection points that were found
+     */
+    @Override
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
         Point Q0 = q0;
@@ -72,11 +76,20 @@ public class Plane extends Geometry {
         if (t > 0){
             intersectPoints.add(P0.add(v.scale(t)));
         }
-        return intersectPoints;
+        return List.of(new GeoPoint(this, ray.getPoint(t)));
     }
 
+    /**
+     * perform full comparison between a given object and this
+     *
+     * @param o - object
+     * @return - whether the object equals to this or not
+     */
     @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        return null;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Plane plane = (Plane) o;
+        return q0.equals(plane.q0) && normal.equals(plane.normal);
     }
 }
