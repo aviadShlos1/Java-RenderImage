@@ -7,6 +7,7 @@
 package geometries;
 import primitives.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * An Interface for Composite Design Pattern The Composite Class - Geometries The
@@ -55,15 +56,14 @@ public abstract class Intersectable {
 
     }
 
-
-
-
     /**
      * @param ray ray that cross the geometry
      * @return list of intersection points that were found
      */
-    public abstract List<Point> findIntersections(Ray ray);
-
+    public List<Point> findIntersections(Ray ray) {
+            List<GeoPoint> geoList = findGeoIntersections(ray);
+            return geoList == null ? null : geoList.stream().map(gp -> gp.point).collect(Collectors.toList());
+    }
 
     /**
      * @param ray ray that cross the geometry
