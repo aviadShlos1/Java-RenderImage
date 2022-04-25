@@ -8,8 +8,13 @@ package scene;
 
 import geometries.Geometries;
 import lighting.AmbientLight;
+import lighting.LightSource;
 import primitives.Color;
 import primitives.Double3;
+
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * this class represents a scene in the real life -
  * containing different geometries to be seen by camera
@@ -31,6 +36,11 @@ public class Scene {
      * geometries - the shapes in scene
      */
     public Geometries geometries = null;
+    /**
+     * lights - the lights in scene
+     */
+    public List<LightSource> lights = new LinkedList<>();
+
 
 
     /**
@@ -71,6 +81,17 @@ public class Scene {
      */
     public Scene setGeometries(Geometries geometries) {
         this.geometries = geometries;
+        return this;
+    }
+
+    /**
+     * setter - chaining method style
+     *
+     * @param lights - lights in photo
+     * @return this instance
+     */
+    public Scene setLights(List<LightSource> lights) {
+        this.lights = lights;
         return this;
     }
 
