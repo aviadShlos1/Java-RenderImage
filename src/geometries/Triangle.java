@@ -33,9 +33,8 @@ public class Triangle extends Polygon{
         return super.getNormal(p);
     }
 
-    @Override
-    public List<Point> findIntersections(Ray ray) {
-        List<Point> resultPoint = plane.findIntersections(ray);
+    public List<Point> findGeoIntersectionsHelper(Ray ray) {
+        List<Point> resultPoint = plane.findGeoIntersectionsHelper(ray);
         if (resultPoint == null) // In case there is no intersection with the plane return null
             return null;
         Vector v1 = vertices.get(0).subtract(ray.getP0());

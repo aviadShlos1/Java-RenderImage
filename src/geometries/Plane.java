@@ -59,8 +59,7 @@ public class Plane extends Geometry {
     }
 
 
-    @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<Point> findGeoIntersectionsHelper(Ray ray) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
         Point Q0 = q0;

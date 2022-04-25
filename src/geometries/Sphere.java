@@ -61,12 +61,12 @@ public class Sphere extends Geometry {
      * @return list of intersection points that were found
      */
     @Override
-    public List<Point> findIntersections(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         Point p0 = ray.getP0();
         Vector v = ray.getDir();
 
         if (p0.equals(this.centerPoint))         // p0 = centerPoint only one intersect
-            return List.of(ray.getPoint(radius));
+            return List.of(new GeoPoint(this, ray.getPoint(radius)));
         Vector u = this.centerPoint.subtract(p0);
         double tm = v.dotProduct(u);
         double d = Math.sqrt(u.lengthSquared() - tm * tm);
@@ -77,17 +77,11 @@ public class Sphere extends Geometry {
         double t1 = tm + th;
         double t2 = tm - th;
 
-        if (t1 > 0 && t2 > 0)
-            return List.of(ray.getPoint(t1), ray.getPoint(t2));
         if (t1 > 0)
-            return List.of(ray.getPoint(t1));
+            return List.of(new GeoPoint(this,ray.getPoint(t1)));
         if (t2 > 0)
-            return List.of(ray.getPoint(t2));
+            return List.of(new GeoPoint(this,ray.getPoint(t2)));
         return null;
     }
 
-    @Override
-    protected List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
-        return null;
-    }
 }

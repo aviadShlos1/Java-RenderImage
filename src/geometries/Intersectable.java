@@ -62,7 +62,13 @@ public abstract class Intersectable {
      * @param ray ray that cross the geometry
      * @return list of intersection points that were found
      */
-    public abstract List<Point> findIntersections(Ray ray);
+    public List<Point> findGeoIntersectionsHelper(Ray ray){
+        List<GeoPoint> geoList=findGeoIntersections(ray);
+        return  geoList==null?null
+                :geoList.stream()
+                .map(geoPoint -> geoPoint.point)
+                .toList();
+    }
 
 
     /**
