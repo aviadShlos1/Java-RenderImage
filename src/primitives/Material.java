@@ -8,11 +8,11 @@ public class Material {
     /**
      *  Kd - diffuse component, represents the scattering of light rays to all directions from the surface
      */
-    public Double3 kD = null;
+    public Double3 kD = new Double3(0,0,0);
     /**
      *  Ks - specular component, represents the reflectance of the light source over the surface
      */
-    public Double3 kS = null;
+    public Double3 kS = new Double3(0,0,0);
     /**
      *  Shininess - the material shininess amount
      */
