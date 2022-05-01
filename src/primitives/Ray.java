@@ -55,18 +55,18 @@ public class Ray
     /**
      * find the closest Point to Ray
      *
-     * @param points3DList List of intersections point
+     * @param pointsList List of intersections point
      * @return the closest point
      */
-    public Point findClosestPoint(List<Point> points3DList) {
+    public Point findClosestPoint(List<Point> pointsList) {
         double distance = Double.POSITIVE_INFINITY;
         Point nearPoint = null;
 
-        if (points3DList == null) {
+        if (pointsList == null) {
             return null;
         }
 
-        for (Point p : points3DList) {
+        for (Point p : pointsList) {
             double dis = p.distance(p0); // distance from the starting point of the ray
             if (dis < distance) {
                 distance = dis;
@@ -80,31 +80,49 @@ public class Ray
     /**
      * find the closest GeoPoint to Ray
      *
-     * @param GeoPointList List of intersections point
+     * @param intersections List of intersections point
      * @return the closest point
      */
-    public GeoPoint findClosestGeoPoint(List<GeoPoint> GeoPointList) {
+    public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
+            if (intersections == null)
+                return null;
 
-        double distance = Double.POSITIVE_INFINITY;
+            GeoPoint closestPoint = intersections.get(0);
+            Point point = closestPoint.point;
 
-        GeoPoint nearPoint = null;
+            double distance = point.distanceSquared(this.p0);
 
-        if (GeoPointList == null) {
-            return null;
-        }
-
-        // distance => distanceSquared
-        // no need to activate the Math.sqrt function
-        // distance is always a positive value,
-        for (GeoPoint p : GeoPointList) {
-            double dis = p.point.distanceSquared(p0); // distance from the starting point of the ray
-            if (dis < distance) {
-                distance = dis;
-                nearPoint = p;
+            for (GeoPoint geoPoint : intersections)
+            {
+                double distanceTemp=geoPoint.point.distanceSquared(this.p0);
+                if (distance > distanceTemp)
+                {
+                    closestPoint = geoPoint;
+                    distance = distanceTemp;
+                }
             }
+            return closestPoint;
         }
-        return nearPoint;
-    }
+//        double distance = Double.POSITIVE_INFINITY;
+//
+//        GeoPoint nearPoint = null;
+//
+//        if (GeoPointList == null) {
+//            return null;
+//        }
+//
+//        // distance => distanceSquared
+//        // no need to activate the Math.sqrt function
+//        // distance is always a positive value,
+//
+//        for (GeoPoint p : GeoPointList) {
+//            double dis = p.point.distanceSquared(p0); // distance from the starting point of the ray
+//            if (dis < distance) {
+//                distance = dis;
+//                nearPoint = p;
+//            }
+//        }
+//        return nearPoint;
 
     @Override
     public String toString() {

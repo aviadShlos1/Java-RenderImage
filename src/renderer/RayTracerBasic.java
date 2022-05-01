@@ -44,6 +44,7 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private Color calcColor(GeoPoint closetPoint, Ray ray){
         return scene.ambientLight.getIntensity()
+                .add(closetPoint.geometry.getEmission())
                 .add(calcLocalEffects(closetPoint, ray));
     }
     /**
@@ -56,14 +57,14 @@ public class RayTracerBasic extends RayTracerBase {
     private Color calcLocalEffects(GeoPoint gp, Ray ray) {
         Color color = gp.geometry.getEmission();
         Vector v = ray.getDir();
-        Vector n = gp.geometry.getNormal(gp.point);
+        Vector n = gp.geometry.getNormal(gp.point).normalize();
         double nv = alignZero(n.dotProduct(v));
         if (nv == 0) return Color.BLACK;
         double nShininess = gp.geometry.getMaterial().nShininess;
         Material material = gp.geometry.getMaterial();
         Double3 ks = gp.geometry.getMaterial().kS;
         for (LightSource lightSource : scene.lights) {
-            Vector l = lightSource.getL(gp.point);
+            Vector l = lightSource.getL(gp.point).normalize();
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sign(nv)
                 Color lightIntensity = lightSource.getIntensity(gp.point);
