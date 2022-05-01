@@ -76,11 +76,17 @@ public class Sphere extends Geometry {
         double th = Math.sqrt(this.radius * this.radius - d * d);
         double t1 = tm + th;
         double t2 = tm - th;
-
+        List<GeoPoint> myList = new LinkedList<>();
         if (t1 > 0)
-            return List.of(new GeoPoint(this,ray.getPoint(t1)));
+            myList.add(new GeoPoint(this,ray.getPoint(t1)));
         if (t2 > 0)
-            return List.of(new GeoPoint(this,ray.getPoint(t2)));
+            myList.add(new GeoPoint(this,ray.getPoint(t2)));
+
+        // if any intersections were found, return them
+        if (myList.size() > 0) {
+            return myList;
+        }
+        // else, return null
         return null;
     }
 
