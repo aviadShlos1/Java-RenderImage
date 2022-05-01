@@ -47,7 +47,7 @@ public class GeometriesTests {
 
         // TC01: Ray intersects 2 out of 3 of the shapes (2 points)
         Ray ray1 = new Ray(new Point(-1, -0.5, 1), new Vector(1, -0.25, -0.75));
-        List<GeoPoint> TC01result = geometries.findGeoIntersectionsHelper(ray1);
+        List<Point> TC01result = geometries.findIntersections(ray1);
 
         assertEquals(2, TC01result.size(), "Wrong number of intersection points");
 
@@ -56,25 +56,25 @@ public class GeometriesTests {
 
         // TC02: empty list of shapes (0 points)
         Ray ray2 = new Ray(new Point(1, 1, 0), new Vector(1, 0, 0));
-        List<GeoPoint> TC02result = empty.findGeoIntersectionsHelper(ray2);
+        List<Point> TC02result = empty.findIntersections(ray2);
 
         assertNull(TC02result, "Wrong number of intersection points");
 
         // TC03: Ray doesn't intersect the shapes (0 points)
         Ray ray3 = new Ray(new Point(2, 1, 0), new Vector(1, 2, 0));
-        List<GeoPoint> TC03result = geometries.findGeoIntersectionsHelper(ray3);
+        List<Point> TC03result = geometries.findIntersections(ray3);
 
         assertNull(TC03result, "Wrong number of intersection points");
 
         // TC04: Ray intersects only one of the shapes (1 points)
         Ray ray4 = new Ray(new Point(-1, 0, 0), new Vector(1, 1, 0));
-        List<GeoPoint> TC04result = geometries.findGeoIntersectionsHelper(ray4);
+        List<Point> TC04result = geometries.findIntersections(ray4);
 
         assertEquals(1, TC04result.size(), "Wrong number of intersection points");
 
         // TC05: Ray intersects all the shapes (3 points)
         Ray ray5 = new Ray(new Point(-1, -1, 1), new Vector(1, 1, -1));
-        List<GeoPoint> TC05result = geometries.findGeoIntersectionsHelper(ray5);
+        List<Point> TC05result = geometries.findIntersections(ray5);
 
         assertEquals(3, TC05result.size(), "Wrong number of intersection points");
     }
