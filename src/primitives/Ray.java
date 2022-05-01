@@ -84,45 +84,28 @@ public class Ray
      * @return the closest point
      */
     public GeoPoint findClosestGeoPoint(List<GeoPoint> intersections) {
-            if (intersections == null)
-                return null;
 
-            GeoPoint closestPoint = intersections.get(0);
-            Point point = closestPoint.point;
+        double distance = Double.POSITIVE_INFINITY;
 
-            double distance = point.distanceSquared(this.p0);
+        GeoPoint nearPoint = null;
 
-            for (GeoPoint geoPoint : intersections)
-            {
-                double distanceTemp=geoPoint.point.distanceSquared(this.p0);
-                if (distance > distanceTemp)
-                {
-                    closestPoint = geoPoint;
-                    distance = distanceTemp;
-                }
-            }
-            return closestPoint;
+        if (intersections == null) {
+            return null;
         }
-//        double distance = Double.POSITIVE_INFINITY;
-//
-//        GeoPoint nearPoint = null;
-//
-//        if (GeoPointList == null) {
-//            return null;
-//        }
-//
-//        // distance => distanceSquared
-//        // no need to activate the Math.sqrt function
-//        // distance is always a positive value,
-//
-//        for (GeoPoint p : GeoPointList) {
-//            double dis = p.point.distanceSquared(p0); // distance from the starting point of the ray
-//            if (dis < distance) {
-//                distance = dis;
-//                nearPoint = p;
-//            }
-//        }
-//        return nearPoint;
+
+        // distance => distanceSquared
+        // no need to activate the Math.sqrt function
+        // distance is always a positive value,
+
+        for (GeoPoint p : intersections) {
+            double dis = p.point.distanceSquared(p0); // distance from the starting point of the ray
+            if (dis < distance) {
+                distance = dis;
+                nearPoint = p;
+            }
+        }
+        return nearPoint;
+    }
 
     @Override
     public String toString() {
