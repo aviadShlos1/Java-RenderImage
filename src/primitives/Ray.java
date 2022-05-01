@@ -53,6 +53,31 @@ public class Ray
     }
 
     /**
+     * find the closest Point to Ray
+     *
+     * @param points3DList List of intersections point
+     * @return the closest point
+     */
+    public Point findClosestPoint(List<Point> points3DList) {
+        double distance = Double.POSITIVE_INFINITY;
+        Point nearPoint = null;
+
+        if (points3DList == null) {
+            return null;
+        }
+
+        for (Point p : points3DList) {
+            double dis = p.distance(p0); // distance from the starting point of the ray
+            if (dis < distance) {
+                distance = dis;
+                nearPoint = p;
+            }
+        }
+
+        return nearPoint;
+    }
+
+    /**
      * find the closest GeoPoint to Ray
      *
      * @param GeoPointList List of intersections point
