@@ -65,7 +65,7 @@ class PlaneTests {
         Ray ray2 = new Ray(new Point(3, 4, 2), new Vector(1, 2, 1));
         List<Point> TC02result = plane.findIntersections(ray2);
 
-        assertEquals(0,TC02result.size(), "Wrong number of intersection points");
+        assertNull(TC02result, "Wrong number of intersection points");
 
 
 // =============== Boundary Values Tests ==================
@@ -75,13 +75,13 @@ class PlaneTests {
         Ray ray3 = new Ray(new Point(0.5, 0.5, 0), new Vector(1, -2, 0));
         List<Point> TC03result = plane.findIntersections(ray3);
 
-        assertEquals(0, TC03result.size(), "Wrong number of intersection points");
+        assertNull(TC03result, "Wrong number of intersection points");
 
         // TC04 :Ray is parallel to the plane and is not included in the plane (0 points)
         Ray ray4 = new Ray(new Point(0.5, 0, 0), new Vector(1, -2, 0));
         List<Point> TC04result = plane.findIntersections(ray4);
 
-        assertEquals(0, TC04result.size(), "Wrong number of intersection points");
+        assertNull(TC04result, "Wrong number of intersection points");
 
         // TC05 :Ray is orthogonal to the plane and the point is located before the plane (1 points)
         Ray ray5 = new Ray(new Point(1, 1, 1), new Vector(-1, -1, -1));
@@ -96,26 +96,26 @@ class PlaneTests {
         Ray ray6 = new Ray(new Point(0.5, 0.25, 0.25), new Vector(-1, -1, -1));
         List<Point> TC06result = plane.findIntersections(ray6);
 
-        assertEquals(0, TC06result.size(), "Wrong number of intersection points");
+        assertNull(TC06result, "Wrong number of intersection points");
 
         // TC07 :Ray is orthogonal to the plane and the point is located after the plane (0 points)
         Ray ray7 = new Ray(new Point(-1, -1, -1), new Vector(-1, -1, -1));
         List<Point> TC07result = plane.findIntersections(ray7);
 
-        assertEquals(0, TC07result.size(), "Wrong number of intersection points");
+        assertNull(TC07result, "Wrong number of intersection points");
 
         // TC08 :Ray is neither orthogonal nor parallel  and begins at the plane(the point is in the plane) (0 points)
         Ray ray8 = new Ray(new Point(0.5, 0.25, 0.25), new Vector(-4, 1, 0));
         List<Point> TC08result = plane.findIntersections(ray8);
 
-        assertEquals(0, TC08result.size(), "Wrong number of intersection points");
+        assertNull(TC08result, "Wrong number of intersection points");
 
         // TC09 :Ray is neither orthogonal nor parallel  and  begins in
         //the same point which appears as reference point in the plane (0 points)
         Ray ray9 = new Ray(new Point(-2, -2, 5), new Vector(2, 10, -5));
         List<Point> TC09result = plane.findIntersections(ray9);
 
-        assertEquals(0, TC09result.size(), "Wrong number of intersection points"+
+        assertNull(TC09result, "Wrong number of intersection points"+
                 "the same point which appears as reference point in the plane");
     }
 }
