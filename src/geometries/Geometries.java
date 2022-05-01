@@ -21,7 +21,7 @@ public class Geometries extends Intersectable {
     /**
      * geometries - list of all components in the scene
      */
-    private List<Intersectable> geometriesList=new LinkedList<>();
+    private List<Intersectable> geometriesList = new LinkedList<>();
 
     /**
      * constructor of class, creates the list and for now it is empty.
@@ -46,7 +46,7 @@ public class Geometries extends Intersectable {
      * @param geometries - shapes to be added to this instance
      */
     public void add(Intersectable... geometries) {
-        this.geometriesList.addAll(Arrays.asList(geometries));
+        this.geometriesList.addAll(List.of(geometries));
     }
 
     /**
