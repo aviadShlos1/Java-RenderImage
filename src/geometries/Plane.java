@@ -72,11 +72,11 @@ public class Plane extends Geometry {
         double enumerator=N.dotProduct(Q0.subtract(P0));
         double denominator=N.dotProduct(v);
         double t = alignZero(enumerator/denominator);
-        List<Point> intersectPoints=new LinkedList<>();
+        List<Point> intersectPoints = new LinkedList<>();
         if (t > 0){
-            intersectPoints.add(P0.add(v.scale(t)));
+            return List.of(new GeoPoint(this, ray.getPoint(t)));
         }
-        return List.of(new GeoPoint(this, ray.getPoint(t)));
+        return null;
     }
 
     /**
