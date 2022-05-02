@@ -1,7 +1,7 @@
 /**
  *@author: Aviad Shlosberg 314960881
  *         Evyatar Levi    318753993
- *Exercise: PR06
+ * Exercise: PR06
  * Brief: In this level we add the color and material elements.
  * 		  In addition, we add light sources to the scene, through implementing the Phong model.
  */
