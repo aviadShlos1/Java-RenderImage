@@ -1,3 +1,10 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR06
+ * Brief: In this level we add the color and material elements.
+ * 		  In addition, we add light sources to the scene, through implementing the Phong model.
+ */
 package unittests.lighting;
 
 
@@ -187,7 +194,6 @@ public class LightsTests {
 						.setkL(0.00001).setkQ(0.000001));
 
 
-
 		ImageWriter imageWriter = new ImageWriter("SphereMultiLight", 500, 500);
 		camera1 .setImageWriter(imageWriter); //
 		camera1	.setRayTracer(new RayTracerBasic(scene1)) ;//
@@ -195,7 +201,6 @@ public class LightsTests {
 		camera1	.renderImage();//
 		camera1	.writeToImage(); //
 	}
-
 
 
 
@@ -214,7 +219,7 @@ public class LightsTests {
 //		camera1.renderImage(); //
 //		camera1.writeToImage(); //
 //	}
-
+//
 //	/**
 //	 * Produce a picture of a two triangles lighted by a narrow spot light
 //	 */
