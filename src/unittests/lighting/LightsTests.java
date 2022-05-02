@@ -196,7 +196,6 @@ public class LightsTests {
 						new Point(10,0,0) ,new Vector(-2, -3, 4))
 						.setkL(0.00001).setkQ(0.000001));
 
-
 		ImageWriter imageWriter = new ImageWriter("SphereMultiLight", 500, 500);
 		camera1 .setImageWriter(imageWriter); //
 		camera1	.setRayTracer(new RayTracerBasic(scene1)) ;//
@@ -204,7 +203,6 @@ public class LightsTests {
 		camera1	.renderImage();//
 		camera1	.writeToImage(); //
 	}
-
 
 
 
@@ -223,7 +221,7 @@ public class LightsTests {
 //		camera1.renderImage(); //
 //		camera1.writeToImage(); //
 //	}
-
+//
 //	/**
 //	 * Produce a picture of a two triangles lighted by a narrow spot light
 //	 */
