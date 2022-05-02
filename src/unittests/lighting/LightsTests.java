@@ -2,13 +2,13 @@ package unittests.lighting;
 
 
 import org.junit.jupiter.api.Test;
-
+import java.awt.Color.*;
 import lighting.*;
 import geometries.*;
 import primitives.*;
 import renderer.*;
 import scene.Scene;
-import static java.awt.Color.*;
+
 
 /**
  * Test rendering a basic image
@@ -18,7 +18,7 @@ import static java.awt.Color.*;
 public class LightsTests {
 	private Scene scene1 = new Scene("Test scene");
 	private Scene scene2 = new Scene("Test scene") //
-			.setAmbientLight(new AmbientLight(new Color(WHITE), new Double3(0.15)));
+			.setAmbientLight(new AmbientLight(new Color(java.awt.Color.white), new Double3(0.15)));
 	private Camera camera1 = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 			.setViewPlaneSize(150, 150) //
 			.setViewPlaneDistance(1000);
@@ -40,7 +40,7 @@ public class LightsTests {
 	private Geometry triangle1 = new Triangle(p[0], p[1], p[2]).setMaterial(material);
 	private Geometry triangle2 = new Triangle(p[0], p[1], p[3]).setMaterial(material);
 	private Geometry sphere = new Sphere(new Point(0, 0, -50), 50d) //
-			.setEmission(new Color(BLUE).reduce(2)) //
+			.setEmission(new Color(java.awt.Color.blue).reduce(2)) //
 			.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300));
 
 	/**
@@ -132,6 +132,72 @@ public class LightsTests {
 		camera2	.renderImage();//
 		camera2.writeToImage(); //
 	}
+	/**
+	 * Produce a picture of a two triangles lighted by a spot light
+	 */
+	@Test
+	public void triangleMultiLight() {
+		scene2.geometries.add(triangle1.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)),
+				triangle2.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(300)));
+
+		scene2.lights.add(
+				new SpotLight(
+						Color.WHITE,
+						new Point(-20, -150, -40),
+						new Vector(19, 45, -22)) //
+						.setkL(0.0001).setkQ(0.000005)
+		);
+
+		scene2.lights.add(new PointLight(
+				Color.WHITE,
+				new Point(70, -150, -100)) //
+				.setkL(0).setkQ(0));
+
+		scene2.lights.add(new DirectionalLight(
+				Color.YELLOW.reduce(2),
+				new Vector(0, 0, -1)));
+
+
+		ImageWriter imageWriter = new ImageWriter("TriangleMultiLight", 500, 500);
+		camera2 .setImageWriter(imageWriter); //
+		camera2	.setRayTracer(new RayTracerBasic(scene2)) ;//
+		camera2	.renderImage();//
+		camera2	.writeToImage(); //
+	}
+
+
+	/**
+	 * Produce a picture of a sphere lighted by a spot light
+	 */
+	@Test
+	public void sphereMultiLight() {
+		scene1.geometries.add(new Sphere(new Point(0, 0, -50), 50) //
+				.setEmission(Color.RED.reduce(2)) //
+				.setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(100)));
+
+		scene1.lights.add(
+				new DirectionalLight(
+						Color.YELLOW,
+						new Vector(1, 1.5, -1.5)));
+
+		scene1.lights.add(
+				new PointLight(
+						Color.BLUE.scale(2),
+						new Point(0, 0, 20))//
+						.setkL(0.00001).setkQ(0.000001));
+
+
+
+		ImageWriter imageWriter = new ImageWriter("SphereMultiLight", 500, 500);
+		camera1 .setImageWriter(imageWriter); //
+		camera1	.setRayTracer(new RayTracerBasic(scene1)) ;//
+		camera1.setViewPlaneDistance(750);//
+		camera1	.renderImage();//
+		camera1	.writeToImage(); //
+	}
+
+
+
 
 //	/**
 //	 * Produce a picture of a sphere lighted by a narrow spot light

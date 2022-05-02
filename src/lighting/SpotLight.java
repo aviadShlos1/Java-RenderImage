@@ -22,7 +22,7 @@ public class SpotLight extends PointLight {
      */
     public SpotLight(Color color, Point position, Vector direction) {
         super(color, position);
-        direction = direction.normalize();
+        this.direction = direction.normalize();
 
     }
 
@@ -40,6 +40,5 @@ public class SpotLight extends PointLight {
     public Vector getL(Point p) {
         return super.getL(p);
     }
-
 
 }
