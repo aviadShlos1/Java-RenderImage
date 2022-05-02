@@ -1,6 +1,11 @@
+/**
+ *@author: Aviad Shlosberg 314960881
+ *         Evyatar Levi    318753993
+ *Exercise: PR06
+ * Brief: In this level we add the color and material elements.
+ * 		  In addition, we add light sources to the scene, through implementing the Phong model.
+ */
 package unittests.lighting;
-
-
 import org.junit.jupiter.api.Test;
 import java.awt.Color.*;
 import lighting.*;
@@ -149,7 +154,7 @@ public class LightsTests {
 		);
 
 		scene2.lights.add(new PointLight(
-				Color.WHITE,
+				Color.RED,
 				new Point(70, -150, -100)) //
 				.setkL(0).setkQ(0));
 
@@ -185,7 +190,11 @@ public class LightsTests {
 						Color.BLUE.scale(2),
 						new Point(0, 0, 20))//
 						.setkL(0.00001).setkQ(0.000001));
-
+		scene1.lights.add(
+				new SpotLight(
+						Color.GREEN,
+						new Point(10,0,0) ,new Vector(-2, -3, 4))
+						.setkL(0.00001).setkQ(0.000001));
 
 
 		ImageWriter imageWriter = new ImageWriter("SphereMultiLight", 500, 500);
