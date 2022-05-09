@@ -67,11 +67,21 @@ public abstract class Intersectable {
 
     /**
      * @param ray ray that cross the geometry
+     * @param maxDistance - the upper bound of distance, any point which
+     *                      its distance is greater than this bound will not be returned
+     * @return list of intersection points that were found and have valid distance value
+     */
+    public final List<GeoPoint> findGeoIntersections(Ray ray, double maxDistance) {
+        return findGeoIntersectionsHelper(ray, maxDistance);
+    }
+    /**
+     * @param ray ray that cross the geometry
      * @return list of intersection points that were found
      */
     public final List<GeoPoint> findGeoIntersections(Ray ray) {
-        return findGeoIntersectionsHelper(ray);
+        return findGeoIntersections(ray, Double.POSITIVE_INFINITY);
     }
 
-    protected abstract List<GeoPoint> findGeoIntersectionsHelper(Ray ray);
+    protected abstract List<GeoPoint>findGeoIntersectionsHelper(Ray ray, double maxDistance);
+
 }
