@@ -26,4 +26,13 @@ public interface LightSource {
      * @return the ray - the normalized(p - pL)
      */
     public Vector getL(Point p);
+    /**
+     * function to calculate the distance between
+     * light source and a point to make sure no object
+     * behind the light source is casting a shadow on the tested point
+     *
+     * @param point - the tested point
+     * @return the distance between the given point and the light source
+     */
+    double getDistance(Point point);
 }

@@ -59,4 +59,16 @@ public class DirectionalLight extends Light implements LightSource {
         return direction.normalize();
     }
 
+    /**
+     * function to calculate the distance between
+     * light source and a point to make sure no object
+     * behind the light source is casting a shadow on the tested point
+     *
+     * @param point - the tested point
+     * @return the distance between the given point and the light source
+     */
+    @Override
+    public double getDistance(Point point){
+        return Double.POSITIVE_INFINITY;
+    }
 }

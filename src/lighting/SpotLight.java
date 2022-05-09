@@ -32,7 +32,12 @@ public class SpotLight extends PointLight {
         this.direction = direction.normalize();
 
     }
-
+    /**
+     * function calculates the color of the light in a given point in the 3D space
+     *
+     * @param p - the point which we want to know what the color is in
+     * @return the light color in p
+     */
     @Override
     public Color getIntensity(Point p) {
         double projection = direction.dotProduct(getL(p));
@@ -48,4 +53,8 @@ public class SpotLight extends PointLight {
         return super.getL(p);
     }
 
+    @Override
+    public double getDistance(Point point) {
+        return super.getDistance(point);
+    }
 }
