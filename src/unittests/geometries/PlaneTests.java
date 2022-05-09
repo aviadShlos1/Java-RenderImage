@@ -6,7 +6,6 @@
  */
 package unittests.geometries;
 
-import geometries.Intersectable.GeoPoint;
 import geometries.Plane;
 import org.junit.jupiter.api.Test;
 import primitives.Point;
@@ -50,7 +49,7 @@ class PlaneTests {
 
 
 // ============ Equivalence Partitions Tests ==============
-        Point intersectionPoint;
+        Point intersection;
 
         // TC01: Ray intersects the plane (1 points)
         Ray ray1 = new Ray(new Point(0, -1, 0), new Vector(1, 3, 1));
@@ -58,8 +57,8 @@ class PlaneTests {
 
         assertEquals(1, TC01result.size(), "Wrong number of intersection points");
 
-        intersectionPoint = new Point(0.4, 0.2, 0.4);
-        assertEquals(intersectionPoint, TC01result.get(0), "not the correct intersection point");
+        intersection = new Point(0.4, 0.2, 0.4);
+        assertEquals(intersection, TC01result.get(0), "not the correct intersection point");
 
         // TC02: Ray doesn't intersect the plane(0 points)
         Ray ray2 = new Ray(new Point(3, 4, 2), new Vector(1, 2, 1));
@@ -89,8 +88,8 @@ class PlaneTests {
 
         assertEquals(1, TC05result.size(), "Wrong number of intersection points");
 
-        intersectionPoint = new Point(1 / 3d, 1 / 3d, 1 / 3d);
-        assertEquals(intersectionPoint, TC05result.get(0), "not the correct intersection point");
+        intersection = new Point(1 / 3d, 1 / 3d, 1 / 3d);
+        assertEquals(intersection, TC05result.get(0), "not the correct intersection point");
 
         // TC06 :Ray is orthogonal to the plane and its starting point is in the plane (0 points)
         Ray ray6 = new Ray(new Point(0.5, 0.25, 0.25), new Vector(-1, -1, -1));

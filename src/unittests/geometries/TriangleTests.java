@@ -45,7 +45,7 @@ public class TriangleTests {
                 new Point(0, 0, 1)
         );
 
-        Point intersectionPoint;
+        Point intersection;
 
         // TC01: Ray intersects the triangle (1 points)
         Ray ray1 = new Ray(new Point(0, -1, 0), new Vector(1, 3, 1));
@@ -53,8 +53,9 @@ public class TriangleTests {
 
         assertEquals(1, TC01result.size(), "Wrong number of intersection points");
 
-        intersectionPoint = new Point(0.4, 0.2, 0.4);
-        assertEquals(TC01result.get(0), intersectionPoint, "not the correct intersection point");
+        intersection = new Point(0.4, 0.2, 0.4);
+        assertEquals(TC01result.get(0), intersection, "not the correct intersection point");
+
 
         // TC02: Ray doesn't intersect the triangle-against the edge (0 points)
         Ray ray2 = new Ray(new Point(0, -1, 0), new Vector(2, 2, 1));

@@ -46,7 +46,7 @@ public class CameraIntegrationsTest {
         if (points == 0) {
             assertNull(allPoints);
         } else {
-            assertEquals(allPoints.size(), points, "wrong number of intersections");
+            assertEquals(points ,allPoints.size() , "wrong number of intersections");
         }
     }
 
