@@ -20,14 +20,17 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit tests for different integrations with camera
  */
 public class CameraIntegrationsTest {
+    //magic numbers
+    private static final int ROW=3;
+    private static final int COL=3;
 
     private void testPointS(Geometry geo, Camera cam, int points) {
 
         List<GeoPoint> allPoints = null;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                Ray ray = cam.constructRayThroughPixel(3, 3, j, i);
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                Ray ray = cam.constructRayThroughPixel(ROW, COL, j, i);
                 List<GeoPoint> intersectionsList = geo.findGeoIntersections(ray);
 
                 if (intersectionsList != null) {
@@ -43,7 +46,7 @@ public class CameraIntegrationsTest {
         if (points == 0) {
             assertNull(allPoints);
         } else {
-            assertEquals(allPoints.size(), points, "wrong number of intersections");
+            assertEquals(points, allPoints.size(),  "wrong number of intersections");
         }
     }
 

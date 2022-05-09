@@ -11,9 +11,12 @@ import primitives.Color;
 import renderer.ImageWriter;
 
 class ImageWriterTest {
+    //magic numbers
+    private static final int ROW=800;
+    private static final int COL=500;
     @Test
     void imageWriterTest(){
-        ImageWriter imageWriter= new ImageWriter("imageWriterTest",800,500);
+        ImageWriter imageWriter= new ImageWriter("imageWriterTest",ROW,COL);
         for (int i=0; i< imageWriter.getNx();i++){
             for (int j=0; j< imageWriter.getNy();j++){
                 imageWriter.writePixel(i,j,new Color(java.awt.Color.YELLOW));
