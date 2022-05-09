@@ -29,11 +29,11 @@ public class RenderTests {
 
 		scene.geometries.add(new Sphere(new Point(0, 0, -100), 50d),
 				new Triangle(new Point(-100, 0, -100), new Point(0, 100, -100), new Point(-100, 100, -100)), // up
-				// left
+																												// left
 				new Triangle(new Point(-100, 0, -100), new Point(0, -100, -100), new Point(-100, -100, -100)), // down
-				// left
+																												// left
 				new Triangle(new Point(100, 0, -100), new Point(0, -100, -100), new Point(100, -100, -100))); // down
-		// right
+																												// right
 		Camera camera = new Camera(Point.ZERO, new Vector(0, 0, -1), new Vector(0, 1, 0)) //
 				.setViewPlaneDistance(100) //
 				.setViewPlaneSize(500, 500) //
@@ -46,7 +46,6 @@ public class RenderTests {
 	}
 
 	// For stage 6 - please disregard in stage 5
-
 	/**
 	 * Produce a scene with basic 3D model - including individual lights of the
 	 * bodies and render it into a png image with a grid
@@ -78,7 +77,7 @@ public class RenderTests {
 		camera.printGrid(100, new Color(WHITE));
 		camera.writeToImage();
 	}
-}
+
 //	/**
 //	 * Test for XML based scene - for bonus
 //	 */
@@ -96,4 +95,4 @@ public class RenderTests {
 //		camera.printGrid(100, new Color(YELLOW));
 //		camera.writeToImage();
 //	}
-
+}

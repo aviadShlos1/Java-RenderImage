@@ -26,30 +26,6 @@ public class Color {
 	 * Black color = (0,0,0)
 	 */
 	public static final Color BLACK = new Color();
-	/**
-	 * constant color - white
-	 */
-	public static final Color WHITE = new Color(java.awt.Color.WHITE);
-	/**
-	 * constant color - red
-	 */
-	public static final Color RED = new Color(java.awt.Color.RED);
-	/**
-	 * constant color - green
-	 */
-	public static final Color GREEN = new Color(java.awt.Color.GREEN);
-	/**
-	 * constant color - blue
-	 */
-	public static final Color BLUE = new Color(java.awt.Color.BLUE);
-	/**
-	 * constant color - yellow
-	 */
-	public static final Color YELLOW = new Color(java.awt.Color.YELLOW);
-	/**
-	 * constant color - gray
-	 */
-	public static final Color GRAY = new Color(java.awt.Color.GRAY);
 
 	/**
 	 * Default constructor - to generate Black Color (privately)
@@ -173,4 +149,8 @@ public class Color {
 		return new Color(rgb.d1 / k.d1, rgb.d2 / k.d2, rgb.d3 / k.d3);
 	}
 
+	@Override
+	public String toString() {
+		return "rgb:" + rgb;
+	}
 }
