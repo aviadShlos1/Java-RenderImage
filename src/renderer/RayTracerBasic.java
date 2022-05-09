@@ -17,6 +17,8 @@ import java.util.List;
 import static primitives.Util.alignZero;
 
 public class RayTracerBasic extends RayTracerBase {
+
+    private static final double DELTA = 0.1;
     public RayTracerBasic(Scene scene) {
         super(scene);
     }
@@ -68,9 +70,12 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(gp.point).normalize();
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sign(nv)
-                Color lightIntensity = lightSource.getIntensity(gp.point);
-                color = color.add(lightIntensity.scale(calcDiffusive(material,nl)),
-                        lightIntensity.scale(calcSpecular(material, n, l ,nl, v)));
+
+                if (unshaded(gp,lightSource,l,n)) {
+                    Color lightIntensity = lightSource.getIntensity(gp.point);
+                    color = color.add(lightIntensity.scale(calcDiffusive(material,nl)),
+                            lightIntensity.scale(calcSpecular(material, n, l ,nl, v)));
+                }
             }
         }
         return color;
@@ -105,4 +110,23 @@ public class RayTracerBasic extends RayTracerBase {
         var p = Math.pow(maximal, material.nShininess);
         return material.kS.scale(p);
     }
+       /**
+    * boolean function to test whether a given point is shaded or not
+     *
+    * @param light    - the light source which we check if the point is shaded from
+    * @param l        - the vector between the light source and the point
+    * @param n        - the normal of l with the body
+    * @param gp       - the tested point
+    * @return true if the point is shaded, false otherwise
+    */
+    private boolean unshaded(GeoPoint gp, LightSource light, Vector l, Vector n){
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Vector delta = n.scale(n.dotProduct(lightDirection) > 0 ? DELTA : - DELTA);
+        Point point = gp.point.add(delta);
+        Ray lightRay = new Ray (point, lightDirection);
+        List<Point> intersections = scene.geometries.findIntersections(lightRay);
+        return intersections == null;
+    }
+
+
 }

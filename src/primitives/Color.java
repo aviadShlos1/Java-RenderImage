@@ -1,10 +1,3 @@
-/**
- *@author: Aviad Shlosberg 314960881
- *         Evyatar Levi    318753993
- *Exercise: PR06
- * Brief: In this level we add the color and material elements.
- * 		  In addition, we add light sources to the scene, through implementing the Phong model.
- */
 package primitives;
 
 /**
@@ -26,6 +19,30 @@ public class Color {
 	 * Black color = (0,0,0)
 	 */
 	public static final Color BLACK = new Color();
+	/**
+	 * constant color - white
+	 */
+	public static final Color WHITE = new Color(java.awt.Color.WHITE);
+	/**
+	 * constant color - red
+	 */
+	public static final Color RED = new Color(java.awt.Color.RED);
+	/**
+	 * constant color - green
+	 */
+	public static final Color GREEN = new Color(java.awt.Color.GREEN);
+	/**
+	 * constant color - blue
+	 */
+	public static final Color BLUE = new Color(java.awt.Color.BLUE);
+	/**
+	 * constant color - yellow
+	 */
+	public static final Color YELLOW = new Color(java.awt.Color.YELLOW);
+	/**
+	 * constant color - gray
+	 */
+	public static final Color GRAY = new Color(java.awt.Color.GRAY);
 
 	/**
 	 * Default constructor - to generate Black Color (privately)
