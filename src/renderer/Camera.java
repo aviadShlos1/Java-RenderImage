@@ -80,7 +80,7 @@ public class Camera {
      * @param i  - Y's index
      * @return - the ray which goes through the pixel
      */
-    public Ray constructRayThroughPixel(int nX, int nY, int j, int i) {
+    public Ray constructRay(int nX, int nY, int j, int i) {
         Point Pc = P0.add(Vto.scale(distance)); // image center
 
         // ratio (pixel width and height)
@@ -148,7 +148,7 @@ public class Camera {
      */
     private Color castRay(int col,int row)
     {
-        Ray rayForCast=constructRayThroughPixel(imageWriter.getNx(), imageWriter.getNy(), col,row);
+        Ray rayForCast= constructRay(imageWriter.getNx(), imageWriter.getNy(), col,row);
         return rayTracerBasic.traceRay(rayForCast);
     }
 

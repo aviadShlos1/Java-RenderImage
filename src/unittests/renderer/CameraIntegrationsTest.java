@@ -20,21 +20,24 @@ import static org.junit.jupiter.api.Assertions.*;
  * Unit tests for different integrations with camera
  */
 public class CameraIntegrationsTest {
+    // Magic Numbers
+    private static final int ROW = 3;
+    private static final int COL = 3;
 
-    private void testPointS(Geometry geo, Camera cam, int points) {
+    private void testPoints(Geometry geo, Camera cam, int points) {
 
         List<GeoPoint> allPoints = null;
 
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                Ray ray = cam.constructRayThroughPixel(3, 3, j, i);
-                List<GeoPoint> intersectionsList = geo.findGeoIntersections(ray);
+        for (int i = 0; i < ROW; i++) {
+            for (int j = 0; j < COL; j++) {
+                Ray ray = cam.constructRay(ROW, COL, j, i);
+                List<GeoPoint> intersections = geo.findGeoIntersections(ray);
 
-                if (intersectionsList != null) {
+                if (intersections != null) {
                     if (allPoints == null) {
                         allPoints = new LinkedList<>();
                     }
-                    allPoints.addAll(intersectionsList);
+                    allPoints.addAll(intersections);
                 }
             }
         }
@@ -78,32 +81,32 @@ public class CameraIntegrationsTest {
         // =================================================================================
         // Sphere 1 test (slide 14)
         Sphere sphere1 = new Sphere(new Point(0, 0, -3), 1);
-        testPointS(sphere1, cam1, 2);
+        testPoints(sphere1, cam1, 2);
         // =================================================================================
 
 
         // =================================================================================
         // Sphere 2 test (slide 15)
         Sphere sphere2 = new Sphere(new Point(0, 0, -2.5), 2.5);
-        testPointS(sphere2, cam2, 18);
+        testPoints(sphere2, cam2, 18);
         // =================================================================================
 
         // =================================================================================
         // Sphere 3 test (slide 16)
         Sphere sphere3 = new Sphere(new Point(0, 0, -2), 2);
-        testPointS(sphere3, cam2, 10);
+        testPoints(sphere3, cam2, 10);
         // =================================================================================
 
         // =================================================================================
         // Sphere 4 test (slide 17)
         Sphere sphere4 = new Sphere(new Point(0, 0, -1), 4);
-        testPointS(sphere4, cam1, 9);
+        testPoints(sphere4, cam1, 9);
         // =================================================================================
 
         // =================================================================================
         // Sphere 5 test (slide 18)
         Sphere sphere5 = new Sphere(new Point(0, 0, 1), 0.5);
-        testPointS(sphere5, cam1, 0);
+        testPoints(sphere5, cam1, 0);
         // =================================================================================
     }
 
@@ -116,19 +119,19 @@ public class CameraIntegrationsTest {
         // =================================================================================
         // Plane 1 test (slide 19)
         Plane plane1 = new Plane(new Point(0, 0, -5), new Vector(0, 0, 1));
-        testPointS(plane1, cam3, 9);
+        testPoints(plane1, cam3, 9);
         // =================================================================================
 
         // =================================================================================
         // Plane 2 test (slide 20)
         Plane plane2 = new Plane(new Point(0, 0, -5), new Vector(0, 1, 2));
-        testPointS(plane2, cam3, 9);
+        testPoints(plane2, cam3, 9);
         // =================================================================================
 
         // =================================================================================
         // Plane 3 test (slide 21)
         Plane plane3 = new Plane(new Point(0, 0, -5), new Vector(0, 1, 1));
-        testPointS(plane3, cam3, 6);
+        testPoints(plane3, cam3, 6);
         // =================================================================================
     }
 
@@ -144,7 +147,7 @@ public class CameraIntegrationsTest {
                 new Point(0, 1, -2),
                 new Point(-1, -1, -2),
                 new Point(1, -1, -2));
-        testPointS(triangle1, cam1, 1);
+        testPoints(triangle1, cam1, 1);
         // =================================================================================
 
         // =================================================================================
@@ -153,7 +156,7 @@ public class CameraIntegrationsTest {
                 new Point(0, 20, -2),
                 new Point(-1, -1, -2),
                 new Point(1, -1, -2));
-        testPointS(triangle2, cam1, 2);
+        testPoints(triangle2, cam1, 2);
         // =================================================================================
 
     }
