@@ -29,7 +29,7 @@ class SphereTests {
         double sq = Math.sqrt(1 / 3d);
         Vector N = sp.getNormal(new Point(sq, sq, sq));
 
-        // Test that result of getNormal is proper
+        // Test that result of getNormal is proper.
         assertEquals(N, new Vector(sq, sq, sq));
     }
 
