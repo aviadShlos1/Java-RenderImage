@@ -98,13 +98,15 @@ public class Polygon extends Geometry {
 
 	/**
 	 * @param ray ray that cross the geometry
+	 *                        @param maxDistance - the upper bound of distance, any point which
+	 *                          its distance is greater than this bound will not be returned
 	 * @return list of intersection points that were found
 	 */
 	@Override
-	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray){
+	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance){
 
 		// First of all, check if there is a point of intersection with the plane
-		if (plane.findGeoIntersections(ray) == null)
+		if (plane.findGeoIntersections(ray, maxDistance) == null)
 			return null;
 
 		Point p0 = ray.getP0();
@@ -153,7 +155,7 @@ public class Polygon extends Geometry {
 			return null;
 		} else {
 			Plane plane = new Plane(vertices.get(0), vertices.get(1), vertices.get(2));
-			return List.of(new GeoPoint(this, plane.findGeoIntersections(ray).get(0).point));
+			return List.of(new GeoPoint(this, plane.findGeoIntersections(ray, maxDistance).get(0).point));
 		}
 	}
 

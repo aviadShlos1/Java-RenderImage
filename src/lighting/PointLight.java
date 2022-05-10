@@ -112,5 +112,4 @@ public class PointLight extends Light implements LightSource{
         this.kQ = kQ;
         return this;
     }
-
 }
