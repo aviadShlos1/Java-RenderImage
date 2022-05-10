@@ -69,7 +69,7 @@ public class PointLight extends Light implements LightSource{
 
     /**
      * function to calculate the distance between
-     * light source and a point to make sure no object
+     * light source and a point to make sure no object.
      * behind the light source is casting a shadow on the tested point
      *
      * @param point - the tested point
