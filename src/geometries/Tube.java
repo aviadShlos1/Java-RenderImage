@@ -61,13 +61,13 @@ public class Tube extends Geometry {
         return (myPoint.subtract(center)).normalize();
     }
     /**
-     * @param ray ray that cross the geometry
+     * @param ray - ray that cross the geometry
      * @param maxDistance - the upper bound of distance, any point which
      *                    its distance is greater than this bound will not be returned
      * @return list of intersection points that were found
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray ,  double maxDistance) {
         return null;
     }
 

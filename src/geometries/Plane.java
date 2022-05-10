@@ -60,12 +60,12 @@ public class Plane extends Geometry {
 
     /**
      * @param ray - ray that cross the geometry
-     *            @param maxDistance - the upper bound of distance, any point which
-     *                      its distance is greater than this bound will not be returned
+     * @param maxDistance - the upper bound of distance, any point which
+     *                    its distance is greater than this bound will not be returned
      * @return list of intersection points that were found
      */
     @Override
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray , double maxDistance) {
         Point P0 = ray.getP0();
         Vector v = ray.getDir();
         Point Q0 = q0;
@@ -75,7 +75,7 @@ public class Plane extends Geometry {
         double denominator=N.dotProduct(v);
         double t = alignZero(enumerator/denominator);
         List<Point> intersectPoints = new LinkedList<>();
-        if (t > 0 && alignZero(t - maxDistance) <= 0){
+        if ((t > 0) && alignZero(t- maxDistance) <=0 ) {  // ensure the points are inside the bound
             return List.of(new GeoPoint(this, ray.getPoint(t)));
         }
         return null;
