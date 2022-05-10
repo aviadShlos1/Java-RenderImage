@@ -35,7 +35,7 @@ class SphereTests {
 
 
     /**
-    * Test method for {@link geometries.Sphere#findGeoIntersectionsHelper(primitives.Ray)}.'
+    * Test method for {@link geometries.Sphere#findIntersections(primitives.Ray)}.'
      * */
     @Test
     public void testFindIntersections() {
@@ -67,7 +67,7 @@ class SphereTests {
 
         // TC04: Ray starts after the sphere (0 points)
         Point p_after = new Point(-0.5, 0, 0);
-        assertNull(sphere.findGeoIntersectionsHelper(new Ray(p_after, new Vector(-0.5, 0, 0))), "Ray's line out of sphere");
+        assertNull(sphere.findIntersections(new Ray(p_after, new Vector(-0.5, 0, 0))), "Ray's line out of sphere");
 
         // =============== Boundary Values Tests ==================
 

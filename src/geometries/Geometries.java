@@ -53,12 +53,14 @@ public class Geometries extends Intersectable {
      * a method that receive a ray and find all intersections of this ray with the shapes in this class
      *
      * @param ray         - the ray to be checked with the shapes
+     * @param maxDistance - the upper bound of distance, any point which
+     *                    its distance is greater than this bound will not be returned
      */
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray ,  double maxDistance ) {
         List<GeoPoint> intersections = new LinkedList<>();
         for (var geometry : geometriesList) {
             // declare list as null
-            List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray);
+            List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray , maxDistance) ;
 
             if (geoIntersections != null) {
                 intersections.addAll(geoIntersections);
