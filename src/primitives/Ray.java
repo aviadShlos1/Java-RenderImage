@@ -9,6 +9,11 @@ package primitives;
 import java.util.List;
 import java.util.Objects;
 import geometries.Intersectable.GeoPoint;
+
+import static primitives.Util.alignZero;
+import static primitives.Util.isZero;
+
+
 /**
  * This class presents the primitive "Ray" -
  * part of a line that has a fixed starting point but no end point. It can extend infinitely in one direction.
@@ -16,8 +21,14 @@ import geometries.Intersectable.GeoPoint;
 
 public class Ray
 {
+    /**
+     * @member dir - the point the Ray points to from p0
+     * @member p0 - starting point of Ray
+     * DELTA - Constant value defining by how much we need to move the ray's starting point
+     */
     final private Point p0;
     final private Vector dir;
+    private static final double DELTA = 0.1;
 
     /**
      * Constructor to initialize Ray based object with its point and vector
@@ -31,8 +42,32 @@ public class Ray
     }
 
     /**
+     * constructor for ray.
+     * creates a new ray and moves its head in the
+     * normal direction by the normal scaled by DELTA
+     *
+     * @param p0     - starting point
+     * @param dir    - direction vector
+     * @param normal - the normal defining the plane
+     */
+    public Ray(Point p0, Vector dir, Vector normal) {
+        this(p0, dir); // activate the current instance constructor
+
+        // make sure the normal and the direction are not orthogonal
+        double nv = alignZero(normal.dotProduct(dir));
+
+        // if not orthogonal
+        if (nv!=0) {
+            // create new vector to help move the head of
+            // the vector to the correct position
+            Vector fixVector = normal.scale(nv > 0 ? DELTA : -DELTA);
+            // move the head of the vector in the right direction
+            p0 = p0.add(fixVector);
+        }
+    }
+
+    /**
      * Getters
-     * @return
      */
     public Point getP0() {
         return p0;
