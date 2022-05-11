@@ -13,17 +13,19 @@ package primitives;
  */
 public class Material {
     /**
-     * @member kD - diffuse component
-     * @member kS - specular component
-     * @member nShininess - how shiny the material is
-     * @member kT - transparency component
-     * @member kR - reflection component
+     * @member kD - Diffuse component
+     * @member kS - Specular component
+     * @member Shininess - how shiny the material is
+     * @member kT - Transparency component
+     * @member kR - Reflection component
      */
+
     public Double3 kD = new Double3(0,0,0);
     public Double3 kS = new Double3(0,0,0);
     public int nShininess = 0 ;
     public Double3 kT = new Double3(0,0,0);
     public Double3 kR = new Double3(0,0,0);
+
 
     /**
      * setter - chaining method
@@ -85,22 +87,22 @@ public class Material {
     /**
      * setter - chaining method
      *
-     * @param kt - transparency component
+     * @param kT - transparency component
      * @return the material after setting the transparency component
      */
-    public Material setKt(Double3 kt) {
-        this.kT = kt;
+    public Material setKt(Double3 kT) {
+        this.kT = kT;
         return this;
     }
 
     /**
      * setter - chaining method
      *
-     * @param kr -  reflection component
+     * @param kR -  reflection component
      * @return the material after setting the reflection component
      */
-    public Material setKr(Double3 kr) {
-        this.kR = kr;
+    public Material setKr(Double3 kR) {
+        this.kR = kR;
         return this;
     }
 }

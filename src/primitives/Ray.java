@@ -13,6 +13,7 @@ import geometries.Intersectable.GeoPoint;
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
+
 /**
  * This class presents the primitive "Ray" -
  * part of a line that has a fixed starting point but no end point. It can extend infinitely in one direction.
@@ -21,8 +22,8 @@ import static primitives.Util.isZero;
 public class Ray
 {
     /**
-     * @member _dir - the point the Ray points to from p0
-     * @member _p0 - starting point of Ray
+     * @member dir - the point the Ray points to from p0
+     * @member p0 - starting point of Ray
      * DELTA - Constant value defining by how much we need to move the ray's starting point
      */
     final private Point p0;
@@ -39,6 +40,7 @@ public class Ray
         this.p0 = p0;
         this.dir = dir.normalize();
     }
+
     /**
      * constructor for ray.
      * creates a new ray and moves its head in the
@@ -63,6 +65,7 @@ public class Ray
             p0 = p0.add(fixVector);
         }
     }
+
     /**
      * Getters
      */
