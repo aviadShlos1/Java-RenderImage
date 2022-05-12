@@ -81,7 +81,7 @@ public class ShadowTests {
 	}
 
 	/**
-	 * Sphere-Triangle shading - move spot even more close
+	 * Sphere-Triangle shading - move spot even more close.
 	 */
 	@Test
 	public void sphereTriangleSpot2() {
