@@ -62,7 +62,7 @@ public class Ray
             // the vector to the correct position
             Vector fixVector = normal.scale(nv > 0 ? DELTA : -DELTA);
             // move the head of the vector in the right direction
-            this.p0=p0.add(fixVector);
+            this.p0 = p0.add(fixVector);
         }
     }
 
