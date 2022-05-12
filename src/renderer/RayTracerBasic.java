@@ -74,9 +74,20 @@ public class RayTracerBasic extends RayTracerBase {
      * @return the color in the point with all the effects
      */
     private Color calcColor(GeoPoint intersection, Ray ray, int level, double k) {
-        Color color = scene.ambientLight.getIntensity()
-                .add(calcLocalEffects(intersection, ray));
+        Color color = calcLocalEffects(intersection, ray);
         return 1 == level ? color : color.add(calcGlobalEffects(intersection, ray.getDir(), level, k));
+    }
+    /**
+     * function which returns the color of the object the ray is intersecting
+     * if no intersection was found, returns the ambient light's color
+     *
+     * @param gp - the point on the 3D model
+     * @param ray   - ray to the point
+     * @return the color in the point
+     */
+    private Color calcColor(GeoPoint gp, Ray ray){
+        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
+                .add(scene.ambientLight.getIntensity());
     }
 
     /**
@@ -108,18 +119,7 @@ public class RayTracerBasic extends RayTracerBase {
     }
 
 
-    /**
-     * function which returns the color of the object the ray is intersecting
-     * if no intersection was found, returns the ambient light's color
-     *
-     * @param gp - the point on the 3D model
-     * @param ray   - ray to the point
-     * @return the color in the point
-     */
-    private Color calcColor(GeoPoint gp, Ray ray){
-        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
-                .add(scene.ambientLight.getIntensity());
-    }
+
 
     /**
      * function to calculate transparency and reflections
