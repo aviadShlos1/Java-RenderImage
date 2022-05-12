@@ -26,7 +26,7 @@ public class Ray
      * @member p0 - starting point of Ray
      * DELTA - Constant value defining by how much we need to move the ray's starting point
      */
-    final private Point p0;
+    private Point p0;
     final private Vector dir;
     private static final double DELTA = 0.1;
 
@@ -62,7 +62,7 @@ public class Ray
             // the vector to the correct position
             Vector fixVector = normal.scale(nv > 0 ? DELTA : -DELTA);
             // move the head of the vector in the right direction
-            p0 = p0.add(fixVector);
+            this.p0 = p0.add(fixVector);
         }
     }
 
