@@ -61,7 +61,18 @@ public class RayTracerBasic extends RayTracerBase {
         }
     }
 
-
+    /**
+     * function which returns the color of the object the ray is intersecting
+     * if no intersection was found, returns the ambient light's color
+     *
+     * @param gp - the point on the 3D model
+     * @param ray   - ray to the point
+     * @return the color in the point
+     */
+    private Color calcColor(GeoPoint gp, Ray ray){
+        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
+                .add(scene.ambientLight.getIntensity());
+    }
 
     /**
      * function which returns the color of the object the ray is intersecting
