@@ -86,6 +86,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @return the color in the point
      */
     private Color calcColor(GeoPoint gp, Ray ray){
+
         return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
                 .add(scene.ambientLight.getIntensity());
     }
@@ -117,9 +118,6 @@ public class RayTracerBasic extends RayTracerBase {
         GeoPoint gp = findClosestIntersection (ray);
         return (gp == null ? scene.background : calcColor(gp, ray, level - 1, kkx.hashCode())).scale(kx);
     }
-
-
-
 
     /**
      * function to calculate transparency and reflections
@@ -194,16 +192,14 @@ public class RayTracerBasic extends RayTracerBase {
     private boolean unshaded(GeoPoint gp, LightSource light, Vector l, Vector n){
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray (gp.point, lightDirection,n);
-
-        List<GeoPoint> intersections= scene.geometries.findGeoIntersections(lightRay);
-        if (intersections == null) {
-            return true;
-        }
         double distance = light.getDistance(gp.point);
-        for (GeoPoint geo : intersections) {
-            if (alignZero(geo.point.distance(gp.point) - distance) <= 0
-                    && geo.geometry.getMaterial().kT == null) {
-               return false;
+        List<GeoPoint> intersections= scene.geometries.findGeoIntersections(lightRay);
+        if (intersections != null) {
+            for (GeoPoint geo : intersections){
+                if (alignZero(geo.point.distance(gp.point) - distance) <= 0
+                        && geo.geometry.getMaterial().kT.lowerThan(0)) {
+                    return false;
+                }
             }
         }
         return true;
