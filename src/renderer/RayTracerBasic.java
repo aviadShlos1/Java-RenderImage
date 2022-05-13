@@ -61,18 +61,7 @@ public class RayTracerBasic extends RayTracerBase {
         }
     }
 
-    /**
-     * function which returns the color of the object the ray is intersecting
-     * if no intersection was found, returns the ambient light's color
-     *
-     * @param gp - the point on the 3D model
-     * @param ray   - ray to the point
-     * @return the color in the point
-     */
-    private Color calcColor(GeoPoint gp, Ray ray){
-        return calcColor(gp, ray, MAX_CALC_COLOR_LEVEL, INITIAL_K)
-                .add(scene.ambientLight.getIntensity());
-    }
+
 
     /**
      * function which returns the color of the object the ray is intersecting
@@ -150,9 +139,9 @@ public class RayTracerBasic extends RayTracerBase {
             Vector l = lightSource.getL(gp.point).normalize();
             double nl = alignZero(n.dotProduct(l));
             if (nl * nv > 0) { // sign(nl) == sign(nv)
-
-                if (unshaded(gp,lightSource,l,n)) {
-                    Color lightIntensity = lightSource.getIntensity(gp.point);
+                Double3 ktr = transparency(gp,lightSource,l,n);
+                if ( !ktr.product(ks).lowerThan(MIN_CALC_COLOR_K)) {
+                    Color lightIntensity = lightSource.getIntensity(gp.point).scale(ktr);
                     color = color.add(lightIntensity.scale(calcDiffusive(material,nl)),
                             lightIntensity.scale(calcSpecular(material, n, l ,nl, v)));
                 }
@@ -215,7 +204,30 @@ public class RayTracerBasic extends RayTracerBase {
         }
         return true;
     }
-
+    /**
+     * function to determine the point transparency
+     *
+     * @param ls       - the light source which we measure the distance from
+     * @param l        - the vector between the light source and the point
+     * @param n        - the normal in the point
+     * @param geoPoint - the tested point
+     * @return the transparency value
+     */
+    private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
+        Vector lightDirection = l.scale(-1); // from point to light source
+        Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
+        double lightDistance = ls.getDistance(geoPoint.point);
+        var intersections = scene.geometries.findGeoIntersections(lightRay);
+        if (intersections == null) return new Double3(1.0);
+        Double3 ktr = new Double3(1.0);
+        for (GeoPoint gp : intersections) {
+            if (alignZero(gp.point.distance(geoPoint.point) - lightDistance) <= 0) {
+                ktr = (gp.geometry.getMaterial().kT).product(ktr);
+                if (!ktr.lowerThan(MIN_CALC_COLOR_K)) return new Double3(0.0);
+            }
+        }
+        return ktr;
+    }
     /**
      * function to construct the new ray reflected
      * from a point where another ray hits
