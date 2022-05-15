@@ -94,7 +94,18 @@ public class Material {
         this.kT = kT;
         return this;
     }
-
+    /**
+     * setter - chaining method
+     *
+     * @param kt - transparency component
+     * @return the material after setting the transparency component
+     */
+    public Material setKt(double kt) {
+        this.kT.d1 = kt;
+        this.kT.d2 = kt;
+        this.kT.d3 = kt;
+        return this;
+    }
     /**
      * setter - chaining method
      *
@@ -103,6 +114,18 @@ public class Material {
      */
     public Material setKr(Double3 kR) {
         this.kR = kR;
+        return this;
+    }
+    /**
+     * setter - chaining method
+     *
+     * @param kr -  reflection component
+     * @return the material after setting the reflection component
+     */
+    public Material setKr(double kr) {
+        this.kR.d1 = kr;
+        this.kR.d2 = kr;
+        this.kR.d3 = kr;
         return this;
     }
 }
