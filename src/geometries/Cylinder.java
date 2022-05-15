@@ -10,7 +10,10 @@ import primitives.Point;
 import primitives.Vector;
 import primitives.Ray;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import static primitives.Util.alignZero;
 
 /**
  * Cylinder class represents which has two parallel circular bases at a distance and a height
@@ -64,14 +67,80 @@ public class Cylinder extends Tube {
             return (myPoint.subtract(O)).normalize();
         }
     }
-    /**
-     * @param ray ray that cross the geometry
-     * @param maxDistance - the upper bound of distance, any point which
-     *                    its distance is greater than this bound will not be returned
-     * @return list of intersection points that were found
-     */
-    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray , double maxDistance) {
-        return super.findGeoIntersectionsHelper(ray , maxDistance);
-    }
 
+    /**
+     * this function finds the intersection points of a given ray with the cylinder
+     *
+     * @param ray         - which could intersect the cylinder
+     * @param maxDistance - is the maximum distance to find intersections in
+     * @return list of intersection points
+     */
+    @Override
+    public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        // Step 1: find intersections between the ray and the tube which the cylinder is a part of
+        List<GeoPoint> intersectionsTube = super.findGeoIntersections(ray, maxDistance);
+
+        // Step 2: intersect is between caps
+        Vector dir = axisRay.getDir();
+        Point bottomCapCenter = axisRay.getP0();
+        Point upperCupCenter = axisRay.getPoint(height);
+
+        double loweBound;
+        double upperBound;
+        List<GeoPoint> intersectionsCylinder = new ArrayList<>();
+
+        // validate each intersection (make sure it is in the cylinder itself and not on its continual)
+        if (intersectionsTube != null) {
+            for (GeoPoint geoPoint : intersectionsTube) {
+                loweBound = dir.dotProduct(geoPoint.point.subtract(bottomCapCenter));
+                upperBound = dir.dotProduct(geoPoint.point.subtract(upperCupCenter));
+                if (loweBound > 0 && upperBound < 0) {
+                    // the check for distance, if the intersection point is beyond the distance
+                    if (alignZero(geoPoint.point.distance(ray.getP0()) - maxDistance) <= 0) {
+                        intersectionsCylinder.add(geoPoint);
+                    }
+                }
+            }
+        }
+
+        // Step 3: intersect with each plane which belongs to the caps
+        Plane bottomCap = new Plane(bottomCapCenter, dir);
+        Plane upperCap = new Plane(upperCupCenter, dir);
+        List<GeoPoint> intersectionsBottomCup = bottomCap.findGeoIntersections(ray, maxDistance);
+        List<GeoPoint> intersectionsUpperCup = upperCap.findGeoIntersections(ray, maxDistance);
+
+        // if no intersections were found with the caps, return the ones we have already found
+        if (intersectionsBottomCup == null && intersectionsUpperCup == null) {
+            if (intersectionsCylinder.isEmpty()) {
+                return null;
+            }
+            return intersectionsCylinder;
+        }
+
+        // Step 4: intersections inside caps
+        Point bottomCapIntersectionPoint;
+        Point upperCapIntersectionPoint;
+
+        // bottom cup
+        if (intersectionsBottomCup != null) {
+            bottomCapIntersectionPoint = intersectionsBottomCup.get(0).point;
+            if (bottomCapIntersectionPoint.subtract(bottomCapCenter).lengthSquared() < radius * radius) {
+                intersectionsCylinder.add(intersectionsBottomCup.get(0));
+            }
+        }
+
+        // upper cup
+        if (intersectionsUpperCup != null) {
+            upperCapIntersectionPoint = intersectionsUpperCup.get(0).point;
+            if (upperCapIntersectionPoint.subtract(upperCupCenter).lengthSquared() < radius * radius) {
+                intersectionsCylinder.add(intersectionsUpperCup.get(0));
+            }
+        }
+
+        if (intersectionsCylinder.isEmpty()) {
+            return null;
+        }
+
+        return intersectionsCylinder;
+    }
 }
