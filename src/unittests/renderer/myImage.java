@@ -24,23 +24,35 @@ public class myImage {
         Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1 ), new Vector(0 , 1, 0))
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000);
-        myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(PINK));
+        myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
                 new Polygon(new Point(100, 0, -100), new Point(0, 100, -100), new Point(-100, 0, -100), new Point(0,-100,-100)) //
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
-                new Sphere(new Point(60, 50, -50), 30d).setEmission(new Color(BLUE)) //
+
+                new Sphere(new Point(7, 45, -50), 7d).setEmission(new Color(BLUE)) //
                         .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
-                 new Sphere(new Point(30, 25, -25), 30d).setEmission(new Color(RED)) //
-                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))));
+
+                new Sphere(new Point(-8, 45, -50), 7d).setEmission(new Color(RED)) //
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
+
+                new Sphere(new Point(-0.5, 57, -50), 7d).setEmission(new Color(BLACK)) //
+                .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
+
+                new Sphere(new Point(-0.5, 0, -25), 7d).setEmission(new Color(WHITE)) //
+                .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
+
+                new Tube(3, new Ray(new Point(-0.5, -50, -25), new Vector(7, 3, 1)))
+                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+                .setEmission(new Color(red)));
 
 
         myScene.lights.add( //
-                new SpotLight(new Color(0, 100, 100), new Point(-200, -200, 300), new Vector(1, 1, -3)) //
+                new SpotLight(new Color(WHITE), new Point(15, 50, 0), new Vector(-1, -1, 0)) //
                         .setkL(0.0004).setkQ(0.000006));
 
         myScene.lights.add(
-                new PointLight(new Color(100, 0, 100), new Point(-100, -300, 500))
+                new PointLight(new Color(YELLOW), new Point(100, 0, -100))
                         .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
