@@ -42,12 +42,15 @@ public class myImage {
                 new Sphere(new Point(-0.5, 0, -25), 7d).setEmission(new Color(WHITE)) //
                 .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
 
-                new Tube(3, new Ray(new Point(-0.5, -50, -25), new Vector(7, 3, 1)))
+//                new Tube(3, new Ray(new Point(-0.5, -50, -25), new Vector(0, 4, 1)))
+//                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+//                .setEmission(new Color(red)));
+                new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),80)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                .setEmission(new Color(red)));
+                        .setEmission(new Color(red)));
 
 
-        myScene.lights.add( //
+                myScene.lights.add( //
                 new SpotLight(new Color(WHITE), new Point(15, 50, 0), new Vector(-1, -1, 0)) //
                         .setkL(0.0004).setkQ(0.000006));
 
@@ -57,7 +60,7 @@ public class myImage {
 
         myScene.lights.add(
                 new DirectionalLight(new Color(GREEN), new Vector(1, 1, -23)));
-        camera.setImageWriter(new ImageWriter(  "firstImage", 500, 500));
+        camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500));
         camera.setRayTracer(new RayTracerBasic(myScene)); //
         camera.renderImage(); //
         camera.writeToImage();

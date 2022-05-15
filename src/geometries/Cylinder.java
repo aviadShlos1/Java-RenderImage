@@ -78,23 +78,23 @@ public class Cylinder extends Tube {
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
         // Step 1: find intersections between the ray and the tube which the cylinder is a part of
-        List<GeoPoint> intersectionsTube = super.findGeoIntersections(ray, maxDistance);
+        List<GeoPoint> intersectionsTube = super.findGeoIntersectionsHelper(ray, maxDistance);
 
         // Step 2: intersect is between caps
         Vector dir = axisRay.getDir();
         Point bottomCapCenter = axisRay.getP0();
         Point upperCupCenter = axisRay.getPoint(height);
 
-        double loweBound;
+        double lowerBound;
         double upperBound;
         List<GeoPoint> intersectionsCylinder = new ArrayList<>();
 
         // validate each intersection (make sure it is in the cylinder itself and not on its continual)
         if (intersectionsTube != null) {
             for (GeoPoint geoPoint : intersectionsTube) {
-                loweBound = dir.dotProduct(geoPoint.point.subtract(bottomCapCenter));
+                lowerBound = dir.dotProduct(geoPoint.point.subtract(bottomCapCenter));
                 upperBound = dir.dotProduct(geoPoint.point.subtract(upperCupCenter));
-                if (loweBound > 0 && upperBound < 0) {
+                if (lowerBound > 0 && upperBound < 0) {
                     // the check for distance, if the intersection point is beyond the distance
                     if (alignZero(geoPoint.point.distance(ray.getP0()) - maxDistance) <= 0) {
                         intersectionsCylinder.add(geoPoint);
