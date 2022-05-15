@@ -28,7 +28,11 @@ public class myImage {
 
         myScene.geometries.add(//
                 new Polygon(new Point(100, 0, -100), new Point(0, 100, -100), new Point(-100, 0, -100), new Point(0,-100,-100)) //
-                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
+                      .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
+
+//                new Polygon(new Point(-65, 0, -100), new Point(-65, 0, 100), new Point(-65, 0, -100), new Point(-65,0,100)) //
+//                        .setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
+
 
                 new Sphere(new Point(7, 45, -50), 7d).setEmission(new Color(BLUE)) //
                         .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
@@ -42,15 +46,12 @@ public class myImage {
                 new Sphere(new Point(-0.5, 0, -25), 7d).setEmission(new Color(WHITE)) //
                 .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30).setKt(new Double3(0.6))),
 
-//                new Tube(3, new Ray(new Point(-0.5, -50, -25), new Vector(0, 4, 1)))
-//                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-//                .setEmission(new Color(red)));
                 new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),80)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                         .setEmission(new Color(red)));
 
 
-                myScene.lights.add( //
+        myScene.lights.add( //
                 new SpotLight(new Color(WHITE), new Point(15, 50, 0), new Vector(-1, -1, 0)) //
                         .setkL(0.0004).setkQ(0.000006));
 
@@ -59,7 +60,7 @@ public class myImage {
                         .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
-                new DirectionalLight(new Color(GREEN), new Vector(1, 1, -23)));
+                new DirectionalLight(new Color(green), new Vector(1, 1, -23)));
         camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500));
         camera.setRayTracer(new RayTracerBasic(myScene)); //
         camera.renderImage(); //
