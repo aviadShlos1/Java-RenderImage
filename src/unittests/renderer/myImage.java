@@ -18,7 +18,9 @@ import scene.Scene;
 public class myImage {
     Scene myScene = new Scene("firstImage");
 
-
+    /**
+     * Creates a basic Billiard image with a couple of elements using lights, shadows and refraction techniques.
+     */
     @Test
     public void createFirstImage() {
         Camera camera = new Camera(new Point(0, 0, 1000), new Vector(0, 0, -1 ), new Vector(0 , 1, 0))
