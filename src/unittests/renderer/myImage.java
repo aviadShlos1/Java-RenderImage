@@ -42,28 +42,59 @@ public class myImage {
 
 //                new Polygon(new Point(-65, 0, -100), new Point(-65, 0, 100), new Point(-65, 0, -100), new Point(-65,0,100)) //
 //                        .setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
+                new Sphere(new Point(-0.5, 57, -50), 7d).setEmission(new Color(BLACK)) //
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
+
                 new Sphere(new Point(7, 45, -50), 7d).setEmission(new Color(BLUE)) //
-                        .setMaterial(new Material().setKd(0.2)
+                        .setMaterial(new Material()
+                                .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))
                         ),
 
                 new Sphere(new Point(-8, 45, -50), 7d).setEmission(new Color(RED)) //
-                        .setMaterial(new Material().setKd(0.2)
+                        .setMaterial(new Material()
+                                .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
 
-                new Sphere(new Point(-0.5, 57, -50), 7d).setEmission(new Color(BLACK)) //
-                .setMaterial(new Material().setKd(0.2).setKs(0.8).setShininess(10).setKt(new Double3(0.6))),
+                new Sphere(new Point(-14, 31, -50), 7d).setEmission(new Color(YELLOW)) //
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
+                new Sphere(new Point(0, 31, -50), 7d).setEmission(new Color(102, 255, 255)) //
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
+                new Sphere(new Point(14, 31, -50), 7d).setEmission(new Color(102, 0, 102)) //
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
+
+
 
                 new Sphere(new Point(-0.5, 0, -25), 7d).setEmission(new Color(WHITE)) //
-                .setMaterial(new Material().setKd(0.2).setKs(0.8).setShininess(10).setKt(new Double3(0.6))),
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
 
                 new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),80)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                        .setEmission(new Color(red)));
+                        .setEmission(new Color(77, 40, 0)));
 
         myScene.lights.add( //
                 new SpotLight(new Color(WHITE), new Point(15, 50, 0), new Vector(-1, -1, 0)) //

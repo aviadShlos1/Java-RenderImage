@@ -46,10 +46,11 @@ public class Color {
 	/**
 	 * constant color - gray
 	 */
-	public static final Color BROWN = new Color(java.awt.Color.CYAN);
+	public static final Color BROWN = new Color(230, 172, 0);
 	/**
 	 * Default constructor - to generate Black Color (privately)
 	 */
+
 	private Color() {
 		rgb = Double3.ZERO;
 	}
