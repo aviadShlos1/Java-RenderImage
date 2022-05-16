@@ -43,7 +43,10 @@ public class Color {
 	 * constant color - gray
 	 */
 	public static final Color GRAY = new Color(java.awt.Color.GRAY);
-
+	/**
+	 * constant color - gray
+	 */
+	public static final Color BROWN = new Color(java.awt.Color.CYAN);
 	/**
 	 * Default constructor - to generate Black Color (privately)
 	 */
