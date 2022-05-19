@@ -110,13 +110,16 @@ public class myImage {
                         .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                         .setEmission(new Color(51,26,0)));
 
-//        myScene.lights.add( //
-//                new SpotLight(new Color(WHITE), new Point(100, 100, 200), new Vector(-1, -1, 0)) //
-//                        .setkL(0.0004).setkQ(0.000006));
+        myScene.lights.add( //
+                new SpotLight(new Color(WHITE), new Point(-100, 20, -10), new Vector(-1, -1, 0)) //
+                        .setkL(0.0004).setkQ(0.000006));
 
         myScene.lights.add(
                 new PointLight(new Color(WHITE).reduce(2.5), new Point(100, 0, -10))
                         .setkL(0.00005).setkQ(0.0000012));
+//        myScene.lights.add(
+//                new PointLight(new Color(WHITE).reduce(2.5), new Point(0, 0, -10))
+//                        .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
                 new DirectionalLight(new Color(GRAY).reduce(2), new Vector(1, 1, -10)));
