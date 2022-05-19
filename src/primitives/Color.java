@@ -1,5 +1,7 @@
 package primitives;
 
+import java.util.List;
+
 /**
  * Wrapper class for java.jwt.Color The constructors operate with any
  * non-negative RGB values. The colors are maintained without upper limit of
@@ -168,6 +170,24 @@ public class Color {
 		if (k.d1 < 1.0 || k.d2 < 1.0 || k.d3 < 1.0)
 			throw new IllegalArgumentException("Can't scale a color by a by a number lower than 1");
 		return new Color(rgb.d1 / k.d1, rgb.d2 / k.d2, rgb.d3 / k.d3);
+	}
+
+	/**
+	 * function to calculate the average of a list of colors
+	 *
+	 * @param colors - 1 or more colors
+	 * @return - the average color
+	 */
+	public static Color avgColor(List<Color> colors) {
+		if (colors.size() == 1) {
+			return colors.get(0);
+		}
+		Color color = new Color();
+		for (Color col : colors) {
+			color = color.add(col);
+		}
+		// to make sure division by 0 is impossible
+		return color.scale(1d / (Math.max(1, colors.size())));
 	}
 
 	@Override

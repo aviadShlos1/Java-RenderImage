@@ -11,8 +11,12 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.MissingResourceException;
 
+import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
 
 
@@ -52,7 +56,35 @@ public class Camera {
     private double height;
     private ImageWriter imageWriter;
     private RayTracerBase rayTracerBasic;
+    /**
+     * number of rays in a single pixel for active super sampling
+     */
+    private int numberOfRaysInPixel;
+    /**
+     * bolean value to determine anti aliasing
+     */
+    private boolean AntiAliasing;
 
+    /**
+     * setter - chaining method
+     *
+     * @param numberOfRaysInPixel - number of rays in a pixel
+     * @return the camera with the configured number of rays
+     */
+    public Camera setNumberOfRaysInPixel(int numberOfRaysInPixel) {
+        this.numberOfRaysInPixel = numberOfRaysInPixel;
+        return this;
+    }
+    /**
+     * setter - chaining method
+     *
+     * @param AntiAliasing - does the picture has Anti Aliasing
+     * @return the camera with the configured AA
+     */
+    public Camera setAntiAliasing(boolean AntiAliasing) {
+        this.AntiAliasing = AntiAliasing;
+        return this;
+    }
     /**
      * simple Camera constructor which get as input location point and two orthogonal vectors represent the direction
      *
@@ -101,6 +133,43 @@ public class Camera {
         Vector Vij = Pij.subtract(P0); // vector to pixel center
 
         return new Ray(P0, Vij);
+    }
+    /**
+     * this function gets the view plane size and a selected pixel,
+     * and return the rays from the view plane
+     *
+     * @param nX - amount of columns in view plane (number of pixels)
+     * @param nY - amount of rows in view plane (number of pixels)
+     * @param j  - X's index
+     * @param i  - Y's index
+     * @return - the list of rays which goes from the pixel
+     */
+    public List<Ray> constructRays(int nX, int nY, int j, int i) {
+
+        // the returned list of rays
+        List<Ray> rays = new ArrayList<>();
+
+        // add the center ray to the list
+        Ray centerRay = constructRay(nX, nY, j, i);
+        rays.add(centerRay);
+
+        // calculate the actual size of a pixel
+        // pixel height is the division of the view plane height in the number of rows of pixels
+        double pixelHeight = alignZero(height / nY);   //  Ry = h/Ny
+        // pixel width is the division of the view plane width in the number of columns of pixels
+        double pixelWidth = alignZero(width / nX);   //  Rx = w/Nx
+
+        if (numberOfRaysInPixel != 1) {
+            rays.addAll(centerRay.randomRaysInGrid(
+                    Vup,
+                    Vright,
+                    numberOfRaysInPixel,
+                    distance,
+                    pixelWidth,
+                    pixelHeight)
+            );
+        }
+        return rays;
     }
 
     public void renderImage() {
@@ -151,7 +220,23 @@ public class Camera {
         Ray rayForCast= constructRay(imageWriter.getNx(), imageWriter.getNy(), col,row);
         return rayTracerBasic.traceRay(rayForCast);
     }
+    /**
+     * Cast beam of rays from the pixel in the view plane to the focal point in the focal plane
+     *
+     * @param nX  - resolution on X axis (number of pixels in row)
+     * @param nY  - resolution on Y axis (number of pixels in column)
+     * @param col - pixel's column number (pixel index in row)
+     * @param row - pixel's row number (pixel index in column)
+     */
+    private void castBeam(int nX, int nY, int col, int row) {
+        List<Ray> rays = constructRays(nX, nY, col, row);
 
+        List<Color> colors = new LinkedList<>();
+        for (Ray ray : rays) {
+            colors.add(rayTracerBasic.traceRay(ray));
+        }
+        imageWriter.writePixel(col, row, Color.avgColor(colors));
+    }
 
 
 
