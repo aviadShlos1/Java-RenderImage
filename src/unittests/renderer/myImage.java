@@ -98,17 +98,17 @@ public class myImage {
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                         .setEmission(new Color(77, 40, 0)),
 
-        new Cylinder(1.5, new Ray(new Point(3.5, 65, 0), new Vector(0.55, -1, 0)),47)
+                new Cylinder(1.5, new Ray(new Point(3.5, 65, 0), new Vector(0.55, -1, 0)),47)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                 .setEmission(new Color(51,26,0)),
 
-        new Cylinder(1.5, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),50)
-                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                .setEmission(new Color(51,26,0)),
+                new Cylinder(1.5, new Ray(new Point(-27, 23, 2), new Vector(3, 5, 2)),47)
+                        .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+                        .setEmission(new Color(51,26,0)),
 
-        new Cylinder(1.5, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),50)
-                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                .setEmission(new Color(51,26,0)));
+                new Cylinder(1.5, new Ray(new Point(-29 ,22, -25), new Vector(10, 0, 1)),49)
+                        .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+                        .setEmission(new Color(51,26,0)));
 
 //        myScene.lights.add( //
 //                new SpotLight(new Color(WHITE), new Point(100, 100, 200), new Vector(-1, -1, 0)) //
