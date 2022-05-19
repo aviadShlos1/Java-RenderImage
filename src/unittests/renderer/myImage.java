@@ -29,8 +29,8 @@ public class myImage {
                 new Vector(0 , 1, 0))
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
-                .setAntiAliasing(true)
-                .setNumberOfRaysInPixel(4);
+                .setAntiAliasing(false);
+//                .setNumberOfRaysInPixel(81);
         myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
@@ -98,15 +98,15 @@ public class myImage {
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                         .setEmission(new Color(77, 40, 0)),
 
-        new Cylinder(1, new Ray(new Point(-22.5, 0, 0), new Vector(0, 4, 1)),99.5)
+        new Cylinder(1.5, new Ray(new Point(3.5, 65, 0), new Vector(0.55, -1, 0)),47)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                 .setEmission(new Color(51,26,0)),
 
-        new Cylinder(1, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),99.5)
+        new Cylinder(1.5, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),50)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                 .setEmission(new Color(51,26,0)),
 
-        new Cylinder(1, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),99.5)
+        new Cylinder(1.5, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),50)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                 .setEmission(new Color(51,26,0)));
 
