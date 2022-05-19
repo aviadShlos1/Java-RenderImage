@@ -42,14 +42,14 @@ public class myImage {
 
 //                new Polygon(new Point(-65, 0, -100), new Point(-65, 0, 100), new Point(-65, 0, -100), new Point(-65,0,100)) //
 //                        .setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
-                new Sphere(new Point(-0.5, 57, -50), 7d).setEmission(new Color(BLACK)) //
+                new Sphere(new Point(-0.5, 56, -50), 7d).setEmission(new Color(BLACK)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
 
-                new Sphere(new Point(7, 45, -50), 7d).setEmission(new Color(BLUE)) //
+                new Sphere(new Point(7, 44, -50), 7d).setEmission(new Color(BLUE)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
@@ -57,7 +57,7 @@ public class myImage {
                                 .setKt(new Double3(0.6))
                         ),
 
-                new Sphere(new Point(-8, 45, -50), 7d).setEmission(new Color(RED)) //
+                new Sphere(new Point(-8, 44, -50), 7d).setEmission(new Color(RED)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
@@ -70,7 +70,7 @@ public class myImage {
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
-                new Sphere(new Point(0, 31, -50), 7d).setEmission(new Color(102, 255, 255)) //
+                new Sphere(new Point(-0.5, 31, -50), 7d).setEmission(new Color(0, 153, 230)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
@@ -85,27 +85,27 @@ public class myImage {
 
 
 
-                new Sphere(new Point(-0.5, 0, -25), 7d).setEmission(new Color(WHITE)) //
+                new Sphere(new Point(-0.5, -10, -25), 7d).setEmission(new Color(WHITE)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
 
-                new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),80)
+                new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),60)
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                         .setEmission(new Color(77, 40, 0)));
 
-        myScene.lights.add( //
-                new SpotLight(new Color(WHITE), new Point(15, 50, 0), new Vector(-1, -1, 0)) //
-                        .setkL(0.0004).setkQ(0.000006));
+//        myScene.lights.add( //
+//                new SpotLight(new Color(WHITE), new Point(100, 100, 200), new Vector(-1, -1, 0)) //
+//                        .setkL(0.0004).setkQ(0.000006));
 
         myScene.lights.add(
-                new PointLight(new Color(YELLOW), new Point(100, 0, -100))
+                new PointLight(new Color(WHITE).reduce(2.5), new Point(100, 0, -10))
                         .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
-                new DirectionalLight(new Color(GRAY).reduce(3), new Vector(1, 1, -23)));
+                new DirectionalLight(new Color(GRAY).reduce(2), new Vector(1, 1, -10)));
         camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500));
         camera.setRayTracer(new RayTracerBasic(myScene)); //
         camera.renderImage(); //
