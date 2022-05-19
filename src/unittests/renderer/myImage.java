@@ -30,7 +30,7 @@ public class myImage {
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
                 .setAntiAliasing(true)
-                .setNumberOfRaysInPixel(16);
+                .setNumberOfRaysInPixel(81);
         myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
@@ -98,17 +98,17 @@ public class myImage {
                 .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
                         .setEmission(new Color(77, 40, 0)));
 
-        new Cylinder(1, new Ray(new Point(-22.5, 0, 0), new Vector(0, 4, 1)),99.5)
-                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                .setEmission(new Color(77, 40, 0)));
-
-        new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),99.5)
-                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                .setEmission(new Color(77, 40, 0)));
-
-        new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),60)
-                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
-                .setEmission(new Color(77, 40, 0)));
+//        new Cylinder(1, new Ray(new Point(-22.5, 0, 0), new Vector(0, 4, 1)),99.5)
+//                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+//                .setEmission(new Color(77, 40, 0)));
+//
+//        new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),99.5)
+//                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+//                .setEmission(new Color(77, 40, 0)));
+//
+//        new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),60)
+//                .setMaterial(new Material().setShininess(100).setKd(0.7).setKs(0.5).setKt(0.4))
+//                .setEmission(new Color(77, 40, 0)));
 
 //        myScene.lights.add( //
 //                new SpotLight(new Color(WHITE), new Point(100, 100, 200), new Vector(-1, -1, 0)) //

@@ -65,26 +65,7 @@ public class Camera {
      */
     private boolean AntiAliasing;
 
-    /**
-     * setter - chaining method
-     *
-     * @param numberOfRaysInPixel - number of rays in a pixel
-     * @return the camera with the configured number of rays
-     */
-    public Camera setNumberOfRaysInPixel(int numberOfRaysInPixel) {
-        this.numberOfRaysInPixel = numberOfRaysInPixel;
-        return this;
-    }
-    /**
-     * setter - chaining method
-     *
-     * @param AntiAliasing - does the picture has Anti Aliasing
-     * @return the camera with the configured AA
-     */
-    public Camera setAntiAliasing(boolean AntiAliasing) {
-        this.AntiAliasing = AntiAliasing;
-        return this;
-    }
+
     /**
      * simple Camera constructor which get as input location point and two orthogonal vectors represent the direction
      *
@@ -171,15 +152,44 @@ public class Camera {
         }
         return rays;
     }
+    /**
+     * Cast ray from camera in order to color a pixel
+     * @param col - pixel's column number (pixel index in row)
+     * @param row - pixel's row number (pixel index in column)
+     */
+    private Color castRay(int col,int row)
+    {
+        Ray rayForCast= constructRay(imageWriter.getNx(), imageWriter.getNy(), col,row);
+        return rayTracerBasic.traceRay(rayForCast);
+    }
+    /**
+     * Cast beam of rays from the pixel in the view plane to the focal point in the focal plane
+     *
+     * @param nX  - resolution on X axis (number of pixels in row)
+     * @param nY  - resolution on Y axis (number of pixels in column)
+     * @param col - pixel's column number (pixel index in row)
+     * @param row - pixel's row number (pixel index in column)
+     */
+    private Color castBeam(int nX, int nY, int col, int row) {
+        List<Ray> rays = constructRays(nX, nY, col, row);
+
+        List<Color> colors = new LinkedList<>();
+        for (Ray ray : rays) {
+            colors.add(rayTracerBasic.traceRay(ray));
+        }
+        return Color.avgColor(colors);
+    }
 
     public void renderImage() {
+        final int nX= imageWriter.getNx();
+        final int nY= imageWriter.getNy();
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
         if (rayTracerBasic == null)
             throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
         for (int i=0; i< imageWriter.getNx();i++){
             for (int j=0; j< imageWriter.getNy();j++){
-                imageWriter.writePixel(j,i,castRay(j,i));
+                imageWriter.writePixel(j,i,castBeam(nX,nY,j,i));
             }
         }
     }
@@ -210,33 +220,8 @@ public class Camera {
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
         imageWriter.writeToImage();
     }
-    /**
-     * Cast ray from camera in order to color a pixel
-     * @param col - pixel's column number (pixel index in row)
-     * @param row - pixel's row number (pixel index in column)
-     */
-    private Color castRay(int col,int row)
-    {
-        Ray rayForCast= constructRay(imageWriter.getNx(), imageWriter.getNy(), col,row);
-        return rayTracerBasic.traceRay(rayForCast);
-    }
-    /**
-     * Cast beam of rays from the pixel in the view plane to the focal point in the focal plane
-     *
-     * @param nX  - resolution on X axis (number of pixels in row)
-     * @param nY  - resolution on Y axis (number of pixels in column)
-     * @param col - pixel's column number (pixel index in row)
-     * @param row - pixel's row number (pixel index in column)
-     */
-    private void castBeam(int nX, int nY, int col, int row) {
-        List<Ray> rays = constructRays(nX, nY, col, row);
 
-        List<Color> colors = new LinkedList<>();
-        for (Ray ray : rays) {
-            colors.add(rayTracerBasic.traceRay(ray));
-        }
-        imageWriter.writePixel(col, row, Color.avgColor(colors));
-    }
+
 
 
 
@@ -338,6 +323,26 @@ public class Camera {
         return this;
     }
 
+    /**
+     * setter - chaining method
+     *
+     * @param numberOfRaysInPixel - number of rays in a pixel
+     * @return the camera with the configured number of rays
+     */
+    public Camera setNumberOfRaysInPixel(int numberOfRaysInPixel) {
+        this.numberOfRaysInPixel = numberOfRaysInPixel;
+        return this;
+    }
+    /**
+     * setter - chaining method
+     *
+     * @param AntiAliasing - does the picture has Anti Aliasing
+     * @return the camera with the configured AA
+     */
+    public Camera setAntiAliasing(boolean AntiAliasing) {
+        this.AntiAliasing = AntiAliasing;
+        return this;
+    }
 //
 //    /** /////////////////////// turn camera functions for bonus ///////////////////
 //     *
