@@ -40,7 +40,7 @@ public class myImage {
                         new Point(-100, 0, -100),
                         new Point(0,-100,-100))
                         .setEmission(new Color(GREEN))//
-                      .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
+                      .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), ///
 
 //                new Polygon(new Point(-65, 0, -100), new Point(-65, 0, 100), new Point(-65, 0, -100), new Point(-65,0,100)) //
 //                        .setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
