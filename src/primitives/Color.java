@@ -187,6 +187,7 @@ public class Color {
 			color = color.add(col);
 		}
 		// to make sure division by 0 is impossible
+		// in that we constrained the max to begin in 1
 		return color.scale(1d / (Math.max(1, colors.size())));
 	}
 
