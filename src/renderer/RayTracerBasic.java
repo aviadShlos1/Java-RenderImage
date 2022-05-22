@@ -248,9 +248,9 @@ public class RayTracerBasic extends RayTracerBase {
         Double3 ktrTotal=new Double3(0.0);
         Double3 ktr = new Double3(1.0);
         for(Ray ray:lightRays){
-            var intersections = scene.geometries.findGeoIntersections(lightRay);
+            var intersections = scene.geometries.findGeoIntersections(ray);
             if (intersections == null)
-                ktrTotal.add(ktr);
+                ktrTotal= ktrTotal.add(ktr);
             else{
                 double lightDistance = ls.getDistance(geoPoint.point);
                 for (GeoPoint gp : intersections) {

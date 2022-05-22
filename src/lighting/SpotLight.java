@@ -34,8 +34,19 @@ public class SpotLight extends PointLight {
     public SpotLight(Color color, Point position, Vector direction, double radius) {
         super(color, position,radius);
         this.direction = direction.normalize();
-
     }
+    /**
+     * default constructor. light source is a point and has no dimensions or shape
+     * @param direction
+     * @param intensity
+     * @param position
+     */
+    public SpotLight(Color intensity, Point position,Vector direction) {
+        this(intensity, position,direction, 0);
+    }
+
+
+
     /**
      * function calculates the color of the light in a given point in the 3D space
      *

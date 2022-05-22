@@ -52,6 +52,14 @@ public class PointLight extends Light implements LightSource{
         this.position = position;
         this.radius=radius;
     }
+    /**
+     * default constructor - light source is only 3D point with no dimensions
+     * @param intensity genuine intensity of the light source
+     * @param position position in the 3D model of the light source
+     */
+    public PointLight(Color intensity, Point position) {
+        this(intensity,position,0);
+    }
 
     /**
      * Calculates the color of the light in a given point in the 3D space ,

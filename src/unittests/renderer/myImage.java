@@ -30,7 +30,7 @@ public class myImage {
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
                 .setAntiAliasing(false)
-               .setNumberOfRaysInPixel(1);
+                .setNumberOfRaysInPixel(1);
         myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
@@ -40,7 +40,7 @@ public class myImage {
                         new Point(-100, 0, -100),
                         new Point(0,-100,-100))
                         .setEmission(new Color(0,128,0))//
-                      .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), ///
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), ///
 
 //                new Polygon(new Point(-65, 0, -100), new Point(-65, 0, 100), new Point(-65, 0, -100), new Point(-65,0,100)) //
 //                        .setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
@@ -95,19 +95,19 @@ public class myImage {
                                 .setKt(new Double3(0.6))),
                 //The starter
                 new Cylinder(3, new Ray(new Point(-0.5, -100, -25), new Vector(0, 4, 1)),60)
-                .setMaterial(new Material()
-                        .setShininess(100)
-                        .setKd(0.7)
-                        .setKs(0.5)
-                        .setKt(0.4))
+                        .setMaterial(new Material()
+                                .setShininess(100)
+                                .setKd(0.7)
+                                .setKs(0.5)
+                                .setKt(0.4))
                         .setEmission(new Color(77, 40, 0)),
                 //edge right
                 new Cylinder(1.5, new Ray(new Point(-0.5, 69, 0), new Vector(0.55, -0.88, 0)),56)
-                .setMaterial(new Material()
-                        .setShininess(100)
-                        .setKd(0.7)
-                        .setKs(0.5)
-                        .setKt(0.4))
+                        .setMaterial(new Material()
+                                .setShininess(100)
+                                .setKd(0.7)
+                                .setKs(0.5)
+                                .setKt(0.4))
                         .setEmission(new Color(51,26,0).reduce(2)),
                 //edge left
                 new Cylinder(1.5, new Ray(new Point(-27, 23, 2), new Vector(3, 5, 2)),55)
@@ -116,7 +116,7 @@ public class myImage {
                                 .setKd(0.7)
                                 .setKs(0.5)
                                 .setKt(0.4))
-                                .setEmission(new Color(51,26,0).reduce(2)),
+                        .setEmission(new Color(51,26,0).reduce(2)),
                 //edge bottom
                 new Cylinder(1.5, new Ray(new Point(-29 ,22, -25), new Vector(10, 0, 1)),60)
                         .setMaterial(new Material()
@@ -124,20 +124,20 @@ public class myImage {
                                 .setKd(0.7)
                                 .setKs(0.5)
                                 .setKt(0.4))
-                                .setEmission(new Color(51,26,0).reduce(2)));
+                        .setEmission(new Color(51,26,0).reduce(2)));
 
         myScene.lights.add( //
-                new SpotLight(new Color(WHITE), new Point(-100, 20, -10), new Vector(-1, -1, 0),1) //
+                new SpotLight(new Color(WHITE), new Point(10, 20, -10), new Vector(1, 1, 0),5) //
                         .setkL(0.0004).setkQ(0.000006));
 
         myScene.lights.add(
-                new PointLight(new Color(WHITE), new Point(100, 0, -10),1)
+                new PointLight(new Color(WHITE).reduce(2.5), new Point(10, 0, -10),5)
                         .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
                 new DirectionalLight(new Color(GRAY).reduce(2), new Vector(1, 1, -10)));
-        camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500));
-        camera.setRayTracer(new RayTracerBasic(myScene).setMIN_SHADOW_SAMPLES(100)); //
+        camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500))
+                .setRayTracer(new RayTracerBasic(myScene).setMIN_SHADOW_SAMPLES(100)); //
         camera.renderImage(); //
         camera.writeToImage();
     }
