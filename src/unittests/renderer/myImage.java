@@ -25,7 +25,7 @@ public class myImage {
     public void createFirstImage() {
         Camera camera = new Camera(
                 new Point(0, 0, 1000),
-                new Vector(0, 0, -1 ),
+                new Vector(0, 0, -1),
                 new Vector(0 , 1, 0))
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
@@ -127,15 +127,15 @@ public class myImage {
                         .setEmission(new Color(51,26,0).reduce(2)));
 
         myScene.lights.add( ///
-                new SpotLight(new Color(WHITE), new Point(10, 20, -10), new Vector(1, 1, 0),5) //
+                new SpotLight(new Color(YELLOW), new Point(10, 20, -10), new Vector(1, 1, 0),5) //
                         .setkL(0.0004).setkQ(0.000006));
 
         myScene.lights.add(
-                new PointLight(new Color(WHITE).reduce(2.5), new Point(10, 0, -10),5)
+                new PointLight(new Color(WHITE).reduce(4), new Point(10, 0, 15),2)
                         .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
-                new DirectionalLight(new Color(GRAY).reduce(2), new Vector(1, 1, -10)));
+                new DirectionalLight(new Color(GRAY).reduce(10), new Vector(1, 1, -10)));
         camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500))
                 .setRayTracer(new RayTracerBasic(myScene).setMIN_SHADOW_SAMPLES(100)); //
         camera.renderImage(); //
