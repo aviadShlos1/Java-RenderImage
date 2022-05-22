@@ -6,7 +6,11 @@
  * 		  In addition, we add light sources to the scene, through implementing the Phong model.
  */
 package lighting;
+import geometries.Plane;
 import primitives.*;
+
+import java.util.List;
+
 /**
  * class represents a light source in a shape  of spotlight
  * in order to get the same light intensity, we need to increase the initial intensity of the light source
@@ -16,7 +20,7 @@ import primitives.*;
 
 public class SpotLight extends PointLight {
     /**
-     *  direction - the direction of the light
+     *  direction - the direction of the light source
      */
     private Vector direction ;
 
@@ -27,8 +31,8 @@ public class SpotLight extends PointLight {
      * @param position - the point which the light is being emitted from
      * @param direction direction of light
      */
-    public SpotLight(Color color, Point position, Vector direction) {
-        super(color, position);
+    public SpotLight(Color color, Point position, Vector direction, double radius) {
+        super(color, position,radius);
         this.direction = direction.normalize();
 
     }
@@ -56,5 +60,18 @@ public class SpotLight extends PointLight {
     @Override
     public double getDistance(Point point) {
         return super.getDistance(point);
+    }
+
+    /**
+     *
+     * @param lightDirection - the vector of the light
+     * @param minPoints - minimum points required to distribute
+     * @return list of points distributed on the surface of the light source.
+     * Min size of the list is as the minimum points required
+     */
+    @Override
+    public List<Point> lightPoints(Vector lightDirection, int minPoints) {
+        Plane targetArea = new Plane(position, direction);
+        return super.pointsOnTarget(position, radius, targetArea, minPoints);
     }
 }

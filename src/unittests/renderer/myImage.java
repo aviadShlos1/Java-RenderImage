@@ -29,7 +29,7 @@ public class myImage {
                 new Vector(0 , 1, 0))
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
-                .setAntiAliasing(true)
+                .setAntiAliasing(false)
                .setNumberOfRaysInPixel(1);
         myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
@@ -127,17 +127,17 @@ public class myImage {
                                 .setEmission(new Color(51,26,0).reduce(2)));
 
         myScene.lights.add( //
-                new SpotLight(new Color(WHITE), new Point(-100, 20, -10), new Vector(-1, -1, 0)) //
+                new SpotLight(new Color(WHITE), new Point(-100, 20, -10), new Vector(-1, -1, 0),1) //
                         .setkL(0.0004).setkQ(0.000006));
 
         myScene.lights.add(
-                new PointLight(new Color(WHITE).reduce(2.5), new Point(100, 0, -10))
+                new PointLight(new Color(WHITE), new Point(100, 0, -10),1)
                         .setkL(0.00005).setkQ(0.0000012));
 
         myScene.lights.add(
                 new DirectionalLight(new Color(GRAY).reduce(2), new Vector(1, 1, -10)));
         camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500));
-        camera.setRayTracer(new RayTracerBasic(myScene)); //
+        camera.setRayTracer(new RayTracerBasic(myScene).setMIN_SHADOW_SAMPLES(100)); //
         camera.renderImage(); //
         camera.writeToImage();
     }

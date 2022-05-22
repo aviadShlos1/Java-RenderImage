@@ -9,6 +9,8 @@ package lighting;
 
 import primitives.*;
 
+import java.util.List;
+
 
 /**
  *
@@ -70,5 +72,10 @@ public class DirectionalLight extends Light implements LightSource {
     @Override
     public double getDistance(Point point){
         return Double.POSITIVE_INFINITY;
+    }
+
+    @Override
+    public List<Point> lightPoints(Vector lightDirection, int minPoints) {
+        return null;
     }
 }

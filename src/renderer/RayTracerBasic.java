@@ -12,6 +12,7 @@ import lighting.LightSource;
 import primitives.*;
 import scene.Scene;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
@@ -28,9 +29,22 @@ public class RayTracerBasic extends RayTracerBase {
     private static final double MIN_CALC_COLOR_K = 0.001;
     //  0 leads to no reflections at all, but no significant difference with any other value
     private static final double INITIAL_K = 1;
+    //A number of minimum points required to distribute to the surface
+    int MIN_SHADOW_SAMPLES = 0;
+
 
     public RayTracerBasic(Scene scene) {
         super(scene);
+    }
+
+    /**
+     * setter to the number of ray tracing
+     * @param MIN_SHADOW_SAMPLES - number of minimum points required to distribute to the surface
+     * @return this - builder pattern
+     */
+    public RayTracerBasic setMIN_SHADOW_SAMPLES(int MIN_SHADOW_SAMPLES) {
+        this.MIN_SHADOW_SAMPLES = MIN_SHADOW_SAMPLES;
+        return this;
     }
 
     /**
@@ -214,20 +228,41 @@ public class RayTracerBasic extends RayTracerBase {
      * @return the transparency value
      */
     private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
+        List<Point> lightPoints = new LinkedList<>();
+        if (MIN_SHADOW_SAMPLES != 0){                 //activate soft shadow
+            lightPoints = ls.lightPoints(l, MIN_SHADOW_SAMPLES);
+        }
+        List<Ray> lightRays = new LinkedList<>();
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
-
-        var intersections = scene.geometries.findGeoIntersections(lightRay);
-        Double3 ktr = new Double3(1.0);
-        if (intersections == null) return ktr;
-        double lightDistance = ls.getDistance(geoPoint.point);
-        for (GeoPoint gp : intersections) {
-            if (alignZero(gp.point.distance(geoPoint.point) - lightDistance) <= 0) {
-                ktr = ktr.product(gp.geometry.getMaterial().kT);
-                if (ktr.lowerThan(MIN_CALC_COLOR_K)) return new Double3(0.0);
+        //directional light - no position,  or no need to active soft shadow (lightPoints size =0)
+        if (lightPoints == null || MIN_SHADOW_SAMPLES == 0){
+            lightRays.add(lightRay);
+        }
+        else{
+            for (Point lightPoint: lightPoints){
+                lightRays.add(new Ray(geoPoint.point, lightPoint.subtract(geoPoint.point).normalize(),n));
             }
         }
-        return ktr;
+
+        Double3 ktrTotal=new Double3(0.0);
+        Double3 ktr = new Double3(1.0);
+        for(Ray ray:lightRays){
+            var intersections = scene.geometries.findGeoIntersections(lightRay);
+            if (intersections == null)
+                ktrTotal.add(ktr);
+            else{
+                double lightDistance = ls.getDistance(geoPoint.point);
+                for (GeoPoint gp : intersections) {
+                    if (alignZero(gp.point.distance(geoPoint.point) - lightDistance) <= 0) {
+                        ktr = ktr.product(gp.geometry.getMaterial().kT);
+                        if (ktr.lowerThan(MIN_CALC_COLOR_K)) break;
+                    }
+                }
+                ktrTotal = ktrTotal.add(ktr);
+            }
+        }
+       return (ktrTotal.scale((double) 1/lightRays.size()));
     }
     /**
      * function to construct the new ray reflected

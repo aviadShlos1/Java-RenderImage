@@ -8,10 +8,14 @@
 package lighting;
 
 import primitives.*;
+
+import java.util.List;
+
 /**
  *  An interface defining crucial methods for every kind of light source
  */
 public interface LightSource {
+
     /**
      * function calculates the color of the light in a given point in the 3D space
      *
@@ -35,4 +39,11 @@ public interface LightSource {
      * @return the distance between the given point and the light source
      */
     double getDistance(Point point);
+
+    /**
+     *
+     * @return random points on the light source
+     */
+    List<Point> lightPoints(Vector lightDirection, int minPoints);
+
 }
