@@ -29,8 +29,8 @@ public class myImage {
                 new Vector(0 , 1, 0))
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
-                .setAntiAliasing(false)
-                .setNumberOfRaysInPixel(1);
+                .setAntiAliasing(true)
+                .setNumberOfRaysInPixel(81);
         myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
@@ -42,8 +42,6 @@ public class myImage {
                         .setEmission(new Color(0,128,0))//
                         .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), ///
 
-//                new Polygon(new Point(-65, 0, -100), new Point(-65, 0, 100), new Point(-65, 0, -100), new Point(-65,0,100)) //
-//                        .setEmission(new Color(BLACK)).setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), //
                 new Sphere(new Point(0, 56, -50), 7d).setEmission(new Color(BLACK)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)

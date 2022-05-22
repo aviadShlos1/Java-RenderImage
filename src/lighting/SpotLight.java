@@ -37,14 +37,13 @@ public class SpotLight extends PointLight {
     }
     /**
      * default constructor. light source is a point and has no dimensions or shape
-     * @param direction
-     * @param intensity
-     * @param position
+     * @param color    - the color of the light source
+     * @param position - the point which the light is being emitted from
+     * @param direction direction of light
      */
-    public SpotLight(Color intensity, Point position,Vector direction) {
-        this(intensity, position,direction, 0);
+    public SpotLight(Color color, Point position, Vector direction) {
+        this(color, position, direction, 0);
     }
-
 
 
     /**
