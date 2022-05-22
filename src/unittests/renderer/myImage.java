@@ -126,7 +126,7 @@ public class myImage {
                                 .setKt(0.4))
                         .setEmission(new Color(51,26,0).reduce(2)));
 
-        myScene.lights.add( //
+        myScene.lights.add( ///
                 new SpotLight(new Color(WHITE), new Point(10, 20, -10), new Vector(1, 1, 0),5) //
                         .setkL(0.0004).setkQ(0.000006));
 
