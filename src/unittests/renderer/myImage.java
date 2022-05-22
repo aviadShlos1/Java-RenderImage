@@ -34,6 +34,7 @@ public class myImage {
         myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
+                // The flat table
                 new Polygon(
                         new Point(100, 0, -100),
                         new Point(0, 100, -100),
