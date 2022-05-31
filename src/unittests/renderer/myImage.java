@@ -2,11 +2,8 @@
  *
  */
 package unittests.renderer;
-
 import org.junit.jupiter.api.Test;
-
 import static java.awt.Color.*;
-
 import renderer.ImageWriter;
 import lighting.*;
 import geometries.*;
@@ -31,7 +28,9 @@ public class myImage {
                 .setViewPlaneDistance(1000)
                 .setAntiAliasing(true)
                 .setNumberOfRaysInPixel(81);
-        myScene.setAmbientLight(new AmbientLight(new Color(MAGENTA),new Double3(0.2))).setBackground(new Color(BLACK));
+        myScene.setAmbientLight(new AmbientLight
+                (new Color(MAGENTA),new Double3(0.2))).
+                setBackground(new Color(BLACK));
 
         myScene.geometries.add(//
                 // The flat table
@@ -41,16 +40,21 @@ public class myImage {
                         new Point(-100, 0, -100),
                         new Point(0,-100,-100))
                         .setEmission(new Color(0,128,0))//
-                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(60)), ///
+                        .setMaterial(new Material()
+                                .setKd(0.5)
+                                .setKs(0.5)
+                                .setShininess(60)), ///
 
-                new Sphere(new Point(0, 56, -50), 7d).setEmission(new Color(BLACK)) //
+                new Sphere(new Point(0, 56, -50), 7d)
+                        .setEmission(new Color(BLACK)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
 
-                new Sphere(new Point(7, 44, -50), 7d).setEmission(new Color(BLUE)) //
+                new Sphere(new Point(7, 44, -50), 7d)
+                        .setEmission(new Color(BLUE)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
@@ -58,35 +62,40 @@ public class myImage {
                                 .setKt(new Double3(0.6))
                         ),
 
-                new Sphere(new Point(-7, 44, -50), 7d).setEmission(new Color(RED)) //
+                new Sphere(new Point(-7, 44, -50), 7d)
+                        .setEmission(new Color(RED)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
 
-                new Sphere(new Point(-14, 31, -50), 7d).setEmission(new Color(YELLOW)) //
-                        .setMaterial(new Material()
-                                .setKd(0.2)
-                                .setKs(0.8)
-                                .setShininess(10)
-                                .setKt(new Double3(0.6))),
-                new Sphere(new Point(-0.5, 31, -50), 7d).setEmission(new Color(0, 153, 230)) //
-                        .setMaterial(new Material()
-                                .setKd(0.2)
-                                .setKs(0.8)
-                                .setShininess(10)
-                                .setKt(new Double3(0.6))),
-                new Sphere(new Point(14, 31, -50), 7d).setEmission(new Color(102, 0, 102)) //
+                new Sphere(new Point(-14, 31, -50), 7d)
+                        .setEmission(new Color(YELLOW)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
                                 .setShininess(10)
                                 .setKt(new Double3(0.6))),
 
+                new Sphere(new Point(-0.5, 31, -50), 7d)
+                        .setEmission(new Color(0, 153, 230)) //
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
 
+                new Sphere(new Point(14, 31, -50), 7d)
+                        .setEmission(new Color(102, 0, 102)) //
+                        .setMaterial(new Material()
+                                .setKd(0.2)
+                                .setKs(0.8)
+                                .setShininess(10)
+                                .setKt(new Double3(0.6))),
 
-                new Sphere(new Point(-0.5, -10, -25), 7d).setEmission(new Color(WHITE)) //
+                new Sphere(new Point(-0.5, -10, -25), 7d)
+                        .setEmission(new Color(WHITE)) //
                         .setMaterial(new Material()
                                 .setKd(0.2)
                                 .setKs(0.8)
@@ -127,16 +136,21 @@ public class myImage {
 
         myScene.lights.add( ///
                 new SpotLight(new Color(YELLOW), new Point(10, 20, -10), new Vector(1, 1, 0),5) //
-                        .setkL(0.0004).setkQ(0.000006));
+                        .setkL(0.0004)
+                        .setkQ(0.000006));
 
         myScene.lights.add(
-                new PointLight(new Color(WHITE).reduce(4), new Point(10, 0, 15),2)
-                        .setkL(0.00005).setkQ(0.0000012));
+                new PointLight(new Color(WHITE).reduce(3.2), new Point(10, 0, 15),4)
+                        .setkL(0.00005)
+                        .setkQ(0.0000012));
 
         myScene.lights.add(
                 new DirectionalLight(new Color(GRAY).reduce(10), new Vector(1, 1, -10)));
-        camera.setImageWriter(new ImageWriter(  "Billiard", 500, 500))
-                .setRayTracer(new RayTracerBasic(myScene).setMIN_SHADOW_SAMPLES(100)); //
+
+        camera.setImageWriter(new ImageWriter(  "BilliardWithAA_SH", 500, 500))
+                .setRayTracer(
+                        new RayTracerBasic(myScene)
+                                .setMIN_SHADOW_POINTS(50)); //
         camera.renderImage(); //
         camera.writeToImage();
     }

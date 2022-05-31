@@ -125,7 +125,7 @@ public class Camera {
      * @param i  - Y's index
      * @return - the list of rays which goes from the pixel
      */
-    public List<Ray> constructRays(int nX, int nY, int j, int i) {
+    public List<Ray>  constructRays(int nX, int nY, int j, int i) {
 
         // the returned list of rays
         List<Ray> rays = new ArrayList<>();

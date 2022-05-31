@@ -16,7 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static primitives.Util.alignZero;
-import static primitives.Util.isZero;
 
 public class RayTracerBasic extends RayTracerBase {
     /**
@@ -30,7 +29,7 @@ public class RayTracerBasic extends RayTracerBase {
     //  0 leads to no reflections at all, but no significant difference with any other value
     private static final double INITIAL_K = 1;
     //A number of minimum points required to distribute to the surface
-    int MIN_SHADOW_SAMPLES = 0;
+    int MIN_SHADOW_POINTS = 0;
 
 
     public RayTracerBasic(Scene scene) {
@@ -39,11 +38,11 @@ public class RayTracerBasic extends RayTracerBase {
 
     /**
      * setter to the number of ray tracing
-     * @param MIN_SHADOW_SAMPLES - number of minimum points required to distribute to the surface
+     * @param MIN_SHADOW_POINTS - number of minimum points required to distribute to the surface
      * @return this - builder pattern
      */
-    public RayTracerBasic setMIN_SHADOW_SAMPLES(int MIN_SHADOW_SAMPLES) {
-        this.MIN_SHADOW_SAMPLES = MIN_SHADOW_SAMPLES;
+    public RayTracerBasic setMIN_SHADOW_POINTS(int MIN_SHADOW_POINTS) {
+        this.MIN_SHADOW_POINTS = MIN_SHADOW_POINTS;
         return this;
     }
 
@@ -229,14 +228,14 @@ public class RayTracerBasic extends RayTracerBase {
      */
     private Double3 transparency(GeoPoint geoPoint, LightSource ls, Vector l, Vector n) {
         List<Point> lightPoints = new LinkedList<>();
-        if (MIN_SHADOW_SAMPLES != 0){                 //activate soft shadow
-            lightPoints = ls.lightPoints(l, MIN_SHADOW_SAMPLES);
+        if (MIN_SHADOW_POINTS != 0){                 //activate soft shadow
+            lightPoints = ls.lightPoints(l, MIN_SHADOW_POINTS);
         }
         List<Ray> lightRays = new LinkedList<>();
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray(geoPoint.point, lightDirection, n);
         //directional light - no position,  or no need to active soft shadow (lightPoints size =0)
-        if (lightPoints == null || MIN_SHADOW_SAMPLES == 0){
+        if (lightPoints == null || MIN_SHADOW_POINTS == 0){
             lightRays.add(lightRay);
         }
         else{
