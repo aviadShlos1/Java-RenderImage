@@ -11,6 +11,8 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
+import java.util.Random;
+
 
 public class myImage {
     Scene myScene = new Scene("firstImage");
@@ -27,7 +29,7 @@ public class myImage {
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
                 .setAntiAliasing(true)
-                .setNumberOfRaysInPixel(81);
+                .setNumberOfRaysInPixel(2);
         myScene.setAmbientLight(new AmbientLight
                 (new Color(MAGENTA),new Double3(0.2))).
                 setBackground(new Color(BLACK));
@@ -132,7 +134,56 @@ public class myImage {
                                 .setKd(0.7)
                                 .setKs(0.5)
                                 .setKt(0.4))
-                        .setEmission(new Color(51,26,0).reduce(2)));
+                        .setEmission(new Color(51,26,0).reduce(2)),
+
+
+                //region moon
+
+                 new Sphere(new Point(-75, 80, 80), 10)
+                        .setMaterial(new Material()
+                                .setKd(0.005)
+                                .setKs(0.00005)
+                                .setShininess(50)
+                                .setKt(0.9))
+                         .setEmission(Color.YELLOW.add(Color.WHITE.reduce(6))),
+
+
+                 //endregion
+
+        //region stars
+                new Sphere(new Point(-75, 60, 80), 2)
+                        .setMaterial(new Material()
+                                        .setKd(0.005)
+                                        .setKs(0.00005)
+                                        .setShininess(100)
+                                        .setKt(0.9))
+                        .setEmission(Color.YELLOW.reduce(4) ));
+
+
+//                // cube:
+//                new Polygon(new Point(-80, -80, 150), new Point(-50, -80, 150), new Point(-50, -80, 120),
+//                        new Point(-80, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+//                new Polygon(new Point(-50, -80, 150), new Point(-50, -50, 150), new Point(-50, -50, 120),
+//                        new Point(-50, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+//                new Polygon(new Point(-80, -50, 150), new Point(-50, -50, 150), new Point(-50, -50, 120),
+//                        new Point(-80, -50, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+//                new Polygon(new Point(-80, -80, 150), new Point(-80, -50, 150), new Point(-80, -50, 120),
+//                        new Point(-80, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+//                new Polygon(new Point(-80, -80, 120), new Point(-50, -80, 120), new Point(-50, -50, 120),
+//                        new Point(-80, -50, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)),
+//                new Cylinder(20,new Ray(new Point(80, -65, 150), new Vector(0, 0, -1)) , 20)
+//                        .setEmission(new primitives.Color(java.awt.Color.BLUE))
+//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)));
+            //moon
+        myScene.lights.add(
+                new PointLight(
+                Color.YELLOW.reduce(6),
+                 new Point(-75, 80, 80)));
 
         myScene.lights.add( ///
                 new SpotLight(new Color(YELLOW), new Point(10, 20, -10), new Vector(1, 1, 0),5) //
@@ -147,11 +198,69 @@ public class myImage {
         myScene.lights.add(
                 new DirectionalLight(new Color(GRAY).reduce(10), new Vector(1, 1, -10)));
 
+
         camera.setImageWriter(new ImageWriter(  "BilliardWithAA_SH", 500, 500))
                 .setRayTracer(
                         new RayTracerBasic(myScene)
-                                .setMIN_SHADOW_POINTS(50)); //
+                                .setMIN_SHADOW_POINTS(2)); //
         camera.renderImage(); //
         camera.writeToImage();
     }
+
+
+
+
+
+
+
+
+    /**
+     * soft shdow test
+     */
+    @Test
+    public void SoftShadowTest() {
+        Scene scene = new Scene("Test scene");
+        Camera camera2 = new Camera(new Point(0, 0, -1000), new Vector(0, 0, 1), new Vector(0, -1, 0))
+                .setViewPlaneDistance(1000).setViewPlaneSize(300, 300);
+        scene.setBackground(primitives.Color.BLACK);
+        scene.setAmbientLight(new AmbientLight(new primitives.Color(java.awt.Color.WHITE), new Double3(0.15)));
+
+        scene.geometries.add( //
+                new Polygon(new Point(-400, -400, 150), new Point(400, -400, 150), new Point(400, 400, 150),
+                        new Point(-400, 400, 150)).setEmission(new primitives.Color(0, 0, 0))
+                        .setMaterial(new Material().setKd(0.2).setKs(0.2).setShininess(30)), //
+                new Sphere(new Point(0, 0, 130), 20).setEmission(new primitives.Color(java.awt.Color.green))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), // //
+                // cube:
+                new Polygon(new Point(-80, -80, 150), new Point(-50, -80, 150), new Point(-50, -80, 120),
+                        new Point(-80, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+                new Polygon(new Point(-50, -80, 150), new Point(-50, -50, 150), new Point(-50, -50, 120),
+                        new Point(-50, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+                new Polygon(new Point(-80, -50, 150), new Point(-50, -50, 150), new Point(-50, -50, 120),
+                        new Point(-80, -50, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+                new Polygon(new Point(-80, -80, 150), new Point(-80, -50, 150), new Point(-80, -50, 120),
+                        new Point(-80, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
+                new Polygon(new Point(-80, -80, 120), new Point(-50, -80, 120), new Point(-50, -50, 120),
+                        new Point(-80, -50, 120)).setEmission(new primitives.Color(java.awt.Color.red))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)),
+                new Cylinder(20,new Ray(new Point(80, -65, 150), new Vector(0, 0, -1)) , 20)
+                        .setEmission(new primitives.Color(java.awt.Color.BLUE))
+                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)));
+
+        scene.lights.add(new PointLight(new primitives.Color(700, 400, 400), //
+                new Point(0, -80, 80)).setkC(1).setkL(4E-4).setkQ(2E-5).setRadius(25));
+        int p = 700;
+
+        camera2.setImageWriter(new ImageWriter(  "tank", 700, 700))
+                .setRayTracer(
+                        new RayTracerBasic(myScene)
+                                .setMIN_SHADOW_POINTS(50)); //
+        camera2.renderImage(); //
+        camera2.writeToImage();
+    }
+
 }

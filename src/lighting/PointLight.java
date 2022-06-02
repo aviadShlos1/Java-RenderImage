@@ -132,6 +132,20 @@ public class PointLight extends Light implements LightSource{
         this.kQ = kQ;
         return this;
     }
+
+
+    /**
+     * setter for radius of light
+     *
+     * @param rad radius to set
+     * @return this for chaining
+     */
+    public PointLight setRadius(double rad) {
+        this.radius = rad;
+        return this;
+    }
+
+
     /**
      *
      * @param lightDirection - the vector of the light source
