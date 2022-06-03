@@ -18,7 +18,6 @@ import java.util.MissingResourceException;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
-import java.util.stream.*;
 
 /**
  *
@@ -63,8 +62,38 @@ public class Camera {
     /**
      * bolean value to determine anti aliasing
      */
-    private boolean AntiAliasing;
+    private boolean AntiAliasing=false;
 
+    //region Multithreading
+    /**
+     * number of threads for the rendering method
+     */
+    private int threadsCount = 0;
+    /**
+     * number of spare threads for the rendering method
+     * Spare threads if trying to use all the cores
+     */
+    private static final int SPARE_THREADS = 2;
+
+    /**
+     * Set multi-threading <br>
+     * - if the parameter is 0 - number of cores less 2 is taken
+     *
+     * @param threads number of threads
+     * @return the Camera object itself
+     */
+    public Camera setMultithreading(int threads) {
+        if (threads < 0)
+            throw new IllegalArgumentException("Multithreading parameter must be 0 or higher");
+        if (threads != 0)
+            this.threadsCount = threads;
+        else {
+            int cores = Runtime.getRuntime().availableProcessors() - SPARE_THREADS;
+            this.threadsCount = cores <= 2 ? 1 : cores;
+        }
+        return this;
+    }
+//endregion
 
     /**
      * simple Camera constructor which get as input location point and two orthogonal vectors represent the direction
@@ -157,10 +186,11 @@ public class Camera {
      * @param col - pixel's column number (pixel index in row)
      * @param row - pixel's row number (pixel index in column)
      */
-    private Color castRay(int col,int row)
+    private void castRay(int col,int row)
     {
         Ray rayForCast= constructRay(imageWriter.getNx(), imageWriter.getNy(), col,row);
-        return rayTracerBasic.traceRay(rayForCast);
+        Color color= rayTracerBasic.traceRay(rayForCast);
+        imageWriter.writePixel(col,row, color);
     }
     /**
      * Cast beam of rays from the pixel in the view plane to the focal point in the focal plane
@@ -170,41 +200,53 @@ public class Camera {
      * @param col - pixel's column number (pixel index in row)
      * @param row - pixel's row number (pixel index in column)
      */
-    private Color castBeam(int nX, int nY, int col, int row) {
+    private void castBeam(int nX, int nY, int col, int row) {
         List<Ray> rays = constructRays(nX, nY, col, row);
 
         List<Color> colors = new LinkedList<>();
         for (Ray ray : rays) {
             colors.add(rayTracerBasic.traceRay(ray));
         }
-        return Color.avgColor(colors);
+        Color colorAvg= Color.avgColor(colors);
+        imageWriter.writePixel(col,row, colorAvg);
     }
 
+    public void renderImageWithTreads() {
+        // In case that not all the fields are filled
+        if (imageWriter == null || rayTracerBasic == null)
+            throw new MissingResourceException("Missing", "resource", "exception");
+
+        // The nested loop finds and creates a ray for each pixel, finds its color and
+        // writes it to the image pixels
+        int nY = this.imageWriter.getNy();
+        int nX = this.imageWriter.getNx();
+
+        double printInterval = 0.01;
+        int threadsCount=3;
+        Pixel.initialize(nY, nX, printInterval);
+        while (threadsCount-- > 0) {
+            new Thread(() -> {
+                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
+                    if(!AntiAliasing)
+                        castRay(pixel.col, pixel.row);
+                    else
+                        castBeam(nX, nY, pixel.col, pixel.row);
+            }).start();
+        }
+        Pixel.waitToFinish();
+    }
     public void renderImage() {
         final int nX= imageWriter.getNx();
         final int nY= imageWriter.getNy();
-        double INTERVAL=100;
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
         if (rayTracerBasic == null)
             throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
-
-//        Pixel.initialize(nY, nX, INTERVAL);
-//        IntStream.range(0, nY).parallel().forEach(i -> {
-//            IntStream.range(0, nX).parallel().forEach(j -> {
-//                castBeam(nX, nY, j, i);
-//                Pixel.pixelDone();
-//                Pixel.printPixel();
-//            });
-//        });
-        Pixel.initialize(nY, nX, INTERVAL);
-        while (threadsCount-- > 0) {
-            new Thread(() -> {
-                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
-                    castBeam(nX, nY, pixel.col, pixel.row);
-            }).start();
+        for(int i=0;i<nX;i++){
+            for(int j=0;j<nY;j++){
+               castBeam(nX,nY,j,i);
+            }
         }
-        Pixel.waitToFinish();
     }
     /**
      * Create a grid [over the picture] in the pixel color map. given the grid's

@@ -30,6 +30,7 @@ public class myImage {
                 .setViewPlaneDistance(1000)
                 .setAntiAliasing(true)
                 .setNumberOfRaysInPixel(10);
+
         myScene.setAmbientLight(new AmbientLight
                         (new Color(MAGENTA), new Double3(0.2))).
                 setBackground(new Color(BLACK));
@@ -184,7 +185,7 @@ public class myImage {
                 .setRayTracer(
                         new RayTracerBasic(myScene)
                                 .setMIN_SHADOW_POINTS(30)); //
-        camera.renderImage(); //
+        camera.renderImageWithTreads(); //
         camera.writeToImage();
     }
 }
