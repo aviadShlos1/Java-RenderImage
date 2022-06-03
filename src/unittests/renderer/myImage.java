@@ -11,8 +11,6 @@ import primitives.*;
 import renderer.*;
 import scene.Scene;
 
-import java.util.Random;
-
 
 public class myImage {
     Scene myScene = new Scene("firstImage");
@@ -21,7 +19,7 @@ public class myImage {
      * Creates a basic Billiard image with a couple of elements using lights, shadows and refraction techniques.
      */
     @Test
-    public void createFirstImage() {
+    public void MP1() {
         Camera camera = new Camera(
                 new Point(0, 0, 1000),
                 new Vector(0, 0, -1),
@@ -189,24 +187,62 @@ public class myImage {
         camera.renderImageWithTreads(); //
         camera.writeToImage();
     }
-}
 
-//                // cube:
-//                new Polygon(new Point(-80, -80, 150), new Point(-50, -80, 150), new Point(-50, -80, 120),
-//                        new Point(-80, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
-//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
-//                new Polygon(new Point(-50, -80, 150), new Point(-50, -50, 150), new Point(-50, -50, 120),
-//                        new Point(-50, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
-//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
-//                new Polygon(new Point(-80, -50, 150), new Point(-50, -50, 150), new Point(-50, -50, 120),
-//                        new Point(-80, -50, 120)).setEmission(new primitives.Color(java.awt.Color.red))
-//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
-//                new Polygon(new Point(-80, -80, 150), new Point(-80, -50, 150), new Point(-80, -50, 120),
-//                        new Point(-80, -80, 120)).setEmission(new primitives.Color(java.awt.Color.red))
-//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)), //
-//                new Polygon(new Point(-80, -80, 120), new Point(-50, -80, 120), new Point(-50, -50, 120),
-//                        new Point(-80, -50, 120)).setEmission(new primitives.Color(java.awt.Color.red))
-//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)),
-//                new Cylinder(20,new Ray(new Point(80, -65, 150), new Vector(0, 0, -1)) , 20)
-//                        .setEmission(new primitives.Color(java.awt.Color.BLUE))
-//                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)));
+    @Test
+    public void MP2()
+    {
+        Camera camera2 = new Camera(new Point(0,30,0), new Vector(1,0,0), new Vector(0,1,0))
+                .setViewPlaneDistance(50)
+                .setViewPlaneSize(200, 200)
+                .setAntiAliasing(true)
+                .setNumberOfRaysInPixel(10)
+                .setMultithreading(3);
+        Geometries floor;
+        /**
+         * create the floor for the scene
+         */
+        floor = new Geometries();
+        double z = 80;
+        for(int i = 0, k = 0; i < 20; i++, k++){
+            double x = 10;
+            for(int j = 0; j < 10; j++, k++){
+                floor.add(new Polygon(
+                        new Point(x, 0, z + 10),
+                        new Point(x + 10,0, z + 10),
+                        new Point(x + 10, 0, z),
+                        new Point(x, 0, z))
+                        .setEmission(k % 2 == 0 ? new Color(195, 148, 171) : new Color(163, 163, 117))
+                        .setMaterial(new Material()
+                                .setShininess(100)
+                                .setKd(0.6)
+                                .setKs(1)));
+                x += 10;
+            }
+            z -= 10;
+        }
+
+        myScene.geometries.add(floor);
+        myScene.lights.add(
+                new SpotLight(new Color(244, 248, 176),
+                        new Point(70, 105, 0),
+                        new Vector(0,-1,0) , 2)
+                        .setkQ(0.00000001)
+                        .setkL(0.0000001));
+
+        myScene.lights.add(new PointLight(
+                        new Color(226, 218, 198),
+                        new Point(100, 1000, 0) , 2)
+                        .setkL(0.000005)
+                        .setkQ(0.000001));
+
+//        myScene.setAmbientLight(new AmbientLight
+//                        (new Color(MAGENTA), new Double3(0.2)));
+
+        camera2.setImageWriter(new ImageWriter("Room", 500, 500))
+                .setRayTracer(
+                        new RayTracerBasic(myScene)
+                                .setMIN_SHADOW_POINTS(30)); //
+        camera2.renderImageWithTreads(); //
+        camera2.writeToImage();
+    }
+}

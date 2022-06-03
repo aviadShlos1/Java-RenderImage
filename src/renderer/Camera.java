@@ -211,6 +211,10 @@ public class Camera {
         imageWriter.writePixel(col,row, colorAvg);
     }
 
+    /**
+     * This function renders image's pixel color map from the scene included with
+     * the Renderer object - with multi-threading
+     */
     public void renderImageWithTreads() {
         // In case that not all the fields are filled
         if (imageWriter == null || rayTracerBasic == null)
@@ -234,6 +238,10 @@ public class Camera {
         }
         Pixel.waitToFinish();
     }
+    /**
+     * This function renders image's pixel color map from the scene included with
+     * the Renderer object
+     */
     public void renderImage() {
         final int nX= imageWriter.getNx();
         final int nY= imageWriter.getNy();
