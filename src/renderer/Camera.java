@@ -181,6 +181,8 @@ public class Camera {
         }
         return rays;
     }
+
+
     /**
      * Cast ray from camera in order to color a pixel
      * @param col - pixel's column number (pixel index in row)
@@ -222,7 +224,6 @@ public class Camera {
         int nX = this.imageWriter.getNx();
 
         double printInterval = 0.01;
-        int threadsCount=3;
         Pixel.initialize(nY, nX, printInterval);
         while (threadsCount-- > 0) {
             new Thread(() -> {
