@@ -236,7 +236,7 @@ public class myImage {
                     new Point(-50,21,66))
                     .setMaterial(new Material().setKd(0.3).setKs(0.7).setShininess(100).setKt(0.8));
 
-//wallSpheres
+//wallSpheres.
             Geometry sphere1 = new Sphere(new Point(35, 30, 50), 4)
                     .setEmission(new Color(java.awt.Color.RED).scale(0.5))
                     .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
