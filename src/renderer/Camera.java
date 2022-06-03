@@ -189,14 +189,22 @@ public class Camera {
         if (rayTracerBasic == null)
             throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
 
+//        Pixel.initialize(nY, nX, INTERVAL);
+//        IntStream.range(0, nY).parallel().forEach(i -> {
+//            IntStream.range(0, nX).parallel().forEach(j -> {
+//                castBeam(nX, nY, j, i);
+//                Pixel.pixelDone();
+//                Pixel.printPixel();
+//            });
+//        });
         Pixel.initialize(nY, nX, INTERVAL);
-        IntStream.range(0, nY).parallel().forEach(i -> {
-            IntStream.range(0, nX).parallel().forEach(j -> {
-                castBeam(nX, nY, j, i);
-                Pixel.pixelDone();
-                Pixel.printPixel();
-            });
-        });
+        while (threadsCount-- > 0) {
+            new Thread(() -> {
+                for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
+                    castBeam(nX, nY, pixel.col, pixel.row);
+            }).start();
+        }
+        Pixel.waitToFinish();
     }
     /**
      * Create a grid [over the picture] in the pixel color map. given the grid's
