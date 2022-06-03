@@ -18,7 +18,7 @@ import java.util.MissingResourceException;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
-
+import java.util.stream.*;
 
 /**
  *
@@ -183,15 +183,20 @@ public class Camera {
     public void renderImage() {
         final int nX= imageWriter.getNx();
         final int nY= imageWriter.getNy();
+        double INTERVAL=100;
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
         if (rayTracerBasic == null)
             throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
-        for (int i=0; i< imageWriter.getNx();i++){
-            for (int j=0; j< imageWriter.getNy();j++){
-                imageWriter.writePixel(j,i,castBeam(nX,nY,j,i));
-            }
-        }
+
+        Pixel.initialize(nY, nX, INTERVAL);
+        IntStream.range(0, nY).parallel().forEach(i -> {
+            IntStream.range(0, nX).parallel().forEach(j -> {
+                castBeam(nX, nY, j, i);
+                Pixel.pixelDone();
+                Pixel.printPixel();
+            });
+        });
     }
     /**
      * Create a grid [over the picture] in the pixel color map. given the grid's
