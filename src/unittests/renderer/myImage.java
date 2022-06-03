@@ -29,7 +29,8 @@ public class myImage {
                 .setViewPlaneSize(200, 200)
                 .setViewPlaneDistance(1000)
                 .setAntiAliasing(true)
-                .setNumberOfRaysInPixel(10);
+                .setNumberOfRaysInPixel(10)
+                .setMultithreading(3);
 
         myScene.setAmbientLight(new AmbientLight
                         (new Color(MAGENTA), new Double3(0.2))).
@@ -209,4 +210,3 @@ public class myImage {
 //                new Cylinder(20,new Ray(new Point(80, -65, 150), new Vector(0, 0, -1)) , 20)
 //                        .setEmission(new primitives.Color(java.awt.Color.BLUE))
 //                        .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(30)));
-

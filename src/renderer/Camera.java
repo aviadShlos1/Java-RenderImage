@@ -222,7 +222,6 @@ public class Camera {
         int nX = this.imageWriter.getNx();
 
         double printInterval = 0.01;
-        int threadsCount=3;
         Pixel.initialize(nY, nX, printInterval);
         while (threadsCount-- > 0) {
             new Thread(() -> {
