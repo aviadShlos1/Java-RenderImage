@@ -411,7 +411,7 @@ public class myImage
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange), new Point(-56, 50, 71),new Vector(0,-1,0),3));
         myScene.lights.add(new SpotLight(new Color(white).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
 //endregion lights
-
+//
         myScene.geometries.add(
                 floor,roof,
                 wallFront,wallBehind,wallRight,wallLeft,
