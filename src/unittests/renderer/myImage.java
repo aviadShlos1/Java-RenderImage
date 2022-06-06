@@ -28,7 +28,7 @@ public class myImage
                 new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(110)
-                .setAntiAliasing(true)
+                .setAntiAliasing(false)
                 .setNumberOfRaysInPixel(10)
                 .setMultithreading(3);
 // region construct
@@ -392,13 +392,20 @@ public class myImage
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.CYAN).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
 //endregion lights
 
-        myScene.geometries.add(floor,wallBehind,roof,wallFront
-                ,wallRight,wallLeft,foot11,foot12,foot13,foot14,foot21,foot22,foot23,foot24,foot31,foot32,foot33,foot34,foot41,foot42,foot43,foot44,
+        myScene.geometries.add(floor,roof,
+                wallFront,wallBehind,wallRight,wallLeft,
+                door1,middle1,middle2,door2,door3,door4,door5,middle3
+                ,foot11,foot12,foot13,foot14
+                ,foot21,foot22,foot23,foot24
+                ,foot31,foot32,foot33,foot34
+                ,foot41,foot42,foot43,foot44,
+                plateUp,plateDown,plateSide1,plateSide2,plateSide3,plateSide4,
+                middle4,door6,
                 plateUp,plateDown,plateSide1,plateSide2,plateSide3,plateSide4,sphere1,sphere2,sphere3,sphere4);
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(10));
+                            .setMIN_SHADOW_POINTS(1));
             camera3.renderImageWithTreads();
             camera3.writeToImage();
     }
