@@ -39,7 +39,7 @@ public class myImage
                         setKs(0.05).
                         setShininess(100));
         Geometry roof= new Plane(new Point(0,80,0),new Vector(0,1,0))
-                .setEmission(new Color(java.awt.Color.WHITE).scale(0.3))
+                .setEmission(new Color(WHITE).scale(0.3))
                 .setMaterial(new Material().
                         setKd(0.7));
         Geometry wallRight= new Plane(new Point(35,0,0),new Vector(1,0,0))
@@ -47,7 +47,7 @@ public class myImage
                 .setMaterial(new Material().
                         setKd(0.5));
         Geometry wallLeft= new Plane(new Point(-100,0,0),new Vector(1,0,0))
-                .setEmission(new Color(java.awt.Color.LIGHT_GRAY))
+                .setEmission(new Color(WHITE))
                 .setMaterial(new Material().
                         setKd(0.5).
                         setKs(0.5).
@@ -356,6 +356,50 @@ public class myImage
                 setShininess(100));
         //endregion plate
 //endregion table
+
+        Geometry shelfUp = new Polygon(new Point(35, 40, 70),new Point(27,40,70),
+                new Point(27,40,90),new Point(35,40,90))
+                .setEmission(new Color(BLACK).scale(0.5))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfDown = new Polygon(new Point(35, 38, 70), new Point(27,38,70),
+                new Point(27,38,90),new Point(35,38,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfRight = new Polygon(new Point(35,40,90),new Point(27,40,90),
+                new Point(27,38,90),new Point(35,38,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfLeft = new Polygon(new Point(35, 40, 70),new Point(35, 38, 70),
+                new Point(27,38,70),new Point(27,40,70))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfFront = new Polygon(new Point(27,40,90), new Point(27,38,90),
+                new Point(27,38,70),new Point(27,40,70))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+
+        Geometry shelfUp2 = new Polygon(new Point(35, 50, 90),new Point(27,50,90),
+                new Point(27,50,110),new Point(35,50,110))
+                .setEmission(new Color(BLACK).scale(0.5))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfDown2 = new Polygon(new Point(35, 48, 90), new Point(27,48,90),
+                new Point(27,48,110),new Point(35,48,110))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfRight2 = new Polygon(new Point(35,50,110),new Point(27,50,110),
+                new Point(27,48,110),new Point(35,48,110))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfLeft2 = new Polygon(new Point(35, 50, 90),new Point(35, 48, 90),
+                new Point(27,48,90),new Point(27,50,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+        Geometry shelfFront2 = new Polygon(new Point(27,50,110), new Point(27,48,110),
+                new Point(27,48,90),new Point(27,50,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
+
+
 // region table decorations
 
         //decor outer
@@ -403,6 +447,8 @@ public class myImage
                 foot41,foot42,foot43,foot44,
                 plateUp,plateDown,plateSide1,plateSide2,plateSide3,plateSide4,
                 middle4,door6,
+                shelfUp,shelfDown,shelfLeft,shelfFront,shelfRight,
+                shelfUp2,shelfDown2,shelfLeft2,shelfFront2,shelfRight2,
                 plateUp,plateDown,
                 plateSide1,plateSide2,plateSide3,plateSide4,
                 sphere1,sphere2,sphere3,sphere4);
