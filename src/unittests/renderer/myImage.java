@@ -241,7 +241,7 @@ public class myImage {
         myScene.geometries.add(floor,wallBehind,roof,wallFront
                 ,wallRight,wallLeft,foot11,foot12,foot13,foot14,foot21,foot22,foot23,foot24,foot31,foot32,foot33,foot34,foot41,foot42,foot43,foot44,
                 plateUp,plateDown,plateSide1,plateSide2,plateSide3,plateSide4,sphere1,sphere2,sphere3,sphere4);
-            //region lights
+            //region lights.
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                     .add(new Color(java.awt.Color.YELLOW)).scale(0.2), new Point(0, 50, 40),3));
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange), new Point(-56, 50, 71),new Vector(0,-1,0),3));
