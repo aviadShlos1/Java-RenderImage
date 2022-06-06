@@ -148,7 +148,7 @@ public class myImage {
                 setKd(0.5).
                 setKs(0.5).
                 setShininess(100));
-
+//
         Geometry handle2 = new Sphere(new Point(2,28,1),1)
                 .setEmission(new Color(java.awt.Color.RED).scale(0.1))
                     .setMaterial(new Material().
