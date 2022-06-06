@@ -18,7 +18,7 @@ public class myImage {
     Scene myScene = new Scene("firstImage");
 
     /**
-     * Creates a basic Billiard image with a couple of elements using lights, shadows and refraction techniques.
+     * Creates a room image with a couple of elements using lights, shadows and refraction techniques.
      */
     @Test
     public void createFirstImage() {
@@ -30,7 +30,7 @@ public class myImage {
                 .setNumberOfRaysInPixel(10)
                 .setMultithreading(3);
 
-
+//region closet
             Geometry door1 = new Polygon(new Point(0,31,0),  new Point(0,61,0),
                     new Point(15,61,0),  new Point(15,31,0))
                     .setEmission(new Color(java.awt.Color.WHITE).scale(0.7))
@@ -104,8 +104,8 @@ public class myImage {
             Geometry handle4 = new Sphere(new Point(-14,28,1),1)
                     .setEmission(new Color(java.awt.Color.RED).scale(0.1))
                     .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(100));
-
-
+//endregion closet
+//region table
             //foot1
             Geometry foot11 = new Polygon(new Point(-40,0,60),new Point(-40,0,62),
                     new Point(-40,20,62),new Point(-40,20,60))
@@ -201,6 +201,8 @@ public class myImage {
                     new Point(-75,21,84),new Point(-75,20,84))
                     .setEmission(new Color(java.awt.Color.RED).scale(0.1))
                     .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(100));
+//endregion table
+// region table decorations
 
             //decor outer
             Geometry triangle1 = new Triangle((new Point(-56,25,71)),new Point(-53,21,69),
@@ -235,7 +237,8 @@ public class myImage {
             Geometry triangle8 = new Triangle((new Point(-56,30,71)),new Point(-62,21,66),
                     new Point(-50,21,66))
                     .setMaterial(new Material().setKd(0.3).setKs(0.7).setShininess(100).setKt(0.8));
-
+//endregion table decorations
+// region wall decorations
 //wallSpheres.
             Geometry sphere1 = new Sphere(new Point(35, 30, 50), 4)
                     .setEmission(new Color(java.awt.Color.RED).scale(0.5))
@@ -246,17 +249,18 @@ public class myImage {
             Geometry sphere3 = new Sphere(new Point(35, 30, 100), 4)
                     .setEmission(new Color(java.awt.Color.GREEN).scale(0.3))
                     .setMaterial(new Material().setKd(0.5).setKs(0.9).setShininess(100));
-
+//endregion wall decorations
 
             myScene.geometries.add(door1,middle1,middle2,door2,door3,door4,door5,middle3,floor,wallBehind,handle1,handle2,handle3,handle4,roof
                     ,wallRight,wallLeft,foot11,foot12,foot13,foot14,foot21,foot22,foot23,foot24,foot31,foot32,foot33,foot34,foot41,foot42,foot43,foot44,
                     plateUp,plateDown,plateSide1,plateSide2,plateSide3,plateSide4,middle4,door6,triangle1,triangle2,triangle3,triangle4,
                     triangle5,triangle6,triangle7,triangle8,wallFront,sphere1,sphere2,sphere3);
+            //region lights
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                     .add(new Color(java.awt.Color.YELLOW)).scale(0.2), new Point(0, 50, 40),3));
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange), new Point(-56, 50, 71),new Vector(0,-1,0),3));
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.CYAN).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
-
+//endregion lights
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
                             .setMIN_SHADOW_POINTS(10));
