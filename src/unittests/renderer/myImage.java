@@ -357,7 +357,7 @@ public class myImage {
 //endregion table
 // region table decorations
 
-            //decor outer
+            //decor outer.
             Geometry triangle1 = new Triangle((new Point(-56,25,71)),new Point(-53,21,69),
                     new Point(-53,21,73))
                     .setEmission(new Color(java.awt.Color.pink).scale(0.1))
