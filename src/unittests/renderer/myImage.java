@@ -64,62 +64,82 @@ public class myImage
 //region closet
         //region doors
                 // from right to left
-                Geometry door1 = new Polygon(new Point(0,31,0),  new Point(0,61,0),
-                new Point(15,61,0),  new Point(15,31,0))
-                .setEmission(new Color(java.awt.Color.WHITE).scale(0.7))
-                        .setMaterial(new Material().
-                setKd(0.6).
-                setKs(0.8).
-                setShininess(400));
+                Geometry upFirstDoor = new Polygon(new Point(0,30,0),  new Point(0,31,0),
+                new Point(46,31,0),  new Point(46,30,0))
+                .setEmission(new Color(white).scale(0.7))
+                .setMaterial(new Material().
+                        setKd(0.6).
+                        setKs(0.8).
+                        setShininess(400));
 
-        Geometry middle1 = new Polygon(new Point(0,0,0),  new Point(-1,0,0),
-                new Point(-1,61,0),  new Point(0,61,0))
+                Geometry sideDoor = new Polygon(new Point(0,30,0),  new Point(0,0,0),
+                new Point(46,0,0),  new Point(46,30,0))
+                .setEmission(new Color(white).scale(0.7))
+                .setMaterial(new Material().
+                        setKd(0.6).
+                        setKs(0.8).
+                        setShininess(400));
+                Geometry verticalSide = new Polygon(new Point(16,0,0),  new Point(15,0,0),
+                new Point(15,31,0),  new Point(16,31,0))
+                .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.5).
+                        setShininess(300));
+
+
+                Geometry upSecDoor = new Polygon(new Point(0,30,0),  new Point(0,31,0),
+                new Point(15,31,0),  new Point(15,30,0))
+                .setEmission(new Color(white).scale(0.7))
+                        .setMaterial(new Material().
+                        setKd(0.6).
+                        setKs(0.8).
+                        setShininess(400));
+
+                Geometry secDoor = new Polygon(new Point(0,30,0),  new Point(0,0,0),
+                new Point(15,0,0),  new Point(15,30,0))
+                .setEmission(new Color(white).scale(0.7))
+                        .setMaterial(new Material().
+                        setKd(0.6).
+                        setKs(0.8).
+                        setShininess(400));
+
+
+        Geometry vertical1 = new Polygon(new Point(0,0,0),  new Point(-1,0,0),
+                new Point(-1,31,0),  new Point(0,31,0))
                 .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
                     .setMaterial(new Material().
                 setKd(0.5).
                 setKs(0.5).
                 setShininess(300));
 
-        Geometry door2 = new Polygon(new Point(-1,31,0),  new Point(-1,61,0),
-                new Point(-16,61,0),  new Point(-16,31,0))
-                .setEmission(new Color(java.awt.Color.WHITE).scale(0.7))
+        Geometry upThirdDoor = new Polygon(new Point(-1,30,0),  new Point(-1,31,0),
+                new Point(-16,31,0),  new Point(-16,30,0))
+                .setEmission(new Color(white).scale(0.7))
                     .setMaterial(new Material().
                 setKd(0.6).
                 setKs(0.8).
                 setShininess(400));
 
-        Geometry middle2 = new Polygon(new Point(-16,0,0),  new Point(-17,0,0),
-                new Point(-17,61,0),  new Point(-16,61,0))
+        Geometry vertical2 = new Polygon(new Point(-16,0,0),  new Point(-17,0,0),
+                new Point(-17,31,0),  new Point(-16,31,0))
                 .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
                     .setMaterial(new Material().
                 setKd(0.5).
                 setKs(0.5).
                 setShininess(100));
         /////
-        Geometry middle3 = new Polygon(new Point(15,31,0),  new Point(15,29,0),
-                new Point(-16,29,0),  new Point(-16,31,0))
-                .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
-                    .setMaterial(new Material().
-                setKd(0.5).
-                setKs(0.5).
-                setShininess(100));
+
+
+
 
         Geometry middle4 = new Polygon(new Point(-32,0,0),  new Point(-33,0,0),
                 new Point(-33,61,0),  new Point(-32,61,0))
-                .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
-                    .setMaterial(new Material().
-                setKd(0.5).
-                setKs(0.5).
-                setShininess(100));
-
-        Geometry door3 = new Polygon(new Point(0,30,0),  new Point(0,0,0),
-                new Point(15,0,0),  new Point(15,30,0))
-                .setEmission(new Color(java.awt.Color.WHITE).scale(0.7))
-                    .setMaterial(new Material().
-                setKd(0.6).
-                setKs(0.8).
-                setShininess(400));
-
+                .setEmission(new Color(green).scale(0.5))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.5).
+                        setShininess(100));
         Geometry door4 = new Polygon(new Point(-1,30,0),  new Point(-1,0,0),
                 new Point(-16,0,0),  new Point(-16,30,0))
                 .setEmission(new Color(java.awt.Color.WHITE).scale(0.7))
@@ -359,26 +379,26 @@ public class myImage
 // region table decorations
 
         //decor outer
-        Geometry sphere1 = new Sphere(new Point(-52,24,76), 2d)
+        Geometry blueSphere = new Sphere(new Point(-52,24,76), 2d)
                 .setEmission(new Color(BLUE)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(100)
                 );
-        Geometry sphere2 = new Sphere(new Point(-57,24,74), 2d)
+        Geometry redSphere = new Sphere(new Point(-57,24,74), 2d)
                 .setEmission(new Color(RED)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(80));
-        Geometry sphere3 = new Sphere(new Point(-53.5,24,80), 2d)
+        Geometry yellowSphere = new Sphere(new Point(-53.5,24,80), 2d)
                 .setEmission(new Color(YELLOW)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(10));
-        Geometry sphere4 = new Sphere(new Point(-55,24,71), 2d)
+        Geometry greenSphere = new Sphere(new Point(-55,24,71), 2d)
                 .setEmission(new Color(GREEN)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
@@ -395,17 +415,10 @@ public class myImage
         myScene.geometries.add(
                 floor,roof,
                 wallFront,wallBehind,wallRight,wallLeft,
-                door1,middle1,middle2,door2,
-                door3,door4,door5,middle3,
-                foot11,foot12,foot13,foot14,
-                foot21,foot22,foot23,foot24,
-                foot31,foot32,foot33,foot34,
-                foot41,foot42,foot43,foot44,
-                plateUp,plateDown,plateSide1,plateSide2,plateSide3,plateSide4,
-                middle4,door6,
-                plateUp,plateDown,
-                plateSide1,plateSide2,plateSide3,plateSide4,
-                sphere1,sphere2,sphere3,sphere4);
+                upSecDoor,vertical1,vertical2,upThirdDoor,verticalSide,
+                secDoor,door4,door5,upFirstDoor,sideDoor,
+                middle4,door6
+                );
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
@@ -415,4 +428,11 @@ public class myImage
     }
 }
 
-
+//
+//    Geometry middle3 = new Polygon(new Point(15,32,0),  new Point(15,32,0),
+//            new Point(-16,32,0),  new Point(-16,32,0))
+//            .setEmission(new Color(black).scale(0.5))
+//            .setMaterial(new Material().
+//                    setKd(0.5).
+//                    setKs(0.5).
+//                    setShininess(100));
