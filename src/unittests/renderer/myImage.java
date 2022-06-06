@@ -142,7 +142,7 @@ public class myImage {
                     new Point(-42,20,80),new Point(-40,20,80))
                     .setEmission(new Color(java.awt.Color.RED).scale(0.1))
                     .setMaterial(new Material().setKd(0.5).setKs(0.5).setShininess(100));
-            //foot3
+            //foot3.
             Geometry foot31 = new Polygon(new Point(-70,0,60),new Point(-70,0,62),
                     new Point(-70,20,62),new Point(-70,20,60))
                     .setEmission(new Color(java.awt.Color.RED).scale(0.1))
