@@ -36,6 +36,10 @@ public class RayTracerBasic extends RayTracerBase {
         super(scene);
     }
 
+    public int getMIN_SHADOW_POINTS() {
+        return MIN_SHADOW_POINTS;
+    }
+
     /**
      * setter to the number of ray tracing
      * @param MIN_SHADOW_POINTS - number of minimum points required to distribute to the surface

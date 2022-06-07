@@ -28,7 +28,7 @@ public class myImage
                 new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(105)
-                .setAntiAliasing(false)
+                .setAntiAliasing(true)
                 .setNumberOfRaysInPixel(10)
                 .setMultithreading(3);
 // region construct
@@ -79,9 +79,10 @@ public class myImage
                         setKd(0.6).
                         setKs(0.8).
                         setShininess(400));
-                Geometry verticalSide = new Polygon(new Point(16,0,0),  new Point(15,0,0),
-                new Point(15,31,0),  new Point(16,31,0))
-                .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
+
+                Geometry verticalSide = new Polygon(new Point(16,0,1),  new Point(15,0,1),
+                new Point(15,31.2,1),  new Point(16,31.2,1))
+                .setEmission(new Color(black).scale(0.5))
                 .setMaterial(new Material().
                         setKd(0.5).
                         setKs(0.5).
@@ -97,7 +98,7 @@ public class myImage
                         setShininess(400));
 
                 Geometry secDoor = new Polygon(new Point(0,30,0),  new Point(0,0,0),
-                new Point(15,0,0),  new Point(15,30,0))
+                new Point(14,0,0),  new Point(14,30,0))
                 .setEmission(new Color(white).scale(0.7))
                         .setMaterial(new Material().
                         setKd(0.6).
@@ -105,7 +106,7 @@ public class myImage
                         setShininess(400));
 
 
-        Geometry vertical1 = new Polygon(new Point(0,0,0),  new Point(-1,0,0),
+        Geometry vertical2 = new Polygon(new Point(0,0,0),  new Point(-1,0,0),
                 new Point(-1,31,0),  new Point(0,31,0))
                 .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
                     .setMaterial(new Material().
@@ -114,84 +115,69 @@ public class myImage
                 setShininess(300));
 
         Geometry upThirdDoor = new Polygon(new Point(-1,30,0),  new Point(-1,31,0),
-                new Point(-16,31,0),  new Point(-16,30,0))
+                new Point(-16.3,31,0),  new Point(-16.3,30,0))
                 .setEmission(new Color(white).scale(0.7))
                     .setMaterial(new Material().
                 setKd(0.6).
                 setKs(0.8).
                 setShininess(400));
 
-        Geometry vertical2 = new Polygon(new Point(-16,0,0),  new Point(-17,0,0),
-                new Point(-17,31,0),  new Point(-16,31,0))
+        Geometry vertical3 = new Polygon(new Point(-16,0,0),  new Point(-17,0,0),
+                new Point(-17,61,0),  new Point(-16,61,0))
                 .setEmission(new Color(java.awt.Color.BLACK).scale(0.5))
                     .setMaterial(new Material().
                 setKd(0.5).
                 setKs(0.5).
                 setShininess(100));
-        /////
 
-
-
-
-        Geometry middle4 = new Polygon(new Point(-32,0,0),  new Point(-33,0,0),
+        Geometry vertical4 = new Polygon(new Point(-32,0,0),  new Point(-33,0,0),
                 new Point(-33,61,0),  new Point(-32,61,0))
-                .setEmission(new Color(green).scale(0.5))
+                .setEmission(new Color(140, 140, 140).scale(0.8))
                 .setMaterial(new Material().
                         setKd(0.5).
                         setKs(0.5).
                         setShininess(100));
-        Geometry door4 = new Polygon(new Point(-1,30,0),  new Point(-1,0,0),
-                new Point(-16,0,0),  new Point(-16,30,0))
+
+        Geometry door3 = new Polygon(new Point(-1,30,0),  new Point(-1,0,0),
+                new Point(-16.3,0,0),  new Point(-16.3,30,0))
                 .setEmission(new Color(java.awt.Color.WHITE).scale(0.7))
                     .setMaterial(new Material().
                 setKd(0.6).
                 setKs(0.8).
                 setShininess(400));
 
-        Geometry door5 = new Polygon(new Point(-17,61,0),  new Point(-17,0,0),
+        Geometry rightFridge = new Polygon(new Point(-17,61,0),  new Point(-17,0,0),
                 new Point(-32,0,0),  new Point(-32,61,0))
                     .setMaterial(new Material().
                 setKd(0.1).
                 setKs(0.7).
                 setShininess(300).
                 setKr(1));
-        Geometry door6 = new Polygon(new Point(-33,61,0),  new Point(-33,0,0),
-                new Point(-48,0,0),  new Point(-48,61,0))
+
+        Geometry vertical5 = new Polygon(new Point(-48,0,0),  new Point(-49,0,0),
+                new Point(-49,61,0),  new Point(-48,61,0))
+                .setEmission(new Color(black).scale(0.5))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.5).
+                        setShininess(100));
+
+        Geometry leftFridge = new Polygon(new Point(-33,61,0),  new Point(-33,0,0),
+                new Point(-48.3,0,0),  new Point(-48.3,61,0))
                     .setMaterial(new Material().
                 setKd(0.1).
                 setKs(0.7).
                 setShininess(300).
                 setKr(1));
+
+        Geometry upFridge = new Polygon(new Point(-16,61,0),  new Point(-16,62,0),
+                new Point(-49,62,0),  new Point(-49,61,0))
+                .setEmission(new Color(black).scale(0.7))
+                .setMaterial(new Material().
+                        setKd(0.6).
+                        setKs(0.8).
+                        setShininess(400));
         //endregion doors
-        //region handles
-        Geometry handle1 = new Sphere(new Point(2,33,1),1)
-                .setEmission(new Color(java.awt.Color.RED).scale(0.1))
-                    .setMaterial(new Material().
-                setKd(0.5).
-                setKs(0.5).
-                setShininess(100));
-//
-        Geometry handle2 = new Sphere(new Point(2,28,1),1)
-                .setEmission(new Color(java.awt.Color.RED).scale(0.1))
-                    .setMaterial(new Material().
-                setKd(0.5).
-                setKs(0.5).
-                setShininess(100));
-
-        Geometry handle3 = new Sphere(new Point(-14,33,1),1)
-                .setEmission(new Color(java.awt.Color.RED).scale(0.1))
-                    .setMaterial(new Material().
-                setKd(0.5).
-                setKs(0.5).
-                setShininess(100));
-
-        Geometry handle4 = new Sphere(new Point(-14,28,1),1)
-                .setEmission(new Color(java.awt.Color.RED).scale(0.1))
-                    .setMaterial(new Material().
-                setKd(0.5).
-                setKs(0.5).
-                setShininess(100));
-        //endregion handles
 //endregion closet
 //region table
         //region foots
@@ -405,6 +391,87 @@ public class myImage
                         .setKs(0.8)
                         .setShininess(10));
         //endregion table decorations
+//region shelf
+        Geometry shelfUp = new Polygon(new Point(35, 40, 70),new Point(27,40,70),
+                new Point(27,40,90),new Point(35,40,90))
+                .setEmission(new Color(BLACK).scale(0.5))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfDown = new Polygon(new Point(35, 38, 70), new Point(27,38,70),
+                new Point(27,38,90),new Point(35,38,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfRight = new Polygon(new Point(35,40,90),new Point(27,40,90),
+                new Point(27,38,90),new Point(35,38,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfLeft = new Polygon(new Point(35, 40, 70),new Point(35, 38, 70),
+                new Point(27,38,70),new Point(27,40,70))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfFront = new Polygon(new Point(27,40,90), new Point(27,38,90),
+                new Point(27,38,70),new Point(27,40,70))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfUp2 = new Polygon(new Point(35, 50, 90),new Point(27,50,90),
+                new Point(27,50,110),new Point(35,50,110))
+                .setEmission(new Color(BLACK).scale(0.5))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfDown2 = new Polygon(new Point(35, 48, 90), new Point(27,48,90),
+                new Point(27,48,110),new Point(35,48,110))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfRight2 = new Polygon(new Point(35,50,110),new Point(27,50,110),
+                new Point(27,48,110),new Point(35,48,110))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfLeft2 = new Polygon(new Point(35, 50, 90),new Point(35, 48, 90),
+                new Point(27,48,90),new Point(27,50,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+
+        Geometry shelfFront2 = new Polygon(new Point(27,50,110), new Point(27,48,110),
+                new Point(27,48,90),new Point(27,50,90))
+                .setEmission(new Color(BLACK).scale(0.3))
+                .setMaterial(new Material().
+                        setKd(0.5).
+                        setKs(0.9).
+                        setShininess(100));
+//endregion shelf
 //region lights
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                 .add(new Color(java.awt.Color.YELLOW)).scale(0.2), new Point(0, 50, 40),3));
@@ -415,24 +482,26 @@ public class myImage
         myScene.geometries.add(
                 floor,roof,
                 wallFront,wallBehind,wallRight,wallLeft,
-                upSecDoor,vertical1,vertical2,upThirdDoor,verticalSide,
-                secDoor,door4,door5,upFirstDoor,sideDoor,
-                middle4,door6
+                sideDoor,upFirstDoor,verticalSide,
+                secDoor,upSecDoor,vertical2,
+                upThirdDoor,door3,vertical3,vertical4,
+                rightFridge,leftFridge,vertical5,upFridge,
+                shelfFront,shelfLeft,shelfRight,shelfDown,shelfUp,
+                shelfFront2,shelfLeft2,shelfRight2,shelfDown2,shelfUp2,
+                foot11,foot12,foot13,foot14,
+                foot21,foot22,foot23,foot24,
+                foot31,foot32,foot33,foot34,
+                foot41,foot42,foot43,foot44,
+                plateDown,plateUp,
+                plateSide1,plateSide2,plateSide3,plateSide4,
+                blueSphere,redSphere,yellowSphere,greenSphere
                 );
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(1));
+                            .setMIN_SHADOW_POINTS(10));
             camera3.renderImageWithTreads();
             camera3.writeToImage();
     }
 }
 
-//
-//    Geometry middle3 = new Polygon(new Point(15,32,0),  new Point(15,32,0),
-//            new Point(-16,32,0),  new Point(-16,32,0))
-//            .setEmission(new Color(black).scale(0.5))
-//            .setMaterial(new Material().
-//                    setKd(0.5).
-//                    setKs(0.5).
-//                    setShininess(100));
