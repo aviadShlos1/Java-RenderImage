@@ -11,6 +11,7 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -60,9 +61,9 @@ public class Camera {
      */
     private int numberOfRaysInPixel;
     /**
-     * bolean value to determine anti aliasing
+     * boolean value to determine anti aliasing
      */
-    private boolean AntiAliasing=false;
+    private boolean antiAliasing =false;
 
     //region Multithreading
     /**
@@ -232,7 +233,7 @@ public class Camera {
         while (threadsCount-- > 0) {
             new Thread(() -> {
                 for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
-                    if(!AntiAliasing)
+                    if(!antiAliasing)
                         castRay(pixel.col, pixel.row);
                     else
                         castBeam(nX, nY, pixel.col, pixel.row);
@@ -404,10 +405,117 @@ public class Camera {
      * @return the camera with the configured AA
      */
     public Camera setAntiAliasing(boolean AntiAliasing) {
-        this.AntiAliasing = AntiAliasing;
+        this.antiAliasing = AntiAliasing;
         return this;
     }
-//
+
+
+//region Adaptive Super Sampling
+    /**
+     * create the Ray and return the color of the ray
+     *
+     * @param nX- Resolution of view plane x-axis
+     * @param nY- Resolution of view plane y-axis
+     * @param j-  number of columns
+     * @param i-  number of rows
+     * @return the color of the ray to that point
+     */
+    private Color castRay(int nX, int nY, int i, int j) {
+        if (antiAliasing == true)
+            return rayTracer.traceRay(constructRay(nX, nY, j, i));
+        else
+            return adaptiveHelper(getPixelLocation(nX, nY, j, i), nX, nY);
+        //return rayTracer.traceRays(constructRays(nX, nY, j, i));
+    }
+
+    /**
+     * get the point and return the color of the ray to this point
+     *
+     * @param p- point on the view plane
+     * @return color of this point
+     */
+    private Color calcPointColor(Point p) {
+        return rayTracer.traceRay(new Ray(startPoint, p.subtract(startPoint)));
+    }
+
+    /**
+     * calculate average color of the pixel by using adaptive Super-sampling
+     * @param center- the center of the pixel
+     * @param nY- number of pixels to width
+     * @param nX- number of pixels to length
+     * @return- the average color of the pixel
+     */
+    private Color adaptiveHelper(Point center, double nY, double nX) {
+        double rY = height / nY / 2;
+        double rX = width / nX / 2;
+        Color upRight = calcPointColor(center.add(up.scale(rY)).add(right.scale(rX)));
+        Color upLeft = calcPointColor(center.add(up.scale(rY)).add(right.scale(-rX)));
+        Color downRight = calcPointColor(center.add(up.scale(-rY)).add(right.scale(rX)));
+        Color downLeft = calcPointColor(center.add(up.scale(-rY)).add(right.scale(-rX)));
+
+        return adaptive(1, center, rX, rY, upLeft, upRight, downLeft, downRight);
+    }
+
+    /**
+     * recursive method that return the average color of the pixel- by checking the color of the four corners
+     * @param max- the depth of the recursion
+     * @param center- the center of the pixel
+     * @param rX- the width of the pixel
+     * @param rY- the height of the pixel
+     * @param upLeftCol- the color of the up left corner
+     * @param upRightCol- the color of the up right corner
+     * @param downLeftCol- the color of the down left corner
+     * @param downRightCol - the color of the down right corner
+     * @return the average color of the pixel
+     */
+    private Color adaptive(int max, Point center, double rX, double rY,
+                           Color upLeftCol, Color upRightCol, Color downLeftCol, Color downRightCol) {
+        if (max == maxAdaptiveLevel) {
+            return downRightCol.add(upLeftCol).add(upRightCol).add(downLeftCol).reduce(4);
+        }
+        if (upRightCol.equals(upLeftCol) && downRightCol.equals(downLeftCol) && downLeftCol.equals(upLeftCol))
+            return upRightCol;
+        else {
+            Color rightPCol = calcPointColor(center.add(right.scale(rX)));
+            Color leftPCol = calcPointColor(center.add(right.scale(-rX)));
+            Color upPCol = calcPointColor(center.add(up.scale(rY)));
+            Color downPCol = calcPointColor(center.add(up.scale(-rY)));
+            Color centerCol = calcPointColor(center);
+
+            rX = rX / 2;
+            rY = rY / 2;
+            upLeftCol = adaptive(max + 1, center.add(up.scale(rY / 2))
+                    .add(right.scale(-rX / 2)), rX, rY, upLeftCol, upPCol, leftPCol, centerCol);
+            upRightCol = adaptive(max + 1, center.add(up.scale(rY / 2))
+                    .add(right.scale(rX / 2)), rX, rY, upPCol, upRightCol, centerCol, leftPCol);
+            downLeftCol = adaptive(max + 1, center.add(up.scale(-rY / 2))
+                    .add(right.scale(-rX / 2)), rX, rY, leftPCol, centerCol, downLeftCol, downPCol);
+            downRightCol = adaptive(max + 1, center.add(up.scale(-rY / 2))
+                    .add(right.scale(rX / 2)), rX, rY, centerCol, rightPCol, downPCol, downRightCol);
+            return downRightCol.add(upLeftCol).add(upRightCol).add(downLeftCol).reduce(4);
+        }
+    }
+//endregion Adaptive Super Sampling
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //
 //    /** /////////////////////// turn camera functions for bonus ///////////////////
 //     *
 //     */

@@ -28,8 +28,8 @@ public class myImage
                 new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(105)
-                .setAntiAliasing(true)
-                .setNumberOfRaysInPixel(10)
+                .setAntiAliasing(false)
+                .setNumberOfRaysInPixel(0)
                 .setMultithreading(3);
 // region construct
         Geometry floor= new Plane(new Point(0,0,0),new Vector(0,1,0))
@@ -365,26 +365,26 @@ public class myImage
 // region table decorations
 
         //decor outer
-        Geometry blueSphere = new Sphere(new Point(-52,24,76), 2d)
+        Geometry blueSphere = new Sphere(new Point(-52,22.5,76), 2d)
                 .setEmission(new Color(BLUE)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(100)
                 );
-        Geometry redSphere = new Sphere(new Point(-57,24,74), 2d)
+        Geometry redSphere = new Sphere(new Point(-57,22.5,74), 2d)
                 .setEmission(new Color(RED)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(80));
-        Geometry yellowSphere = new Sphere(new Point(-53.5,24,80), 2d)
+        Geometry yellowSphere = new Sphere(new Point(-53.5,22.5,80), 2d)
                 .setEmission(new Color(YELLOW)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(10));
-        Geometry greenSphere = new Sphere(new Point(-55,24,71), 2d)
+        Geometry greenSphere = new Sphere(new Point(-55,22.5,71), 2d)
                 .setEmission(new Color(GREEN)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
@@ -499,7 +499,7 @@ public class myImage
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(10));
+                            .setMIN_SHADOW_POINTS(20));
             camera3.renderImageWithTreads();
             camera3.writeToImage();
     }
