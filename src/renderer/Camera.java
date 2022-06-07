@@ -11,7 +11,6 @@ import primitives.Point;
 import primitives.Ray;
 import primitives.Vector;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -401,16 +400,17 @@ public class Camera {
     /**
      * setter - chaining method
      *
-     * @param AntiAliasing - does the picture has Anti Aliasing
+     * @param antiAliasing - does the picture has Anti Aliasing
      * @return the camera with the configured AA
      */
-    public Camera setAntiAliasing(boolean AntiAliasing) {
-        this.antiAliasing = AntiAliasing;
+    public Camera setAntiAliasing(boolean antiAliasing) {
+        this.antiAliasing = antiAliasing;
         return this;
     }
 
 
 //region Adaptive Super Sampling
+    int MAX_LEVEL =4;
     /**
      * create the Ray and return the color of the ray
      *
@@ -421,10 +421,10 @@ public class Camera {
      * @return the color of the ray to that point
      */
     private Color castRay(int nX, int nY, int i, int j) {
-        if (antiAliasing == true)
-            return rayTracer.traceRay(constructRay(nX, nY, j, i));
+        if (antiAliasing)
+            return rayTracerBasic.traceRay(constructRay(nX, nY, j, i));
         else
-            return adaptiveHelper(getPixelLocation(nX, nY, j, i), nX, nY);
+            return adaptiveHelper(getPixelLocation(nX, nY, j, i), nY, nX);
         //return rayTracer.traceRays(constructRays(nX, nY, j, i));
     }
 
@@ -435,7 +435,7 @@ public class Camera {
      * @return color of this point
      */
     private Color calcPointColor(Point p) {
-        return rayTracer.traceRay(new Ray(startPoint, p.subtract(startPoint)));
+        return rayTracerBasic.traceRay(new Ray(P0, p.subtract(P0)));
     }
 
     /**
@@ -448,10 +448,10 @@ public class Camera {
     private Color adaptiveHelper(Point center, double nY, double nX) {
         double rY = height / nY / 2;
         double rX = width / nX / 2;
-        Color upRight = calcPointColor(center.add(up.scale(rY)).add(right.scale(rX)));
-        Color upLeft = calcPointColor(center.add(up.scale(rY)).add(right.scale(-rX)));
-        Color downRight = calcPointColor(center.add(up.scale(-rY)).add(right.scale(rX)));
-        Color downLeft = calcPointColor(center.add(up.scale(-rY)).add(right.scale(-rX)));
+        Color upRight = calcPointColor(center.add(Vup.scale(rY)).add(Vright.scale(rX)));
+        Color upLeft = calcPointColor(center.add(Vup.scale(rY)).add(Vright.scale(-rX)));
+        Color downRight = calcPointColor(center.add(Vup.scale(-rY)).add(Vright.scale(rX)));
+        Color downLeft = calcPointColor(center.add(Vup.scale(-rY)).add(Vright.scale(-rX)));
 
         return adaptive(1, center, rX, rY, upLeft, upRight, downLeft, downRight);
     }
@@ -470,28 +470,29 @@ public class Camera {
      */
     private Color adaptive(int max, Point center, double rX, double rY,
                            Color upLeftCol, Color upRightCol, Color downLeftCol, Color downRightCol) {
-        if (max == maxAdaptiveLevel) {
+
+        if (max == MAX_LEVEL) {
             return downRightCol.add(upLeftCol).add(upRightCol).add(downLeftCol).reduce(4);
         }
         if (upRightCol.equals(upLeftCol) && downRightCol.equals(downLeftCol) && downLeftCol.equals(upLeftCol))
             return upRightCol;
         else {
-            Color rightPCol = calcPointColor(center.add(right.scale(rX)));
-            Color leftPCol = calcPointColor(center.add(right.scale(-rX)));
-            Color upPCol = calcPointColor(center.add(up.scale(rY)));
-            Color downPCol = calcPointColor(center.add(up.scale(-rY)));
+            Color rightPCol = calcPointColor(center.add(Vright.scale(rX)));
+            Color leftPCol = calcPointColor(center.add(Vright.scale(-rX)));
+            Color upPCol = calcPointColor(center.add(Vup.scale(rY)));
+            Color downPCol = calcPointColor(center.add(Vup.scale(-rY)));
             Color centerCol = calcPointColor(center);
 
             rX = rX / 2;
             rY = rY / 2;
-            upLeftCol = adaptive(max + 1, center.add(up.scale(rY / 2))
-                    .add(right.scale(-rX / 2)), rX, rY, upLeftCol, upPCol, leftPCol, centerCol);
-            upRightCol = adaptive(max + 1, center.add(up.scale(rY / 2))
-                    .add(right.scale(rX / 2)), rX, rY, upPCol, upRightCol, centerCol, leftPCol);
-            downLeftCol = adaptive(max + 1, center.add(up.scale(-rY / 2))
-                    .add(right.scale(-rX / 2)), rX, rY, leftPCol, centerCol, downLeftCol, downPCol);
-            downRightCol = adaptive(max + 1, center.add(up.scale(-rY / 2))
-                    .add(right.scale(rX / 2)), rX, rY, centerCol, rightPCol, downPCol, downRightCol);
+            upLeftCol = adaptive(max + 1, center.add(Vup.scale(rY / 2))
+                    .add(Vright.scale(-rX / 2)), rX, rY, upLeftCol, upPCol, leftPCol, centerCol);
+            upRightCol = adaptive(max + 1, center.add(Vup.scale(rY / 2))
+                    .add(Vright.scale(rX / 2)), rX, rY, upPCol, upRightCol, centerCol, leftPCol);
+            downLeftCol = adaptive(max + 1, center.add(Vup.scale(-rY / 2))
+                    .add(Vright.scale(-rX / 2)), rX, rY, leftPCol, centerCol, downLeftCol, downPCol);
+            downRightCol = adaptive(max + 1, center.add(Vup.scale(-rY / 2))
+                    .add(Vright.scale(rX / 2)), rX, rY, centerCol, rightPCol, downPCol, downRightCol);
             return downRightCol.add(upLeftCol).add(upRightCol).add(downLeftCol).reduce(4);
         }
     }
