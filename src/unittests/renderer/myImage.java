@@ -30,6 +30,8 @@ public class myImage
                 .setViewPlaneDistance(105)
                 .setAntiAliasing(false)
                 .setNumberOfRaysInPixel(0)
+                .setMultiSampling(true)
+                .setMAX_LEVEL(4)
                 .setMultithreading(3);
 // region construct
         Geometry floor= new Plane(new Point(0,0,0),new Vector(0,1,0))
@@ -499,7 +501,7 @@ public class myImage
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(20));
+                            .setMIN_SHADOW_POINTS(10));
             camera3.renderImageWithTreads();
             camera3.writeToImage();
     }

@@ -172,8 +172,8 @@ public class Camera {
         Ray centerRay = constructRay(nX, nY, j, i);
         rays.add(centerRay);
 
-        // calculate the actual size of a pixel
-        // pixel height is the division of the view plane height in the number of rows of pixels
+        // calculate the actual size of a pixel height
+        // is the division of the view plane height in the number of rows of pixels
         double pixelHeight = alignZero(height / nY);   //  Ry = h/Ny
         // pixel width is the division of the view plane width in the number of columns of pixels
         double pixelWidth = alignZero(width / nX);   //  Rx = w/Nx
