@@ -70,6 +70,20 @@ public class myImage
                         .setKs(0.8)
                         .setShininess(100)
                 );
+        Geometry shelfSpot1 = new Sphere(new Point(35,80,80), 4)
+                .setEmission(new Color(green).scale(2)) //
+                .setMaterial(new Material()
+                        .setKd(0.2)
+                        .setKs(0.8)
+                        .setShininess(100)
+                );
+        Geometry shelfSpot2 = new Sphere(new Point(35,80,100), 4)
+                .setEmission(new Color(red)) //
+                .setMaterial(new Material()
+                        .setKd(0.2)
+                        .setKs(0.8)
+                        .setShininess(100)
+                );
 
 //region closet
         //region doors
@@ -483,16 +497,22 @@ public class myImage
                         setShininess(100));
 //endregion shelf
 //region lights
-        myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
-                .add(new Color(java.awt.Color.YELLOW)).scale(0.2), new Point(0, 50, 40),3));
-        myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange), new Point(-56, 50, 71),new Vector(0,-1,0),3));
+        //center
         myScene.lights.add(new PointLight(new Color(white).reduce(1.5),new Point(-35,83.5,50),20));
+        //top Left
+        myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
+                .add(new Color(java.awt.Color.YELLOW)).scale(0.4), new Point(0, 50, 40),3));
+        //buttom Right
+        myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange).reduce(2), new Point(-56, 50, 71),new Vector(0,-1,0),3));
+        //right wall
         myScene.lights.add(new SpotLight(new Color(white).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
+
+
 //endregion lights
 //
         myScene.geometries.add(
                 floor,roof, wallFront,wallBehind,wallRight,wallLeft,
-                whiteBolb,
+                whiteBolb,shelfSpot1,shelfSpot2,
                 new Geometries(sideDoor,upFirstDoor,verticalSide),
                 new Geometries(secDoor,upSecDoor,vertical2),
                 new Geometries(upThirdDoor,door3,vertical3,vertical4),
