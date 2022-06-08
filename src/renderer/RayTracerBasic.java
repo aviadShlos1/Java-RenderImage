@@ -35,6 +35,14 @@ public class RayTracerBasic extends RayTracerBase {
     public RayTracerBasic(Scene scene) {
         super(scene);
     }
+    /**
+     * Function that creates boxes for each geometry (for on/off switch)
+     * @return This
+     */
+    public RayTracerBasic turnAllBoxesOn() {
+        scene.geometries.setBox();
+        return this;
+    }
 
     public int getMIN_SHADOW_POINTS() {
         return MIN_SHADOW_POINTS;

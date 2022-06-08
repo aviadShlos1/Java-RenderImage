@@ -498,7 +498,8 @@ public class myImage
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(40));
+                            .setMIN_SHADOW_POINTS(100)
+                            .turnAllBoxesOn());
             camera3.renderImageWithTreads();
             camera3.writeToImage();
     }
