@@ -62,7 +62,7 @@ public class myImage
                         setKd(0.5));
         //endregion construct
 
-
+//region light sources
         Geometry whiteBolb = new Sphere(new Point(-35,85,52), 18)
                 .setEmission(new Color(white)) //
                 .setMaterial(new Material()
@@ -84,7 +84,7 @@ public class myImage
                         .setKs(0.8)
                         .setShininess(100)
                 );
-
+//endregion light sources'
 //region closet
         //region doors
                 // from right to left
