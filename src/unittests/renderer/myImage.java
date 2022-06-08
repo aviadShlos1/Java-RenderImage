@@ -28,10 +28,8 @@ public class myImage
                 new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(105)
-                .setAntiAliasing(false)
+                .setAntiAliasing(true)
                 .setNumberOfRaysInPixel(0)
-                .setMultiSampling(true)
-                .setMAX_LEVEL(4)
                 .setMultithreading(3);
 // region construct
         Geometry floor= new Plane(new Point(0,0,0),new Vector(0,1,0))
