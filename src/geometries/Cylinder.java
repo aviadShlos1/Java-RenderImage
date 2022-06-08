@@ -77,6 +77,8 @@ public class Cylinder extends Tube {
      */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray, double maxDistance) {
+        if (box != null && !box.IsRayHitBox(ray))
+            return null;
         // Step 1: find intersections between the ray and the tube which the cylinder is a part of
         List<GeoPoint> intersectionsTube = super.findGeoIntersectionsHelper(ray, maxDistance);
 

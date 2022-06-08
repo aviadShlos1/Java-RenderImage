@@ -6,10 +6,8 @@
  */
 package geometries;
 
-import primitives.Point;
 import primitives.Ray;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,14 +19,14 @@ public class Geometries extends Intersectable {
     /**
      * geometries - list of all components in the scene
      */
-    private List<Intersectable> geometriesList = new LinkedList<>();
+    private List<Intersectable> geometriesBodies = new LinkedList<>();
 
     /**
      * constructor of class, creates the list and for now it is empty.
      * implements as a linked list that allows adding and deleting easily (running time).
      */
     public Geometries() {
-        geometriesList = new LinkedList<>();
+        geometriesBodies = new LinkedList<>();
     }
 
     /**
@@ -46,7 +44,7 @@ public class Geometries extends Intersectable {
      * @param geometries - shapes to be added to this instance
      */
     public void add(Intersectable... geometries) {
-        this.geometriesList.addAll(List.of(geometries));
+        this.geometriesBodies.addAll(List.of(geometries));
     }
 
     /**
@@ -57,8 +55,10 @@ public class Geometries extends Intersectable {
      *                    its distance is greater than this bound will not be returned
      */
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray ,  double maxDistance ) {
+        if (box != null && !box.IsRayHitBox(ray))
+            return null;
         List<GeoPoint> intersections = new LinkedList<>();
-        for (var geometry : geometriesList) {
+        for (var geometry : geometriesBodies) {
             // declare list as null
             List<GeoPoint> geoIntersections = geometry.findGeoIntersections(ray , maxDistance) ;
 
@@ -70,6 +70,53 @@ public class Geometries extends Intersectable {
             return intersections;
         }
         return null;
+    }
+    /**
+     * Function that create box for each geometry
+     */
+    public void setGeometriesBoxes() {
+        for(Intersectable geo : geometriesBodies) {
+            geo.setBox();
+        }
+    }
+    /**
+     * Create big box that will contain all of the geometries
+     */
+    @Override
+    public void setBox() {
+
+        setGeometriesBoxes(); //Create box for each geometry
+
+        Intersectable intersecI = geometriesBodies.get(0);
+        double maxX = intersecI.box.maxX;
+        double maxY = intersecI.box.maxY;
+        double maxZ = intersecI.box.maxZ;
+        double minX = maxX;
+        double minY = maxY;
+        double minZ = maxZ;
+
+        for(Intersectable geo : geometriesBodies) {	//For each geometry find the max and min of is box,
+            //and create the geometries box
+
+            if (maxX < geo.box.maxX)
+                maxX = geo.box.maxX;
+
+            if (maxY < geo.box.maxY)
+                maxY = geo.box.maxY;
+
+            if (maxZ < geo.box.maxZ)
+                maxZ = geo.box.maxZ;
+
+            if (minX > geo.box.minX)
+                minX = geo.box.minX;
+
+            if (minY > geo.box.minY)
+                minY = geo.box.minY;
+
+            if (minZ > geo.box.minZ)
+                minZ = geo.box.minZ;
+        }
+        box = new Box(maxX, maxY, maxZ, minX, minY, minZ);
     }
 
 }
