@@ -104,7 +104,8 @@ public class Polygon extends Geometry {
 	 */
 	@Override
 	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray , double maxDistance){
-
+		if (box != null && !box.IsRayHitBox(ray))
+			return null;
 		// First of all, check if there is a point of intersection with the plane
 		if (plane.findGeoIntersections(ray, maxDistance) == null)
 			return null;
