@@ -28,7 +28,7 @@ public class myImage
                 new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(105)
-                .setAntiAliasing(true)
+                .setAntiAliasing(false)
                 .setNumberOfRaysInPixel(0)
                 .setMultithreading(3);
 // region construct
@@ -499,7 +499,7 @@ public class myImage
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(10));
+                            .setMIN_SHADOW_POINTS(40));
             camera3.renderImageWithTreads();
             camera3.writeToImage();
     }

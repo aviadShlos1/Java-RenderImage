@@ -220,39 +220,16 @@ public class Camera {
      * the Renderer object
      */
     public void renderImage() {
+        final int nX= imageWriter.getNx();
+        final int nY= imageWriter.getNy();
         if (imageWriter == null)
             throw new MissingResourceException("Error: you missed", "Camera", "imageWriter");
         if (rayTracerBasic == null)
             throw new MissingResourceException("Error: you missed", "Camera", "rayTracerBasic");
-
-        final int nX= imageWriter.getNx();
-        final int nY= imageWriter.getNy();
-
-        if (threadsCount == 0)
-        {
-            // check whether the camera has AA effect turned on,
-            // if it is not, proceed as usual (cast a single ray)
-            // if it is on, cast a beam, instead of a single ray
-            if (antiAliasing)
-            {
-                for (int i = 0; i < nY; ++i) {
-                    for (int j = 0; j < nX; ++j) {
-                        castBeam(nX, nY, j, i);
-                    }
-                }
+        for(int i=0;i<nX;i++) {
+            for (int j = 0; j < nY; j++) {
+                castBeam(nX, nY, j, i);
             }
-            else
-            {
-                for (int i = 0; i < nY; ++i) {
-                    for (int j = 0; j < nX; ++j) {
-                        castRay(nX, nY);
-                    }
-                }
-            }
-        }
-        else
-        {
-           renderImageWithTreads();
         }
     }
 
@@ -264,7 +241,6 @@ public class Camera {
         // In case that not all the fields are filled
         if (imageWriter == null || rayTracerBasic == null)
             throw new MissingResourceException("Missing", "resource", "exception");
-
         // The nested loop finds and creates a ray for each pixel, finds its color and
         // writes it to the image pixels
         int nY = this.imageWriter.getNy();
@@ -275,11 +251,10 @@ public class Camera {
         while (threadsCount-- > 0) {
             new Thread(() -> {
                 for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
-                    if(antiAliasing)
+                    if(!antiAliasing)
+                        castRay(pixel.col, pixel.row);
+                    else
                         castBeam(nX, nY, pixel.col, pixel.row);
-                    else{
-                        castRay(nX,nY);
-                    }
             }).start();
         }
         Pixel.waitToFinish();
