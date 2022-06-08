@@ -34,6 +34,8 @@ public class Triangle extends Polygon{
     }
 
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
+        if (box != null && !box.IsRayHitBox(ray))
+            return null;
         List<GeoPoint> resultPoint = plane.findGeoIntersections(ray);
         if (resultPoint == null) // In case there is no intersection with the plane return null
             return null;

@@ -64,6 +64,8 @@ public class Sphere extends Geometry {
      */
     @Override
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray , double maxDistance) {
+        if (box != null && !box.IsRayHitBox(ray))
+            return null;
         Point p0 = ray.getP0();
         Vector v = ray.getDir();
 
@@ -97,13 +99,13 @@ public class Sphere extends Geometry {
     @Override
     public void setBox() {
         //Get the max and min for sphere box
-        double maxX = center.getX() + radius;
-        double maxY = center.getY() + radius;
-        double maxZ = center.getZ() + radius;
+        double maxX = centerPoint.getX() + radius;
+        double maxY = centerPoint.getY() + radius;
+        double maxZ = centerPoint.getZ() + radius;
 
-        double minX = center.getX() - radius;
-        double minY = center.getY() - radius;
-        double minZ = center.getZ() - radius;
+        double minX = centerPoint.getX() - radius;
+        double minY = centerPoint.getY() - radius;
+        double minZ = centerPoint.getZ() - radius;
 
         this.box = new Box(maxX, maxY, maxZ, minX, minY, minZ);
     }
