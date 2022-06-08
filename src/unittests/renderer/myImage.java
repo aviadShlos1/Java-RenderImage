@@ -70,14 +70,14 @@ public class myImage
                         .setKs(0.8)
                         .setShininess(100)
                 );
-        Geometry shelfSpot1 = new Sphere(new Point(35,80,80), 4)
+        Geometry shelfSpot1 = new Sphere(new Point(30,80,80), 3.5)
                 .setEmission(new Color(green).scale(2)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
                         .setShininess(100)
                 );
-        Geometry shelfSpot2 = new Sphere(new Point(35,80,100), 4)
+        Geometry shelfSpot2 = new Sphere(new Point(30,80,100), 3.5)
                 .setEmission(new Color(red)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
@@ -502,12 +502,14 @@ public class myImage
         //top Left
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                 .add(new Color(java.awt.Color.YELLOW)).scale(0.4), new Point(0, 50, 40),3));
-        //buttom Right
+        //bottom Right
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange).reduce(2), new Point(-56, 50, 71),new Vector(0,-1,0),3));
         //right wall
         myScene.lights.add(new SpotLight(new Color(white).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
-
-
+        //green spot
+        myScene.lights.add(new SpotLight(new Color(green).reduce(2), new Point(20,50,80),new Vector(1,-1,0),0.5));
+        //red spot
+        myScene.lights.add(new SpotLight(new Color(red).reduce(1.5), new Point(10,60,100),new Vector(1,-1,0),0.5));
 //endregion lights
 //
         myScene.geometries.add(
