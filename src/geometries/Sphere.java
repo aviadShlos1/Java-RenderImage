@@ -91,5 +91,20 @@ public class Sphere extends Geometry {
         // else, return null
         return null;
     }
+    /**
+     * Create bix for sphere
+     */
+    @Override
+    public void setBox() {
+        //Get the max and min for sphere box
+        double maxX = center.getX() + radius;
+        double maxY = center.getY() + radius;
+        double maxZ = center.getZ() + radius;
 
+        double minX = center.getX() - radius;
+        double minY = center.getY() - radius;
+        double minZ = center.getZ() - radius;
+
+        this.box = new Box(maxX, maxY, maxZ, minX, minY, minZ);
+    }
 }
