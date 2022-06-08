@@ -28,8 +28,8 @@ public class myImage
                 new Vector(0, 0, -1), new Vector(0, 1, 0)) //
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(105)
-                .setAntiAliasing(false)
-                .setNumberOfRaysInPixel(0)
+                .setAntiAliasing(true)
+                .setNumberOfRaysInPixel(1)
                 .setMultithreading(3);
 // region construct
         Geometry floor= new Plane(new Point(0,0,0),new Vector(0,1,0))
@@ -61,6 +61,16 @@ public class myImage
                 .setMaterial(new Material().
                         setKd(0.5));
         //endregion construct
+
+
+        Geometry whiteBolb = new Sphere(new Point(-35,85,52), 18)
+                .setEmission(new Color(white)) //
+                .setMaterial(new Material()
+                        .setKd(0.2)
+                        .setKs(0.8)
+                        .setShininess(100)
+                );
+
 //region closet
         //region doors
                 // from right to left
@@ -476,11 +486,13 @@ public class myImage
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                 .add(new Color(java.awt.Color.YELLOW)).scale(0.2), new Point(0, 50, 40),3));
         myScene.lights.add(new SpotLight(new Color(java.awt.Color.orange), new Point(-56, 50, 71),new Vector(0,-1,0),3));
+        myScene.lights.add(new PointLight(new Color(white).reduce(1.5),new Point(-35,83.5,50),20));
         myScene.lights.add(new SpotLight(new Color(white).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
 //endregion lights
 //
         myScene.geometries.add(
                 floor,roof, wallFront,wallBehind,wallRight,wallLeft,
+                whiteBolb,
                 new Geometries(sideDoor,upFirstDoor,verticalSide),
                 new Geometries(secDoor,upSecDoor,vertical2),
                 new Geometries(upThirdDoor,door3,vertical3,vertical4),
@@ -498,7 +510,7 @@ public class myImage
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(100)
+                            .setMIN_SHADOW_POINTS(5)
                             .turnAllBoxesOn());
             camera3.renderImageWithTreads();
             camera3.writeToImage();
