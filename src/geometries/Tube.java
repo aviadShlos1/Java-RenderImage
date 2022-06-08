@@ -80,7 +80,8 @@ public class Tube extends Geometry {
              c = (∆p - (∆p,va)va)^2 - r^2
         where  ∆p = p - pa
         */
-
+        if (box != null && !box.IsRayHitBox(ray))
+            return null;
         Vector v = ray.getDir();
         Vector va = this.getAxisRay().getDir();
 
