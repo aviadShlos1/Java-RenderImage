@@ -56,6 +56,8 @@ public abstract class Intersectable {
 
     }
 
+    public Box box;
+
     /**
      * @param ray ray that cross the geometry
      * @return list of intersection points that were found
@@ -83,5 +85,8 @@ public abstract class Intersectable {
     }
 
     protected abstract List<GeoPoint>findGeoIntersectionsHelper(Ray ray, double maxDistance);
-
+    /**
+     * Abstract method for creating box for each geometry
+     */
+    public abstract void setBox();
 }

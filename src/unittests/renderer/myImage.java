@@ -480,22 +480,21 @@ public class myImage
 //endregion lights
 //
         myScene.geometries.add(
-                floor,roof,
-                wallFront,wallBehind,wallRight,wallLeft,
-                sideDoor,upFirstDoor,verticalSide,
-                secDoor,upSecDoor,vertical2,
-                upThirdDoor,door3,vertical3,vertical4,
-                rightFridge,leftFridge,vertical5,upFridge,
-                shelfFront,shelfLeft,shelfRight,shelfDown,shelfUp,
-                shelfFront2,shelfLeft2,shelfRight2,shelfDown2,shelfUp2,
-                foot11,foot12,foot13,foot14,
-                foot21,foot22,foot23,foot24,
-                foot31,foot32,foot33,foot34,
-                foot41,foot42,foot43,foot44,
-                plateDown,plateUp,
-                plateSide1,plateSide2,plateSide3,plateSide4,
-                blueSphere,redSphere,yellowSphere,greenSphere
-                );
+                floor,roof, wallFront,wallBehind,wallRight,wallLeft,
+                new Geometries(sideDoor,upFirstDoor,verticalSide),
+                new Geometries(secDoor,upSecDoor,vertical2),
+                new Geometries(upThirdDoor,door3,vertical3,vertical4),
+                new Geometries(rightFridge,leftFridge,vertical5,upFridge),
+                new Geometries(shelfFront,shelfLeft,shelfRight,shelfDown,shelfUp),
+                new Geometries(shelfFront2,shelfLeft2,shelfRight2,shelfDown2,shelfUp2),
+                new Geometries(foot11,foot12,foot13,foot14),
+                new Geometries(foot21,foot22,foot23,foot24),
+                new Geometries(foot31,foot32,foot33,foot34),
+                new Geometries(foot41,foot42,foot43,foot44),
+                new Geometries(plateDown,plateUp,
+                        plateSide1,plateSide2,plateSide3,plateSide4),
+                new Geometries(blueSphere,redSphere,yellowSphere,greenSphere)
+        );
 
         camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
