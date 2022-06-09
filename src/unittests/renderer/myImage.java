@@ -63,7 +63,7 @@ public class myImage
         //endregion construct
 
 //region light sources
-        Geometry whiteBolb = new Sphere(new Point(-35,85,52), 18)
+        Geometry whiteBolb = new Sphere(new Point(-35,85,52), 16.5)
                 .setEmission(new Color(white)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
@@ -71,7 +71,7 @@ public class myImage
                         .setShininess(100)
                 );
         Geometry shelfSpot1 = new Sphere(new Point(30,80,80), 3.5)
-                .setEmission(new Color(green).scale(2)) //
+                .setEmission(new Color(0, 204, 0).scale(1)) //
                 .setMaterial(new Material()
                         .setKd(0.2)
                         .setKs(0.8)
@@ -498,7 +498,7 @@ public class myImage
 //endregion shelf
 //region lights
         //center
-        myScene.lights.add(new PointLight(new Color(white).reduce(1.5),new Point(-35,83.5,50),20));
+        myScene.lights.add(new PointLight(new Color(white).reduce(1.5),new Point(-34,84,50),18.4));
         //top Left
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                 .add(new Color(java.awt.Color.YELLOW)).scale(0.4), new Point(0, 50, 40),3));
@@ -507,7 +507,7 @@ public class myImage
         //right wall
         myScene.lights.add(new SpotLight(new Color(white).scale(0.8), new Point(10, 55, 75),new Vector(1.5,-1,0),3));
         //green spot
-        myScene.lights.add(new SpotLight(new Color(green).reduce(2), new Point(20,50,80),new Vector(1,-1,0),0.5));
+        myScene.lights.add(new SpotLight(new Color(0, 204, 0).reduce(2), new Point(20,50,80),new Vector(1,-1,0),0.5));
         //red spot
         myScene.lights.add(new SpotLight(new Color(red).reduce(1.5), new Point(10,60,100),new Vector(1,-1,0),0.5));
 //endregion lights
@@ -530,9 +530,9 @@ public class myImage
                 new Geometries(blueSphere,redSphere,yellowSphere,greenSphere)
         );
 
-        camera3.setImageWriter(new ImageWriter("Room", 1000, 1000))
+        camera3.setImageWriter(new ImageWriter("RoomSoft", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(5)
+                            .setMIN_SHADOW_POINTS(120)
                             .turnAllBoxesOn());
             camera3.renderImageWithTreads();
             camera3.writeToImage();
