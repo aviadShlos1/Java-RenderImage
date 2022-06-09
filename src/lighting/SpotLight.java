@@ -62,11 +62,21 @@ public class SpotLight extends PointLight {
         return super.getIntensity(p).scale(maxAngle);
     }
 
+    /**
+     * Getter
+     * @param p - the ray's destination point
+     * @return
+     */
     @Override
     public Vector getL(Point p) {
         return super.getL(p);
     }
 
+    /**
+     * Getter
+     * @param point - the tested point
+     * @return
+     */
     @Override
     public double getDistance(Point point) {
         return super.getDistance(point);

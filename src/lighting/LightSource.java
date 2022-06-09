@@ -42,6 +42,8 @@ public interface LightSource {
 
     /**
      *
+     * @param lightDirection the light direction
+     * @param minPoints the min points on the surface
      * @return random points on the light source
      */
     List<Point> lightPoints(Vector lightDirection, int minPoints);

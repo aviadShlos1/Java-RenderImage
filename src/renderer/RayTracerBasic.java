@@ -31,7 +31,10 @@ public class RayTracerBasic extends RayTracerBase {
     //A number of minimum points required to distribute to the surface
     int MIN_SHADOW_POINTS = 0;
 
-
+    /**
+     * c-tor
+     * @param scene
+     */
     public RayTracerBasic(Scene scene) {
         super(scene);
     }
@@ -44,6 +47,10 @@ public class RayTracerBasic extends RayTracerBase {
         return this;
     }
 
+    /**
+     * Getter
+     * @return
+     */
     public int getMIN_SHADOW_POINTS() {
         return MIN_SHADOW_POINTS;
     }
@@ -122,7 +129,7 @@ public class RayTracerBasic extends RayTracerBase {
      * @param gp       - the tested point
      * @param v        - the direction vector
      * @param level    - recursion iterations upper limit
-     * @param k        - TODO lines 26 - 27
+     * @param k        - initiation value
      * @return the Color of the returned light after calculating all the required effects
      */
     private Color calcGlobalEffects(GeoPoint gp, Vector v, int level, double k) {
@@ -213,7 +220,6 @@ public class RayTracerBasic extends RayTracerBase {
     * @param gp       - the tested point
     * @return true if the point is shaded, false otherwise
     */
-
     private boolean unshaded(GeoPoint gp, LightSource light, Vector l, Vector n){
         Vector lightDirection = l.scale(-1); // from point to light source
         Ray lightRay = new Ray (gp.point, lightDirection,n);

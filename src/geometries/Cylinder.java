@@ -27,6 +27,7 @@ public class Cylinder extends Tube {
      *
      * @param radius
      * @param axisRay
+     * @param height
      */
     public Cylinder(double radius, Ray axisRay,double height) {
         super(radius, axisRay);
@@ -44,6 +45,12 @@ public class Cylinder extends Tube {
         return height;
     }
 
+    /**
+     * function that receive a point in a body and return a normal in this point to the body
+     *
+     * @param myPoint pointing in the direction of the normal
+     * @return normal vector to the Geometry
+     */
     @Override
     public Vector getNormal(Point myPoint) {
         Point P0 = axisRay.getP0(); //middle of starting base

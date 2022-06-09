@@ -1,6 +1,4 @@
-/**
- *
- */
+
 package geometries;
 
 import primitives.*;

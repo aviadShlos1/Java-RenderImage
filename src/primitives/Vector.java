@@ -109,42 +109,4 @@ public class Vector extends Point
         if (!(obj instanceof Point)) return false;
         return super.equals(obj);
     }
-
-    /** rotate vector for bonus ///////////////////////
-     * function to rotate the direction of "this" vector,
-     * according to a new direction axis, in the difference angle
-     * <p>
-     * https://stackoverflow.com/questions/31225062/rotating-a-vector-by-angle-and-axis-in-java
-     *
-     * @param axis  - axis of rotation
-     * @param theta - angle of rotation
-     */
-    public void rotateVector(Vector axis, double theta) {
-        double x = this.getX();
-        double y = this.getY();
-        double z = this.getZ();
-
-        double u = axis.getX();
-        double v = axis.getY();
-        double w = axis.getZ();
-
-        double v1 = u * x + v * y + w * z;
-
-        double thetaRad = Math.toRadians(theta);
-
-        double xPrime = u * v1 * (1d - Math.cos(thetaRad))
-                + x * Math.cos(thetaRad)
-                + (-w * y + v * z) * Math.sin(thetaRad);
-
-        double yPrime = v * v1 * (1d - Math.cos(thetaRad))
-                + y * Math.cos(thetaRad)
-                + (w * x - u * z) * Math.sin(thetaRad);
-
-        double zPrime = w * v1 * (1d - Math.cos(thetaRad))
-                + z * Math.cos(thetaRad)
-                + (-v * x + u * y) * Math.sin(thetaRad);
-
-        new Point(xPrime, yPrime, zPrime);
-    }
-
 }

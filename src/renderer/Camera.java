@@ -18,6 +18,7 @@ import java.util.MissingResourceException;
 
 import static primitives.Util.alignZero;
 import static primitives.Util.isZero;
+import java.util.stream.*;
 
 /**
  *
@@ -75,8 +76,6 @@ public class Camera {
      */
     private static final int SPARE_THREADS = 2;
 
-
-    //region Multithreading
     /**
      * Set multi-threading <br>
      * - if the parameter is 0 - number of cores less 2 is taken
@@ -95,7 +94,6 @@ public class Camera {
         }
         return this;
     }
-//endregion
 
 
 
@@ -253,10 +251,7 @@ public class Camera {
         while (threadsCount-- > 0) {
             new Thread(() -> {
                 for (Pixel pixel = new Pixel(); pixel.nextPixel(); Pixel.pixelDone())
-                    if(!antiAliasing)
-                        castRay(pixel.col, pixel.row);
-                    else
-                        castBeam(nX, nY, pixel.col, pixel.row);
+                    castBeam(nX, nY, pixel.col, pixel.row);
             }).start();
         }
         Pixel.waitToFinish();
