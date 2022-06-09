@@ -29,7 +29,7 @@ public class myImage
                 .setViewPlaneSize(200, 200) //
                 .setViewPlaneDistance(105)
                 .setAntiAliasing(true)
-                .setNumberOfRaysInPixel(1)
+                .setNumberOfRaysInPixel(4)
                 .setMultithreading(3);
 // region construct
         Geometry floor= new Plane(new Point(0,0,0),new Vector(0,1,0))
@@ -498,7 +498,7 @@ public class myImage
 //endregion shelf
 //region lights
         //center
-        myScene.lights.add(new PointLight(new Color(white).reduce(1.5),new Point(-34,84,50),18.4));
+        myScene.lights.add(new PointLight(new Color(white).scale(1),new Point(-36,84,50),25));
         //top Left
         myScene.lights.add(new PointLight(new Color(java.awt.Color.YELLOW)
                 .add(new Color(java.awt.Color.YELLOW)).scale(0.4), new Point(0, 50, 40),3));
@@ -532,7 +532,7 @@ public class myImage
 
         camera3.setImageWriter(new ImageWriter("RoomSoft", 1000, 1000))
                     .setRayTracer(new RayTracerBasic(myScene)
-                            .setMIN_SHADOW_POINTS(120)
+                            .setMIN_SHADOW_POINTS(20)
                             .turnAllBoxesOn());
             camera3.renderImageWithTreads();
             camera3.writeToImage();
