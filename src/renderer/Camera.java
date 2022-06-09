@@ -158,7 +158,7 @@ public class Camera {
      */
     public List<Ray> constructRays(int nX, int nY, int j, int i) {
 
-        // the returned list of rays
+        // the returned list of rays/
         List<Ray> rays = new ArrayList<>();
 
         // add the center ray to the list
