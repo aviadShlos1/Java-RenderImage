@@ -78,10 +78,10 @@ public class Ray
     public Vector getDir() {
         return dir;
     }
-
     public Point getPoint(double t) { // Function calculate - P = P0 + v * t
         return p0.add(dir.scale(t));
     }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
@@ -222,7 +222,4 @@ public class Ray
                 ", dir=" + dir +
                 '}';
     }
-
-
-
 }

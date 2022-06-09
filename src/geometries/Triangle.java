@@ -28,11 +28,21 @@ public class Triangle extends Polygon{
         super(vertices);
     }
 
+    /**
+     * function to calculate the normal of the triangle
+     *
+     * @param p pointing in the direction of the normal
+     * @return call to polygon implement
+     */
     @Override
     public Vector getNormal(Point p){
         return super.getNormal(p);
     }
 
+    /**
+     * @param ray ray that cross the geometry
+     * @return list of intersection points that were found
+     */
     public List<GeoPoint> findGeoIntersectionsHelper(Ray ray) {
         if (box != null && !box.IsRayHitBox(ray))
             return null;

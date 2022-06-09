@@ -35,7 +35,9 @@ public class PointLight extends Light implements LightSource{
      * kQ - fixed attenuation depending on square distance
      */
     private double kC = 1,kL = 0 ,kQ = 0;
-
+    /**
+     * the radius of light source which hit on the surface
+     */
     protected double radius;
 
 

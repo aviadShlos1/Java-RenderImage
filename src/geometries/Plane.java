@@ -40,19 +40,30 @@ public class Plane extends Geometry {
         normal = U.crossProduct(V).normalize();
     }
 
-    //c-tor which gets point and vector
+    /**
+     * c-tor
+     * @param q0 the point
+     * @param normal the vector
+     */
     public Plane(Point q0, Vector normal) {
         this.q0 = q0;
         this.normal = normal;
         normal = normal.normalize();
     }
 
-    // getter
+    /**
+     * Getter of normal
+     * @return the normal
+     */
     public Vector getNormal() {
         return normal;
     }
 
-    // getNormal
+    /**
+     * Getter of normal
+     * @param myPoint
+     * @return the normal
+     */
     @Override
     public Vector getNormal(Point myPoint) {
         return normal;

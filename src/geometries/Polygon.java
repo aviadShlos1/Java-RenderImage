@@ -106,7 +106,7 @@ public class Polygon extends Geometry {
 	public List<GeoPoint> findGeoIntersectionsHelper(Ray ray , double maxDistance){
 		if (box != null && !box.IsRayHitBox(ray))
 			return null;
-		// First of all, check if there is a point of intersection with the plane
+		// First, check if there is a point of intersection with the plane
 		if (plane.findGeoIntersections(ray, maxDistance) == null)
 			return null;
 
@@ -151,7 +151,7 @@ public class Polygon extends Geometry {
 			} else Vns.add(Vni);
 		}
 
-		// check that all of the elements
+		// check that all the elements
 		if (!Vns.stream().allMatch(i -> i > 0) && !Vns.stream().allMatch(i -> i < 0)) {
 			return null;
 		} else {

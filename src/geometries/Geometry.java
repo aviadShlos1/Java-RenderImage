@@ -25,11 +25,6 @@ public abstract class Geometry extends Intersectable{
       */
      private Material material = new Material();
 
-
-
-
-
-
      /**
       * get self color of the shape
       *

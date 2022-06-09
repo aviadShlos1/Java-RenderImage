@@ -80,7 +80,7 @@ public class Geometries extends Intersectable {
         }
     }
     /**
-     * Create big box that will contain all of the geometries
+     * Create big box that will contain all the geometries
      */
     @Override
     public void setBox() {
